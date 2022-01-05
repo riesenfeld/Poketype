@@ -145,6 +145,12 @@ export default {
 }
 
 @media (orientation: portrait) {
+  .grid-item-dummy {
+    width: 28vw;
+    height: 28vw;
+    max-width: 14vh;
+    max-height: 14vh;
+  }
   .grid-item {
     width: 28vw;
     height: 28vw;
