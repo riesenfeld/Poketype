@@ -1,10 +1,12 @@
 <template>
-  <div
-    :class="{ 'grid-item': true, 'grid-item-active': isActive }"
-    :style="[isActive ? active : passive]"
-    @click="toggleModal"
-  >
-    <p>{{ isActive }}</p>
+  <div class="grid-item-dummy">
+    <div
+      :class="{ 'grid-item': true, 'grid-item-active': isActive }"
+      :style="[isActive ? active : passive]"
+      @click="toggleModal"
+    >
+      <p>{{ isActive }}</p>
+    </div>
   </div>
 </template>
 
@@ -114,6 +116,12 @@ export default {
 </script>
 
 <style scoped>
+.grid-item-dummy {
+  width: 14vw;
+  height: 14vw;
+  max-width: 28vh;
+  max-height: 28vh;
+}
 .grid-item {
   background-color: blue;
   border: 2px solid blue;
