@@ -1,7 +1,8 @@
 <template>
   <div class="home">
+    <div id="modal-background" :class="{ active: modalActivated }"></div>
     <NavBar />
-    <div id="vertical-centering-flexbox">
+    <div id="vertical-centering-flexbox" @click="toggleModalBackground">
       <div id="horizontal-centering-flexbox">
         <main id="container">
           <GridItem class="type" :type="pokemonTypes[0]" />
@@ -287,24 +288,46 @@ export default {
           specialInteraction: "",
         },
       ],
+      modalActivated: false,
       /* Width and height of the grid #container */
-      gridDimensions: [null, null],
+      // gridDimensions: [null, null],
     }
   },
   methods: {
-    orientationIsLandscape() {
-      return document.documentElement.clientWidth >= document.documentElement.clientHeight
+    toggleModalBackground() {
+      if (this.modalActivated) {
+        this.modalActivated = false
+      } else this.modalActivated = true
+      return this.modalActivated
+
+      // orientationIsLandscape() {
+      //   return document.documentElement.clientWidth >= document.documentElement.clientHeight
+      // },
+      // setGridDimensions() {
+      //   if (this.orientationIsLandscape) {
+      //     this.gridDimensions = []
+      //   }
     },
-    setGridDimensions() {
-      if (this.orientationIsLandscape) {
-        this.gridDimensions = []
+  },
+  computed: {
+    activeModalBackGround() {
+      return {
+        position: "absolute",
+        zIndex: 5,
+        backgroundColor: "rgba(0.5, 0.5, 0.5, 0.8)",
+      }
+    },
+    passiveModalBackGround() {
+      return {
+        // zIndex: 5,
+        // backgroundColor: "rgba(0.5, 0.5, 0.5, 0.8)",
       }
     },
   },
   mounted() {
-    if (this.orientationIsLandscape) {
-      this.dimensions = [90, 90]
-    }
+    // if (this.orientationIsLandscape) {
+    //   this.dimensions = [90, 90]
+    // }
   },
 }
 </script>
@@ -315,6 +338,21 @@ export default {
 */
 .home {
   height: 100vh;
+}
+#modal-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  visibility: hidden;
+}
+#modal-background.active {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0.5, 0.5, 0.5, 0.8);
+  z-index: 2;
+  visibility: visible;
 }
 #vertical-centering-flexbox {
   display: flex;

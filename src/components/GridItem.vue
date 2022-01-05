@@ -160,7 +160,7 @@ export default {
   max-height: 30vh;
   width: 30vw;
   height: 30vh;
-  /* z-index: 2; */
+  z-index: 3;
   /* transform: translate(-200px, -200px); */
   /* margin: 35vh 35vw 35vh 35vw; */
   /* top: 35vh; */
