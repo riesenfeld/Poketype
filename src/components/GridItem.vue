@@ -48,21 +48,24 @@ export default {
      *  Dynamically-bound styles
      * */
     activeAnimation() {
-      let rect = this.$el.getBoundingClientRect()
-      let centerOfGridItem = {
-        x: rect.x + rect.width / 2,
-        y: rect.y + rect.height / 2,
-      }
+      let preTranslationRect = this.$el.getBoundingClientRect()
       let centerOfPage = {
         x: document.documentElement.clientWidth / 2,
         y: document.documentElement.clientHeight / 2,
       }
-      console.log(`x: ${rect.x}, y: ${rect.y}, width ${rect.width}, height ${rect.height}`)
-      console.log(`item center: ${centerOfGridItem.x}, ${centerOfGridItem.y}`)
-      console.log(`page center: ${centerOfPage.x}, ${centerOfPage.y}`)
+      let modalBoundingRect = {
+        width: document.documentElement.clientWidth * 0.6,
+        height: document.documentElement.clientHeight * 0.6,
+        centerX: preTranslationRect.x + (document.documentElement.clientWidth * 0.6) / 2,
+        centerY: preTranslationRect.y + (document.documentElement.clientHeight * 0.6) / 2,
+      }
       return {
-        transform: `translate(${centerOfPage.x - centerOfGridItem.x}px, ${
-          centerOfPage.y - centerOfGridItem.y
+        maxWidth: `${modalBoundingRect.width}px`,
+        maxHeight: `${modalBoundingRect.height}px`,
+        width: `${modalBoundingRect.width}px`,
+        height: `${modalBoundingRect.height}px`,
+        transform: `translate(${centerOfPage.x - modalBoundingRect.centerX}px, ${
+          centerOfPage.y - modalBoundingRect.centerY
         }px)`,
       }
     },
@@ -92,10 +95,10 @@ export default {
   border-color: violet;
   background-color: green;
   position: absolute;
-  max-width: 30vw;
+  /* max-width: 30vw;
   max-height: 30vh;
   width: 30vw;
-  height: 30vh;
+  height: 30vh; */
   z-index: 3;
 }
 
