@@ -38,7 +38,8 @@ export default {
       if (this.isActive) {
         this.isActive = false
       } else this.isActive = true
-
+      /* Let the Home component know to toggle the modal backdrop */
+      this.$emit("modalToggled")
       return this.isActive
     },
   },
@@ -85,7 +86,7 @@ export default {
   height: 14vw;
   max-width: 28vh;
   max-height: 28vh;
-  transition: 1s;
+  transition-duration: 0.5s;
 }
 .grid-item-active {
   border-color: violet;

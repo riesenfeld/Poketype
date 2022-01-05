@@ -2,27 +2,27 @@
   <div class="home">
     <div id="modal-backdrop" :class="{ active: modalActivated }"></div>
     <NavBar />
-    <div id="vertical-centering-flexbox" @click="toggleModalBackground">
+    <div id="vertical-centering-flexbox">
       <div id="horizontal-centering-flexbox">
         <main id="container">
-          <GridItem class="type" :type="pokemonTypes[0]" />
-          <GridItem class="type" :type="pokemonTypes[1]" />
-          <GridItem class="type" :type="pokemonTypes[2]" />
-          <GridItem class="type" :type="pokemonTypes[3]" />
-          <GridItem class="type" :type="pokemonTypes[4]" />
-          <GridItem class="type" :type="pokemonTypes[5]" />
-          <GridItem class="type" :type="pokemonTypes[6]" />
-          <GridItem class="type" :type="pokemonTypes[7]" />
-          <GridItem class="type" :type="pokemonTypes[8]" />
-          <GridItem class="type" :type="pokemonTypes[9]" />
-          <GridItem class="type" :type="pokemonTypes[10]" />
-          <GridItem class="type" :type="pokemonTypes[11]" />
-          <GridItem class="type" :type="pokemonTypes[12]" />
-          <GridItem class="type" :type="pokemonTypes[13]" />
-          <GridItem class="type" :type="pokemonTypes[14]" />
-          <GridItem class="type" :type="pokemonTypes[15]" />
-          <GridItem class="type" :type="pokemonTypes[16]" />
-          <GridItem class="type" :type="pokemonTypes[17]" />
+          <GridItem class="type" :type="pokemonTypes[0]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[1]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[2]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[3]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[4]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[5]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[6]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[7]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[8]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[9]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[10]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[11]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[12]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[13]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[14]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[15]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[16]" @modalToggled="toggleModalBackground" />
+          <GridItem class="type" :type="pokemonTypes[17]" @modalToggled="toggleModalBackground" />
         </main>
       </div>
     </div>
@@ -315,6 +315,7 @@ export default {
   height: 100%;
   z-index: -1;
   visibility: hidden;
+  transition-duration: 0.5s;
 }
 #modal-backdrop.active {
   position: absolute;
