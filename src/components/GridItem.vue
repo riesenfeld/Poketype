@@ -26,7 +26,6 @@ export default {
   },
   methods: {
     orientationIsPortrait() {
-      // return document.documentElement.clientWidth <= document.documentElement.clientHeight
       return this.orientation == "portrait"
     },
     toggleModal() {
