@@ -2,13 +2,7 @@
   <div class="grid-item-dummy">
     <div
       :class="{ 'grid-item': true, 'grid-item-active': isActive }"
-      :style="[
-        isActive && orientation == 'landscape'
-          ? activeAnimation
-          : isActive && orientation == 'portrait'
-          ? activeAnimation
-          : '',
-      ]"
+      :style="[isActive ? activeAnimation : '']"
       @click="toggleModal"
     >
       <p>{{ orientation }}</p>
@@ -68,38 +62,9 @@ export default {
      * */
     activeAnimation() {
       let preTranslationRect = this.$el.getBoundingClientRect()
-      // let centerOfPage = {
-      //   x: document.documentElement.clientWidth / 2,
-      //   y: document.documentElement.clientHeight / 2,
-      // }
-      // let modalBoundingRect = {
-      //   width: document.documentElement.clientWidth * 0.6,
-      //   height: document.documentElement.clientHeight * 0.6,
-      //   centerX: preTranslationRect.x + (document.documentElement.clientWidth * 0.6) / 2,
-      //   centerY: preTranslationRect.y + (document.documentElement.clientHeight * 0.6) / 2,
-      // }
-
-      // let modalWidth = 60
-      // if (this.orientationIsPortrait()) {
-      //   modalWidth = 80
-      // }
-
       let modalHeight = 60
       let centerX = this.convertPxToVu(preTranslationRect.x, "width") + this.modalWidth / 2
       let centerY = this.convertPxToVu(preTranslationRect.y, "height") + modalHeight / 2
-      // let portraitModalWidth = 80
-      // let portraitModalHeight = 60
-      // let portraitCenterX = this.convertPxToVu(preTranslationRect.x, "width") + modalWidth / 2
-      // let portraitCenterY = this.convertPxToVu(preTranslationRect.y, "height") + modalHeight / 2
-      // console.log(
-      //   `preTranslationRect coords: [${this.convertPxToVu(
-      //     preTranslationRect.x,
-      //     "width"
-      //   )}, ${this.convertPxToVu(preTranslationRect.y, "height")}]`
-      // )
-      // console.log(`centerX: ${centerX}vw`)
-      // console.log(`centerY: ${centerX}vh`)
-      // console.log(`translation vector: [${50 - centerX}vw, ${50 - centerY}vh]`)
       console.log(`modal width: ${this.modalWidth}vw`)
       console.log(`orientation: ${this.orientation}`)
       return {
@@ -108,13 +73,6 @@ export default {
         width: `${this.modalWidth}vw`,
         height: `${modalHeight}vh`,
         transform: `translate(${50 - centerX}vw, ${50 - centerY}vh)`,
-        // "@media (orientation: portrait)": {
-        //   maxWidth: `${portraitModalWidth}vw`,
-        //   maxHeight: `${portraitModalHeight}vh`,
-        //   width: `${portraitModalWidth}vw`,
-        //   height: `${portraitModalHeight}vh`,
-        //   transform: `translate(${50 - portraitCenterX}vw, ${50 - portraitCenterY}vh)`,
-        // },
       }
     },
   },
@@ -129,7 +87,6 @@ export default {
   max-height: 28vh;
 }
 .grid-item {
-  /* position: relative; */
   background-color: red;
   border: 2px solid blue;
   /* Ensure that the grid items remain square and never overflow the page */
@@ -143,10 +100,6 @@ export default {
   border-color: violet;
   background-color: green;
   position: absolute;
-  /* max-width: 30vw;
-  max-height: 30vh;
-  width: 30vw;
-  height: 30vh; */
   z-index: 3;
 }
 
