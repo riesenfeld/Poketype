@@ -2,7 +2,7 @@
   <div class="grid-item-dummy">
     <div
       :class="{ 'grid-item': true, 'grid-item-active': isActive }"
-      :style="[isActive ? active : passive]"
+      :style="[isActive ? activeAnimation : passiveAnimation]"
       @click="toggleModal"
     >
       <p>{{ isActive }}</p>
@@ -80,21 +80,34 @@ export default {
     /**
      *  Dynamically-bound styles
      * */
-    active() {
+    activeAnimation() {
       /* For testing */
       // let rect = this.passiveBoundingClientRect
-      // console.log(`x: ${rect.x}, y: ${rect.y}, width ${rect.width}, height ${rect.height}`)
+      let rect = this.$el.getBoundingClientRect()
+      let centerOfGridItem = {
+        x: rect.x + rect.width / 2,
+        y: rect.y + rect.height / 2,
+      }
+      let centerOfPage = {
+        x: document.documentElement.clientWidth / 2,
+        y: document.documentElement.clientHeight / 2,
+      }
+      console.log(`x: ${rect.x}, y: ${rect.y}, width ${rect.width}, height ${rect.height}`)
+      console.log(`item center: ${centerOfGridItem.x}, ${centerOfGridItem.y}`)
+      console.log(`page center: ${centerOfPage.x}, ${centerOfPage.y}`)
       return {
         //   backgroundColor: "green",
         //   //   zIndex: 5,
-        //   transform: "translate(-50px, -50px)",
+        transform: `translate(${centerOfPage.x - centerOfGridItem.x}px, ${
+          centerOfPage.y - centerOfGridItem.y
+        }px)`,
         //   position: "relative",
         //   //   width: "75vw",
         //   //   height: "75vh",
         //   transitionDuration: "1s",
       }
     },
-    passive() {
+    passiveAnimation() {
       return {
         //   backgroundColor: "red",
         //   transitionDuration: "1s",
@@ -116,6 +129,9 @@ export default {
 </script>
 
 <style scoped>
+/* @keyframes activate {
+  0%;
+} */
 .grid-item-dummy {
   width: 14vw;
   height: 14vw;
@@ -123,6 +139,7 @@ export default {
   max-height: 28vh;
 }
 .grid-item {
+  /* position: relative; */
   background-color: red;
   border: 2px solid blue;
   /* Ensure that the grid items remain square and never overflow the page */
@@ -130,18 +147,26 @@ export default {
   height: 14vw;
   max-width: 28vh;
   max-height: 28vh;
-  transition-duration: 1s;
+  /* top: initial; */
+  /* left: initial; */
+  /* margin: 0; */
+  transition: 1s;
 }
 .grid-item-active {
   border-color: violet;
   background-color: green;
-  /* position: relative; */
+  position: absolute;
   max-width: 30vw;
   max-height: 30vh;
   width: 30vw;
   height: 30vh;
-  transform: translate(-200px, -200px);
+  /* z-index: 2; */
+  /* transform: translate(-200px, -200px); */
+  /* margin: 35vh 35vw 35vh 35vw; */
+  /* top: 35vh; */
+  /* left: 35vw; */
   /* transition-duration: 1s; */
+  /* transition: all 1s; */
 }
 
 @media (orientation: portrait) {
