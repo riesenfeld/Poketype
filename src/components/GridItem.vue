@@ -2,10 +2,10 @@
   <div class="grid-item-dummy">
     <div
       :class="{ 'grid-item': true, 'grid-item-active': isActive }"
-      :style="[isActive ? activeAnimation : '']"
+      :style="[isActive ? activeAnimation : '', gridItemColor]"
       @click="toggleModal"
     >
-      <p>{{ orientation }}</p>
+      <h4>{{ type.name }}</h4>
     </div>
   </div>
 </template>
@@ -18,6 +18,8 @@ export default {
     type: Object,
     /* Window orientation */
     orientation: String,
+    /* The colors mapped to each type */
+    colors: Object,
   },
   data: function () {
     return {
@@ -56,7 +58,7 @@ export default {
       } else return 60
     },
     /**
-     *  Dynamically-bound styles
+     *  Computed and dynamically-bound styles
      * */
     activeAnimation() {
       let preTranslationRect = this.$el.getBoundingClientRect()
@@ -71,6 +73,15 @@ export default {
         transform: `translate(${50 - centerX}vw, ${50 - centerY}vh)`,
       }
     },
+    gridItemColor() {
+      return {
+        backgroundColor: `${this.colors[this.type.name][0]}`,
+        background: `linear-gradient(
+          ${this.colors[this.type.name][1]}, 
+          ${this.colors[this.type.name][0]}, 
+          ${this.colors[this.type.name][2]})`,
+      }
+    },
   },
 }
 </script>
@@ -83,8 +94,8 @@ export default {
   max-height: 28vh;
 }
 .grid-item {
-  background-color: red;
-  border: 2px solid blue;
+  /* background-color: red; */
+  /* border: 2px solid blue; */
   /* Ensure that the grid items remain square and never overflow the page */
   width: 14vw;
   height: 14vw;

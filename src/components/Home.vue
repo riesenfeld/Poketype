@@ -10,6 +10,7 @@
             :key="type.id"
             :type="type"
             :orientation="orientation"
+            :colors="typesAndColors"
             @modalToggled="toggleModalBackground"
           />
         </main>
