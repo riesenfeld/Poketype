@@ -1,28 +1,27 @@
 <template>
   <div class="home">
     <NavBar />
-    <!-- We use two flexboxes to ensure that the grid items never have gutters between them -->
     <div id="vertical-centering-flexbox">
       <div id="horizontal-centering-flexbox">
         <main id="container">
-          <GridItem class="grid-item" :type="pokemonTypes[0]" />
-          <GridItem class="grid-item" :type="pokemonTypes[1]" />
-          <GridItem class="grid-item" :type="pokemonTypes[2]" />
-          <GridItem class="grid-item" :type="pokemonTypes[3]" />
-          <GridItem class="grid-item" :type="pokemonTypes[4]" />
-          <GridItem class="grid-item" :type="pokemonTypes[5]" />
-          <GridItem class="grid-item" :type="pokemonTypes[6]" />
-          <GridItem class="grid-item" :type="pokemonTypes[7]" />
-          <GridItem class="grid-item" :type="pokemonTypes[8]" />
-          <GridItem class="grid-item" :type="pokemonTypes[9]" />
-          <GridItem class="grid-item" :type="pokemonTypes[10]" />
-          <GridItem class="grid-item" :type="pokemonTypes[11]" />
-          <GridItem class="grid-item" :type="pokemonTypes[12]" />
-          <GridItem class="grid-item" :type="pokemonTypes[13]" />
-          <GridItem class="grid-item" :type="pokemonTypes[14]" />
-          <GridItem class="grid-item" :type="pokemonTypes[15]" />
-          <GridItem class="grid-item" :type="pokemonTypes[16]" />
-          <GridItem class="grid-item" :type="pokemonTypes[17]" />
+          <GridItem class="type" :type="pokemonTypes[0]" />
+          <GridItem class="type" :type="pokemonTypes[1]" />
+          <GridItem class="type" :type="pokemonTypes[2]" />
+          <GridItem class="type" :type="pokemonTypes[3]" />
+          <GridItem class="type" :type="pokemonTypes[4]" />
+          <GridItem class="type" :type="pokemonTypes[5]" />
+          <GridItem class="type" :type="pokemonTypes[6]" />
+          <GridItem class="type" :type="pokemonTypes[7]" />
+          <GridItem class="type" :type="pokemonTypes[8]" />
+          <GridItem class="type" :type="pokemonTypes[9]" />
+          <GridItem class="type" :type="pokemonTypes[10]" />
+          <GridItem class="type" :type="pokemonTypes[11]" />
+          <GridItem class="type" :type="pokemonTypes[12]" />
+          <GridItem class="type" :type="pokemonTypes[13]" />
+          <GridItem class="type" :type="pokemonTypes[14]" />
+          <GridItem class="type" :type="pokemonTypes[15]" />
+          <GridItem class="type" :type="pokemonTypes[16]" />
+          <GridItem class="type" :type="pokemonTypes[17]" />
         </main>
       </div>
     </div>

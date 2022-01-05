@@ -1,6 +1,9 @@
 <template>
-  <div class="grid-item" :style="[isActive ? active : passive]" @click="toggleModal">
-    <!-- <h1>THIS IS A GRID ITEM: {{ type.name }}</h1> -->
+  <div
+    :class="{ 'grid-item': true, 'grid-item-active': isActive }"
+    :style="[isActive ? active : passive]"
+    @click="toggleModal"
+  >
     <p>{{ isActive }}</p>
   </div>
 </template>
@@ -81,19 +84,25 @@ export default {
       // console.log(`x: ${rect.x}, y: ${rect.y}, width ${rect.width}, height ${rect.height}`)
       return {
         backgroundColor: "green",
-        transform: "scale(1.5)",
+        //   zIndex: 5,
+        transform: "translate(-50px, -50px)",
+        position: "relative",
+        //   width: "75vw",
+        //   height: "75vh",
+        transitionDuration: "1s",
       }
     },
     passive() {
       return {
         backgroundColor: "red",
+        transitionDuration: "1s",
       }
     },
   },
   mounted() {
     /* Record the initial dimensions of the component */
     //  this.passiveBoundingClientRect = this.$el.getBoundingClientRect()
-    /* We DON'T want to trigger an update to this.boundingClientRect on each 
+    /* We DON'T want to trigger an update to this.boundingClientRect on each
          page resize because the page can resize while an element*/
     //  window.addEventListener("resize", this.windowResizeHandler)
   },
@@ -114,6 +123,10 @@ export default {
   height: 14vw;
   max-width: 28vh;
   max-height: 28vh;
+}
+.grid-item-active {
+  border-color: violet;
+  width: 30vw;
 }
 
 @media (orientation: portrait) {
