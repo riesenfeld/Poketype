@@ -5,24 +5,114 @@
     <div id="vertical-centering-flexbox">
       <div id="horizontal-centering-flexbox">
         <main id="container">
-          <GridItem class="type" :type="pokemonTypes[0]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[1]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[2]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[3]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[4]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[5]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[6]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[7]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[8]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[9]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[10]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[11]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[12]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[13]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[14]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[15]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[16]" @modalToggled="toggleModalBackground" />
-          <GridItem class="type" :type="pokemonTypes[17]" @modalToggled="toggleModalBackground" />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[0]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[1]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[2]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[3]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[4]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[5]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[6]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[7]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[8]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[9]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[10]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[11]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[12]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[13]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[14]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[15]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[16]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
+          <GridItem
+            class="type"
+            :type="pokemonTypes[17]"
+            :orientation="orientation"
+            @modalToggled="toggleModalBackground"
+          />
         </main>
       </div>
     </div>
@@ -289,15 +379,34 @@ export default {
         },
       ],
       modalActivated: false,
+      orientation: null,
     }
   },
   methods: {
+    updateOrientation(bool) {
+      if (bool) {
+        this.orientation = "portrait"
+      } else {
+        this.orientation = "landscape"
+      }
+    },
     toggleModalBackground() {
       if (this.modalActivated) {
         this.modalActivated = false
       } else this.modalActivated = true
       return this.modalActivated
     },
+  },
+  mounted() {
+    /* Get and update the window's orientation */
+    var mediaQueryList = window.matchMedia("(orientation: portrait)")
+    this.updateOrientation(mediaQueryList.matches)
+    /* Bring the event handler into scope for addEventListener */
+    let updateOrientation = this.updateOrientation
+    /* Listen for changes to orientation */
+    mediaQueryList.addEventListener("change", function (mql) {
+      updateOrientation(mql.matches)
+    })
   },
 }
 </script>
