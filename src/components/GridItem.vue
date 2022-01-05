@@ -1,7 +1,7 @@
 <template>
   <div class="grid-item" :style="[isActive ? active : passive]" @click="toggleModal">
-    <h1>THIS IS A GRID ITEM: {{ type.name }}</h1>
-    <h2>{{ isActive }}</h2>
+    <!-- <h1>THIS IS A GRID ITEM: {{ type.name }}</h1> -->
+    <p>{{ isActive }}</p>
   </div>
 </template>
 
@@ -18,7 +18,10 @@ export default {
    */
   name: "GridItem",
   props: {
+    /* The type data */
     type: Object,
+    /* Width and height */
+    dimensions: Array,
   },
   data: function () {
     return {
@@ -27,14 +30,14 @@ export default {
        *  The base dimensions of the inactive gridItem.
        *  Defined by mounted() lifecycle hook and updated by windowResizeHandler()
        */
-      passiveBoundingClientRect: null,
+      // passiveBoundingClientRect: null,
       /**
        *  The dimensions of the gridItem when it is expanded into a modal.
        *  Updated by windowResizeHandler()
        */
-      activeBoundingClientRect: null,
+      // activeBoundingClientRect: null,
       /* The ID we will give to our resize timeout debouncing method so that it can be cleared */
-      resizeTimeoutIdentifier: null,
+      // resizeTimeoutIdentifier: null,
     }
   },
   methods: {
@@ -45,34 +48,37 @@ export default {
 
       return this.isActive
     },
-    setBoundingClientRect() {
-      /**
-       * When passive, update passiveBoundingClientRect.
-       * When active update activeBoundingClientRect.
-       */
-      if (this.isActive) {
-        this.activeBoundingClientRect = this.$el.getBoundingClientRect()
-        console.log(`setBoundingClientRect fired, component is active.`)
-      } else {
-        this.passiveBoundingClientRect = this.$el.getBoundingClientRect()
-        console.log(`setBoundingClientRect fired, component is passive.`)
-      }
-    },
-    windowResizeHandler() {
-      /**
-       * Debouncing the window resize event handler to aid performance
-       * Reset the timer every time a window resize event fires,
-       * and only call setBoundingClientRect() 100ms after the resizing is done.
-       */
-      clearTimeout(this.resizeTimeoutIdentifier)
-      this.resizeTimeoutIdentifier = setTimeout(this.setBoundingClientRect, 100)
-    },
+    //  setBoundingClientRect() {
+    //    /**
+    //     * When passive, update passiveBoundingClientRect.
+    //     * When active update activeBoundingClientRect.
+    //     */
+    //    if (this.isActive) {
+    //      this.activeBoundingClientRect = this.$el.getBoundingClientRect()
+    //      console.log(`setBoundingClientRect fired, component is active.`)
+    //    } else {
+    //      this.passiveBoundingClientRect = this.$el.getBoundingClientRect()
+    //      console.log(`setBoundingClientRect fired, component is passive.`)
+    //    }
+    //  },
+    //  windowResizeHandler() {
+    //    /**
+    //     * Debouncing the window resize event handler to aid performance
+    //     * Reset the timer every time a window resize event fires,
+    //     * and only call setBoundingClientRect() 100ms after the resizing is done.
+    //     */
+    //    clearTimeout(this.resizeTimeoutIdentifier)
+    //    this.resizeTimeoutIdentifier = setTimeout(this.setBoundingClientRect, 100)
+    //  },
   },
   computed: {
+    /**
+     *  Dynamically-bound styles
+     * */
     active() {
       /* For testing */
-      let rect = this.passiveBoundingClientRect
-      console.log(`x: ${rect.x}, y: ${rect.y}, width ${rect.width}, height ${rect.height}`)
+      // let rect = this.passiveBoundingClientRect
+      // console.log(`x: ${rect.x}, y: ${rect.y}, width ${rect.width}, height ${rect.height}`)
       return {
         backgroundColor: "green",
         transform: "scale(1.5)",
@@ -86,14 +92,14 @@ export default {
   },
   mounted() {
     /* Record the initial dimensions of the component */
-    this.passiveBoundingClientRect = this.$el.getBoundingClientRect()
+    //  this.passiveBoundingClientRect = this.$el.getBoundingClientRect()
     /* We DON'T want to trigger an update to this.boundingClientRect on each 
          page resize because the page can resize while an element*/
-    window.addEventListener("resize", this.windowResizeHandler)
+    //  window.addEventListener("resize", this.windowResizeHandler)
   },
   destroyed() {
     /* Not strictly necessary here, but is good practice in general */
-    window.addEventListener("resize", this.windowResizeHandler)
+    //  window.addEventListener("resize", this.windowResizeHandler)
   },
 }
 </script>
@@ -103,6 +109,20 @@ export default {
   background-color: blue;
   border: 2px solid blue;
   transition-duration: 0.5s;
+  /* Ensure that the grid items remain square and never overflow the page */
+  width: 14vw;
+  height: 14vw;
+  max-width: 28vh;
+  max-height: 28vh;
+}
+
+@media (orientation: portrait) {
+  .grid-item {
+    width: 28vw;
+    height: 28vw;
+    max-width: 14vh;
+    max-height: 14vh;
+  }
 }
 /* .active {
 } */

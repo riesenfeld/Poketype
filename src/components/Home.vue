@@ -1,27 +1,31 @@
 <template>
   <div class="home">
     <NavBar />
-    <h1>THIS IS A TEST</h1>
-    <main id="container">
-      <GridItem :type="pokemonTypes[0]" />
-      <GridItem :type="pokemonTypes[1]" />
-      <GridItem :type="pokemonTypes[2]" />
-      <GridItem :type="pokemonTypes[3]" />
-      <GridItem :type="pokemonTypes[4]" />
-      <GridItem :type="pokemonTypes[5]" />
-      <GridItem :type="pokemonTypes[6]" />
-      <GridItem :type="pokemonTypes[7]" />
-      <GridItem :type="pokemonTypes[8]" />
-      <GridItem :type="pokemonTypes[9]" />
-      <GridItem :type="pokemonTypes[10]" />
-      <GridItem :type="pokemonTypes[11]" />
-      <GridItem :type="pokemonTypes[12]" />
-      <GridItem :type="pokemonTypes[13]" />
-      <GridItem :type="pokemonTypes[14]" />
-      <GridItem :type="pokemonTypes[15]" />
-      <GridItem :type="pokemonTypes[16]" />
-      <GridItem :type="pokemonTypes[17]" />
-    </main>
+    <!-- We use two flexboxes to ensure that the grid items never have gutters between them -->
+    <div id="vertical-centering-flexbox">
+      <div id="horizontal-centering-flexbox">
+        <main id="container">
+          <GridItem class="grid-item" :type="pokemonTypes[0]" />
+          <GridItem class="grid-item" :type="pokemonTypes[1]" />
+          <GridItem class="grid-item" :type="pokemonTypes[2]" />
+          <GridItem class="grid-item" :type="pokemonTypes[3]" />
+          <GridItem class="grid-item" :type="pokemonTypes[4]" />
+          <GridItem class="grid-item" :type="pokemonTypes[5]" />
+          <GridItem class="grid-item" :type="pokemonTypes[6]" />
+          <GridItem class="grid-item" :type="pokemonTypes[7]" />
+          <GridItem class="grid-item" :type="pokemonTypes[8]" />
+          <GridItem class="grid-item" :type="pokemonTypes[9]" />
+          <GridItem class="grid-item" :type="pokemonTypes[10]" />
+          <GridItem class="grid-item" :type="pokemonTypes[11]" />
+          <GridItem class="grid-item" :type="pokemonTypes[12]" />
+          <GridItem class="grid-item" :type="pokemonTypes[13]" />
+          <GridItem class="grid-item" :type="pokemonTypes[14]" />
+          <GridItem class="grid-item" :type="pokemonTypes[15]" />
+          <GridItem class="grid-item" :type="pokemonTypes[16]" />
+          <GridItem class="grid-item" :type="pokemonTypes[17]" />
+        </main>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -284,14 +288,61 @@ export default {
           specialInteraction: "",
         },
       ],
+      /* Width and height of the grid #container */
+      gridDimensions: [null, null],
+    }
+  },
+  methods: {
+    orientationIsLandscape() {
+      return document.documentElement.clientWidth >= document.documentElement.clientHeight
+    },
+    setGridDimensions() {
+      if (this.orientationIsLandscape) {
+        this.gridDimensions = []
+      }
+    },
+  },
+  mounted() {
+    if (this.orientationIsLandscape) {
+      this.dimensions = [90, 90]
     }
   },
 }
 </script>
 
 <style scoped>
+/**
+*   LANDSCAPE ORIENTATION AND DEFAULT STYLES
+*/
+.home {
+  height: 100vh;
+}
+#vertical-centering-flexbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 90%; /* viewport height - navbar height */
+}
+#horizontal-centering-flexbox {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 #container {
+  /* Making sure height is always half with width without flowing over the page */
+  /* [width, height] = [84vw, 42vw]. [max-width, max-height] = [168vh, 84vh].  */
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+}
+
+@media (orientation: portrait) {
+  #vertical-centering-flexbox {
+    height: 92%; /* viewport height - navbar height */
+  }
+  #container {
+    /* Making sure height is always twice with width without flowing over the page */
+    /* [width, height] = [42vh, 84vh]. [max-width, max-height] = [84vw, 168vw].  */
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 </style>

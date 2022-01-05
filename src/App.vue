@@ -7,13 +7,11 @@
 </template>
 
 <script>
-// import HelloWorld from "./components/HelloWorld.vue"
 import Home from "./components/Home.vue"
 
 export default {
   name: "App",
   components: {
-    // HelloWorld,
     Home,
   },
 }
@@ -21,8 +19,11 @@ export default {
 
 <style>
 * {
+  /* Simple reset */
   margin: 0;
   padding: 0;
+  border: 0;
+  box-sizing: border-box;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
