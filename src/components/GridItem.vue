@@ -85,19 +85,19 @@ export default {
       // let rect = this.passiveBoundingClientRect
       // console.log(`x: ${rect.x}, y: ${rect.y}, width ${rect.width}, height ${rect.height}`)
       return {
-        backgroundColor: "green",
-        //   zIndex: 5,
-        transform: "translate(-50px, -50px)",
-        position: "relative",
-        //   width: "75vw",
-        //   height: "75vh",
-        transitionDuration: "1s",
+        //   backgroundColor: "green",
+        //   //   zIndex: 5,
+        //   transform: "translate(-50px, -50px)",
+        //   position: "relative",
+        //   //   width: "75vw",
+        //   //   height: "75vh",
+        //   transitionDuration: "1s",
       }
     },
     passive() {
       return {
-        backgroundColor: "red",
-        transitionDuration: "1s",
+        //   backgroundColor: "red",
+        //   transitionDuration: "1s",
       }
     },
   },
@@ -123,18 +123,25 @@ export default {
   max-height: 28vh;
 }
 .grid-item {
-  background-color: blue;
+  background-color: red;
   border: 2px solid blue;
-  transition-duration: 0.5s;
   /* Ensure that the grid items remain square and never overflow the page */
   width: 14vw;
   height: 14vw;
   max-width: 28vh;
   max-height: 28vh;
+  transition-duration: 1s;
 }
 .grid-item-active {
   border-color: violet;
+  background-color: green;
+  /* position: relative; */
+  max-width: 30vw;
+  max-height: 30vh;
   width: 30vw;
+  height: 30vh;
+  transform: translate(-200px, -200px);
+  /* transition-duration: 1s; */
 }
 
 @media (orientation: portrait) {
