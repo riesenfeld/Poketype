@@ -22,7 +22,6 @@ export default {
   data: function () {
     return {
       isActive: false,
-      // modalWidth: this.orientation == "portait" ? 80 : 60,
     }
   },
   methods: {
@@ -65,8 +64,6 @@ export default {
       let modalHeight = 60
       let centerX = this.convertPxToVu(preTranslationRect.x, "width") + this.modalWidth / 2
       let centerY = this.convertPxToVu(preTranslationRect.y, "height") + modalHeight / 2
-      console.log(`modal width: ${this.modalWidth}vw`)
-      console.log(`orientation: ${this.orientation}`)
       return {
         maxWidth: `${this.modalWidth}vw`,
         maxHeight: `${modalHeight}vh`,
