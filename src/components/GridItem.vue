@@ -5,15 +5,34 @@
       :style="[isActive ? activeAnimation : '', gridItemColor]"
       @click="toggleModal"
     >
-      <h3>{{ type.name }}</h3>
+      <h3><Type :typeName="type.name" :typeColors="colors[type.name]" /></h3>
       <div class="info">
         <div class="info-section">
           <h4><Type :typeName="type.name" :typeColors="colors[type.name]" /> type Pokemon</h4>
-          <div class="text"></div>
+          <div class="text">
+            <p>
+              Strong against attacks from
+              <Type
+                v-for="(item, index) in type.defendingNotVeryEffective"
+                :key="index"
+                :typeName="item"
+                :typeColors="colors[item]"
+                :delimiter="type.defendingNotVeryEffective.length - 1 - index"
+              />
+              <!-- <h5>TEST TEST</h5>
+                <span v-if="index < type.defendingNotVeryEffective.length - 2">,</span> -->
+            </p>
+            <p>Weak against attacks from</p>
+            <p>Invulnerable to attacks from</p>
+          </div>
         </div>
         <div class="info-section">
-          <h4>{{ type.name }} type Moves</h4>
-          <div class="text"></div>
+          <h4><Type :typeName="type.name" :typeColors="colors[type.name]" /> type Moves</h4>
+          <div class="text">
+            <p>Not very effective against</p>
+            <p>Super effective against</p>
+            <p>Have no effect against</p>
+          </div>
         </div>
       </div>
     </div>
@@ -62,9 +81,6 @@ export default {
       } else {
         return (pixelValue / viewportHeight) * 100
       }
-    },
-    colorText(str) {
-      return str
     },
   },
   computed: {
