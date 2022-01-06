@@ -5,14 +5,28 @@
       :style="[isActive ? activeAnimation : '', gridItemColor]"
       @click="toggleModal"
     >
-      <h4>{{ type.name }}</h4>
+      <h3>{{ type.name }}</h3>
+      <div class="info">
+        <div class="info-section">
+          <h4><Type :typeName="type.name" :typeColors="colors[type.name]" /> type Pokemon</h4>
+          <div class="text"></div>
+        </div>
+        <div class="info-section">
+          <h4>{{ type.name }} type Moves</h4>
+          <div class="text"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Type from "./Type.vue"
 export default {
   name: "GridItem",
+  components: {
+    Type,
+  },
   props: {
     /* The type data */
     type: Object,
@@ -49,6 +63,9 @@ export default {
         return (pixelValue / viewportHeight) * 100
       }
     },
+    colorText(str) {
+      return str
+    },
   },
   computed: {
     /* The dimensions of the modal are different for landscape and portrait orientations */
@@ -77,8 +94,8 @@ export default {
       return {
         backgroundColor: `${this.colors[this.type.name][0]}`,
         background: `linear-gradient(
-          ${this.colors[this.type.name][1]}, 
-          ${this.colors[this.type.name][0]}, 
+          ${this.colors[this.type.name][1]},
+          ${this.colors[this.type.name][0]},
           ${this.colors[this.type.name][2]})`,
       }
     },
