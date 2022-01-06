@@ -19,19 +19,62 @@
                 :typeColors="colors[item]"
                 :delimiter="type.defendingNotVeryEffective.length - 1 - index"
               />
-              <!-- <h5>TEST TEST</h5>
-                <span v-if="index < type.defendingNotVeryEffective.length - 2">,</span> -->
             </p>
-            <p>Weak against attacks from</p>
-            <p>Invulnerable to attacks from</p>
+            <p>
+              Weak against attacks from
+              <Type
+                v-for="(item, index) in type.defendingSuperEffective"
+                :key="index"
+                :typeName="item"
+                :typeColors="colors[item]"
+                :delimiter="type.defendingSuperEffective.length - 1 - index"
+              />
+            </p>
+            <p>
+              Invulnerable to attacks from
+              <Type
+                v-for="(item, index) in type.defendingNotEffective"
+                :key="index"
+                :typeName="item"
+                :typeColors="colors[item]"
+                :delimiter="type.defendingNotEffective.length - 1 - index"
+              />
+            </p>
           </div>
         </div>
         <div class="info-section">
           <h4><Type :typeName="type.name" :typeColors="colors[type.name]" /> type Moves</h4>
           <div class="text">
-            <p>Not very effective against</p>
-            <p>Super effective against</p>
-            <p>Have no effect against</p>
+            <p>
+              Not very effective against
+              <Type
+                v-for="(item, index) in type.attackingNotVeryEffective"
+                :key="index"
+                :typeName="item"
+                :typeColors="colors[item]"
+                :delimiter="type.attackingNotVeryEffective.length - 1 - index"
+              />
+            </p>
+            <p>
+              Super effective against
+              <Type
+                v-for="(item, index) in type.attackingSuperEffective"
+                :key="index"
+                :typeName="item"
+                :typeColors="colors[item]"
+                :delimiter="type.attackingSuperEffective.length - 1 - index"
+              />
+            </p>
+            <p>
+              Have no effect against
+              <Type
+                v-for="(item, index) in type.attackingNotEffective"
+                :key="index"
+                :typeName="item"
+                :typeColors="colors[item]"
+                :delimiter="type.attackingNotEffective.length - 1 - index"
+              />
+            </p>
           </div>
         </div>
       </div>
