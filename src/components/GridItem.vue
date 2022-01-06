@@ -5,8 +5,10 @@
       :style="[isActive ? activeAnimation : '', gridItemColor]"
       @click="toggleModal"
     >
-      <h3><Type :typeName="type.name" :typeColors="colors[type.name]" /></h3>
-      <div class="info">
+      <h3 v-if="!isActive" class="type-name-passive">
+        <Type :typeName="type.name" :typeColors="colors[type.name]" />
+      </h3>
+      <div v-if="isActive" class="info">
         <div class="info-section">
           <h4><Type :typeName="type.name" :typeColors="colors[type.name]" /> type Pokemon</h4>
           <div class="text">
