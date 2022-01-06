@@ -5,7 +5,7 @@
       :style="[isActive ? activeAnimation : '', gridItemColor]"
       @click="toggleModal"
     >
-      <h3 v-if="!isActive" :class="['type-name', { 'show-text': !isActive }]">
+      <h3 v-if="!isActive" :class="['passive-header', { 'show-text': !isActive }]">
         <Type :typeName="type.name" :typeColors="colors[type.name]" />
       </h3>
       <div v-if="isActive" :class="['info', { 'show-text': isActive }]">
@@ -213,11 +213,8 @@ export default {
     opacity: 1;
   }
 }
-.show-text .info-section {
-  animation: scale-text 0.4s;
-}
-.hide-text {
-}
+/* .hide-text {
+} */
 .grid-item-dummy {
   width: 14vw;
   height: 14vw;
@@ -241,12 +238,29 @@ export default {
   z-index: 3;
 }
 
-.type-name {
+.passive-header {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.info {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-section {
+  /* Keeps both info-sections the same length along the main track */
+  flex-basis: 100%;
+}
+
+.show-text .info-section {
+  animation: scale-text 0.4s;
 }
 
 @media (orientation: portrait) {
@@ -261,6 +275,9 @@ export default {
     height: 28vw;
     max-width: 14vh;
     max-height: 14vh;
+  }
+  .info {
+    flex-direction: column;
   }
 }
 </style>
