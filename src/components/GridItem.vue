@@ -5,10 +5,10 @@
       :style="[isActive ? activeAnimation : '', gridItemColor]"
       @click="toggleModal"
     >
-      <h3 v-if="!isActive" class="type-name-passive">
+      <h3 v-if="!isActive" :class="['type-name', { 'show-text': !isActive }]">
         <Type :typeName="type.name" :typeColors="colors[type.name]" />
       </h3>
-      <div v-if="isActive" class="info">
+      <div v-if="isActive" :class="['info', { 'show-text': isActive }]">
         <div class="info-section">
           <h4><Type :typeName="type.name" :typeColors="colors[type.name]" /> type Pokemon</h4>
           <div class="text">
@@ -165,6 +165,59 @@ export default {
 </script>
 
 <style scoped>
+/**
+ * @keyframes pop-in
+ * Used when text appears on a modal to prevent it from showing until 
+ * the moment the modal is at full size. This keeps the text from rearranging
+ * as the modal size increases during its transition.
+ */
+/* @keyframes pop-in {
+  0% {
+    visibility: hidden;
+  }
+  90% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+} */
+/**
+ * @keyframes pop-in
+ * Ensures that the modal text disappears immediately during a transition,
+ * preventing showing text rearranging as the modal shrinks back down into the grid.
+ */
+/* @keyframes pop-out {
+  0% {
+    visibility: visible;
+  }
+  1% {
+    visibility: visible;
+  }
+  100% {
+    visibility: hidden;
+  }
+} */
+
+@keyframes scale-text {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  75% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.show-text .info-section {
+  animation: scale-text 0.4s;
+}
+.hide-text {
+}
 .grid-item-dummy {
   width: 14vw;
   height: 14vw;
@@ -186,6 +239,14 @@ export default {
   background-color: green;
   position: absolute;
   z-index: 3;
+}
+
+.type-name {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (orientation: portrait) {
