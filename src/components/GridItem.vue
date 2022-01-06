@@ -10,7 +10,7 @@
         <div class="info-section">
           <h4><Type :typeName="type.name" :typeColors="colors[type.name]" /> type Pokemon</h4>
           <div class="text">
-            <p>
+            <p v-if="type.defendingNotVeryEffective.length > 0">
               Strong against attacks from
               <Type
                 v-for="(item, index) in type.defendingNotVeryEffective"
@@ -20,7 +20,7 @@
                 :delimiter="type.defendingNotVeryEffective.length - 1 - index"
               />
             </p>
-            <p>
+            <p v-if="type.defendingSuperEffective.length > 0">
               Weak against attacks from
               <Type
                 v-for="(item, index) in type.defendingSuperEffective"
@@ -30,7 +30,7 @@
                 :delimiter="type.defendingSuperEffective.length - 1 - index"
               />
             </p>
-            <p>
+            <p v-if="type.defendingNotEffective.length > 0">
               Invulnerable to attacks from
               <Type
                 v-for="(item, index) in type.defendingNotEffective"
@@ -45,7 +45,7 @@
         <div class="info-section">
           <h4><Type :typeName="type.name" :typeColors="colors[type.name]" /> type Moves</h4>
           <div class="text">
-            <p>
+            <p v-if="type.attackingNotVeryEffective.length > 0">
               Not very effective against
               <Type
                 v-for="(item, index) in type.attackingNotVeryEffective"
@@ -55,7 +55,7 @@
                 :delimiter="type.attackingNotVeryEffective.length - 1 - index"
               />
             </p>
-            <p>
+            <p v-if="type.attackingSuperEffective.length > 0">
               Super effective against
               <Type
                 v-for="(item, index) in type.attackingSuperEffective"
@@ -65,8 +65,8 @@
                 :delimiter="type.attackingSuperEffective.length - 1 - index"
               />
             </p>
-            <p>
-              Have no effect against
+            <p v-if="type.attackingNotEffective.length > 0">
+              Completely ineffective against
               <Type
                 v-for="(item, index) in type.attackingNotEffective"
                 :key="index"
