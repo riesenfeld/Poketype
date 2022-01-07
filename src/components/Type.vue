@@ -10,7 +10,7 @@ export default {
   name: "Type",
   props: {
     typeName: String,
-    typeColors: [Array, String],
+    typeColors: Array,
 
     /**
      * An optional delimiter for natural language lists of types.
@@ -34,16 +34,18 @@ export default {
   computed: {
     colorMap() {
       /* If the only one color is passed in (as a string), set the text color only */
-      if (typeof this.typeColors == "string") {
-        return {
-          color: this.typeColors,
-          padding: "1px",
-          borderRadius: "2px",
-        }
-      }
+      // if (typeof this.typeColors == "string") {
+      //   return {
+      //     //  color: this.typeColors,
+      //     color: "white",
+      //     mixBlendMode: "exclusion",
+      //     padding: "1px",
+      //     borderRadius: "2px",
+      //   }
+      // }
       return {
-        backgroundColor: this.typeColors[0],
-        color: this.typeColors[3],
+        backgroundColor: this.typeColors[2],
+        color: this.typeColors[1],
         padding: "1px",
         borderRadius: "2px",
       }

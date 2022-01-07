@@ -9,7 +9,8 @@
       @click="toggleModal"
     >
       <h3 v-if="!isActive" :class="['passive-header', { 'show-text': !isActive }]">
-        <Type :typeName="type.name" :typeColors="colors[type.name][3]" />
+        <!-- <Type :typeName="type.name" :typeColors="colors[type.name][3]" /> -->
+        {{ type.name }}
       </h3>
       <div v-if="isActive" :class="['info', { 'show-text': isActive }]">
         <div class="info-section">
@@ -93,6 +94,7 @@
 
 <script>
 import Type from "./Type.vue"
+import colors from "../data/SwordAndShieldColors.js"
 export default {
   name: "GridItem",
   components: {
@@ -104,16 +106,16 @@ export default {
     /* Window orientation */
     orientation: String,
     /* The colors mapped to each type */
-    colors: Object,
-    /* Whether a modal is currently active */
-    // modalActivated: Boolean,
-    // modalIsOn: Boolean,
-    // currentlyActiveGridItem: Number,
-    isActive: Boolean,
+    // colors: Object,
+    /* Whether this GridItem is active, kept track of in the parent Home component */
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: function () {
     return {
-      // isActive: false,
+      colors,
     }
   },
   methods: {
@@ -121,27 +123,13 @@ export default {
       return this.orientation == "portrait"
     },
     toggleModal() {
-      /* If there is no modal currently up, just in case a click somehow gets past the backdrop */
-      // if (this.modalIsActive) {
-      //   this.isActive = false
-      // } else {
-      //   this.isActive = true
-      //   this.$emit("modalOn")
-      // }
-      /**
-       * If this grid item is not active (kept track of by the parent Home Component),
-       * then let Home know to activate it.
-       */
       if (!this.isActive) {
         /**
-         * Send a signal to the parent to flip isActive to true for this gridItem
-         * thereby activating this item and the backdrop
+         * Send a signal to the parent to flip isActive to true for this gridItem,
+         * thereby activating this item and the backdrop.
          */
         this.$emit("modalOn")
       }
-      //   this.isActive = false
-      // } else
-
       return this.isActive
     },
     /* Convert pixel units to viewport units */
@@ -198,8 +186,11 @@ export default {
       }
     },
   },
-  mounted() {
-    // this.modalIsOn.addEventListener
+  watch: {
+    /* For Testing */
+    // isActive(val) {
+    //   console.log("isActive: " + val)
+    // },
   },
 }
 </script>
@@ -270,14 +261,10 @@ export default {
   max-width: 28vh;
   max-height: 28vh;
   transition-duration: 0.5s;
-  /* opacity: 0.8; */
 }
 .grid-item-active {
-  border-color: violet;
-  background-color: green;
   position: absolute;
   z-index: 3;
-  /* opacity: 1; */
 }
 
 .passive-header {

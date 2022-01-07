@@ -303,8 +303,10 @@ export default {
         Steel: ["#B8B8D0", "#D8D8C0", "#807870", "#44447C"],
         Fairy: ["#F0B6BC", "#F5CAD1", "#905F63", "#30F6FC"],
       },
+      newColors: this.gen8Colors,
       /* The ID of the active grid item, -1 when no grid item is active */
       currentlyActiveGridItem: -1,
+      /* The current orientation of the window or device */
       orientation: null,
     }
   },
@@ -318,15 +320,10 @@ export default {
     },
     toggleModalBackground(id) {
       if (id >= 0) {
-        // this.modalActivated = true
         this.currentlyActiveGridItem = id
       } else {
-        // this.modalActivated = false
         this.currentlyActiveGridItem = -1
       }
-      // if (this.modalActivated) {
-      //   this.modalActivated = false
-      // } else this.modalActivated = true
       return this.currentlyActiveGridItem
     },
   },
