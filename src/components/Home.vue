@@ -14,7 +14,6 @@
             :key="type.id"
             :type="type"
             :orientation="orientation"
-            :colors="typesAndColors"
             :isActive="currentlyActiveGridItem == type.id"
             @modalOn="toggleModalBackground(type.id)"
           />
@@ -283,27 +282,6 @@ export default {
           specialInteraction: "",
         },
       ],
-      typesAndColors: {
-        Normal: ["#A8A878", "#D8D8D0", "#705848", "#E8E8B8"],
-        Fire: ["#F08030", "#F8D030", "#C03028", "#700B0"],
-        Water: ["#6890F0", "#98D8D8", "#807870", "#83090"],
-        Grass: ["#78C850", "#C0F860", "#08B820", "#277700"],
-        Electric: ["#F8D030", "#F8F878", "#B8A038", "#38B030"],
-        Ice: ["#98D8D8", "#D0F8E8", "#9090A0", "#185858"],
-        Fighting: ["#803028", "#B08030", "#585038", "#302008"],
-        Poison: ["#A040A0", "#D880B8", "#483850", "#20C070"],
-        Ground: ["#E0C068", "#F8F878", "#886830", "#5C5C04"],
-        Flying: ["#A890F0", "#C8C0F8", "#705898", "#DCC414"],
-        Psychic: ["#B0E0E6", "#4CB8DA", "#00A57D", "#5C3BEF"],
-        Bug: ["#809200", "#D8D030", "#825019", "#724009"],
-        Rock: ["#555555", "#999999", "#222222", "#C0C0C0"],
-        Ghost: ["#462A74", "#8A7AA6", "#252527", "#B195DF"],
-        Dragon: ["#B038F8", "#FF8053", "#483890", "#FBB303"],
-        Dark: ["#333333", "#555555", "#111111", "#B03636"],
-        Steel: ["#B8B8D0", "#D8D8C0", "#807870", "#44447C"],
-        Fairy: ["#F0B6BC", "#F5CAD1", "#905F63", "#30F6FC"],
-      },
-      newColors: this.gen8Colors,
       /* The ID of the active grid item, -1 when no grid item is active */
       currentlyActiveGridItem: -1,
       /* The current orientation of the window or device */

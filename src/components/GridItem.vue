@@ -9,7 +9,6 @@
       @click="toggleModal"
     >
       <h3 v-if="!isActive" class="passive-header">
-        <!-- <Type :typeName="type.name" :typeColors="colors[type.name][3]" /> -->
         {{ type.name }}
       </h3>
       <div v-if="isActive" :class="['info', { 'show-text': isActive }]">
@@ -107,8 +106,6 @@ export default {
     type: Object,
     /* Window orientation */
     orientation: String,
-    /* The colors mapped to each type */
-    // colors: Object,
     /* Whether this GridItem is active, kept track of in the parent Home component */
     isActive: {
       type: Boolean,
@@ -117,6 +114,7 @@ export default {
   },
   data: function () {
     return {
+      /* The colors mapped to each type */
       colors,
     }
   },
