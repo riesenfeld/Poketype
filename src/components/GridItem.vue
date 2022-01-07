@@ -2,11 +2,14 @@
   <div class="grid-item-dummy">
     <div
       :class="{ 'grid-item': true, 'grid-item-active': isActive }"
-      :style="[isActive ? activeAnimation : '', gridItemColor]"
+      :style="[
+        isActive ? activeAnimation : '',
+        isActive ? activeGridItemColor : passiveGridItemColor,
+      ]"
       @click="toggleModal"
     >
       <h3 v-if="!isActive" :class="['passive-header', { 'show-text': !isActive }]">
-        <Type :typeName="type.name" :typeColors="colors[type.name]" />
+        <Type :typeName="type.name" :typeColors="colors[type.name][3]" />
       </h3>
       <div v-if="isActive" :class="['info', { 'show-text': isActive }]">
         <div class="info-section">
@@ -155,13 +158,22 @@ export default {
         transform: `translate(${50 - centerX}vw, ${50 - centerY}vh)`,
       }
     },
-    gridItemColor() {
+    passiveGridItemColor() {
       return {
         backgroundColor: `${this.colors[this.type.name][0]}`,
         background: `linear-gradient(
-          ${this.colors[this.type.name][1]},
-          ${this.colors[this.type.name][0]},
-          ${this.colors[this.type.name][2]})`,
+          ${this.colors[this.type.name][1]}DD,
+          ${this.colors[this.type.name][0]}DD,
+          ${this.colors[this.type.name][2]}DD)`,
+      }
+    },
+    activeGridItemColor() {
+      return {
+        backgroundColor: `${this.colors[this.type.name][0]}`,
+        background: `linear-gradient(
+          ${this.colors[this.type.name][1]}FF,
+          ${this.colors[this.type.name][0]}FF,
+          ${this.colors[this.type.name][2]}FF)`,
       }
     },
   },
@@ -234,12 +246,14 @@ export default {
   max-width: 28vh;
   max-height: 28vh;
   transition-duration: 0.5s;
+  /* opacity: 0.8; */
 }
 .grid-item-active {
   border-color: violet;
   background-color: green;
   position: absolute;
   z-index: 3;
+  /* opacity: 1; */
 }
 
 .passive-header {

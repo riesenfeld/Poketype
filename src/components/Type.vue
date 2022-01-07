@@ -1,6 +1,6 @@
 <template>
   <span>
-    <span class="typeName" :style="colorMap" @click="viewColor">{{ typeName }}</span>
+    <span class="typeName" :style="colorMap">{{ typeName }}</span>
     <span class="delimiter">{{ delimiters[Math.min(delimiter, 2)] }}</span>
   </span>
 </template>
@@ -10,7 +10,8 @@ export default {
   name: "Type",
   props: {
     typeName: String,
-    typeColors: Array,
+    typeColors: [Array, String],
+
     /**
      * An optional delimiter for natural language lists of types.
      * Can be ",", "and", or "".
@@ -32,6 +33,14 @@ export default {
   },
   computed: {
     colorMap() {
+      /* If the only one color is passed in (as a string), set the text color only */
+      if (typeof this.typeColors == "string") {
+        return {
+          color: this.typeColors,
+          padding: "1px",
+          borderRadius: "2px",
+        }
+      }
       return {
         backgroundColor: this.typeColors[0],
         color: this.typeColors[3],
@@ -44,7 +53,8 @@ export default {
 </script>
 
 <style>
-/* .testing-only {
-  color: #a52626
-} */
+.testing-only {
+  color: #a52626;
+  background-color: initial;
+}
 </style>

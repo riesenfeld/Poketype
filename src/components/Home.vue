@@ -337,6 +337,7 @@ export default {
 */
 .home {
   height: 100vh;
+  background-color: #222222;
 }
 #modal-backdrop {
   position: absolute;
