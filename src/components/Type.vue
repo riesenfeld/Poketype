@@ -1,6 +1,6 @@
 <template>
-  <span>
-    <span class="typeName" :style="colorMap">{{ typeName }}</span>
+  <span id="type-wrapper">
+    <span class="type-name" :style="colorMap">{{ typeName }}</span>
     <span class="delimiter">{{ delimiters[Math.min(delimiter, 2)] }}</span>
   </span>
 </template>
@@ -33,19 +33,11 @@ export default {
   },
   computed: {
     colorMap() {
-      /* If the only one color is passed in (as a string), set the text color only */
-      // if (typeof this.typeColors == "string") {
-      //   return {
-      //     //  color: this.typeColors,
-      //     color: "white",
-      //     mixBlendMode: "exclusion",
-      //     padding: "1px",
-      //     borderRadius: "2px",
-      //   }
-      // }
+      console.log(`Type text color ${this.typeColors[1]}`)
       return {
         backgroundColor: this.typeColors[2],
         color: this.typeColors[1],
+        filter: "contrast(130%)",
         padding: "1px",
         borderRadius: "2px",
       }
@@ -55,8 +47,8 @@ export default {
 </script>
 
 <style>
-.testing-only {
-  color: #a52626;
-  background-color: initial;
+.delimiter {
+  /* Same as .plain-text class in GridItem component */
+  mix-blend-mode: multiply;
 }
 </style>

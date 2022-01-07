@@ -8,18 +8,19 @@
       ]"
       @click="toggleModal"
     >
-      <h3 v-if="!isActive" :class="['passive-header', { 'show-text': !isActive }]">
+      <h3 v-if="!isActive" class="passive-header">
         <!-- <Type :typeName="type.name" :typeColors="colors[type.name][3]" /> -->
         {{ type.name }}
       </h3>
       <div v-if="isActive" :class="['info', { 'show-text': isActive }]">
         <div class="info-section">
           <h4 class="info-section-header">
-            <Type :typeName="type.name" :typeColors="colors[type.name]" /> type Pokemon
+            <Type :typeName="type.name" :typeColors="colors[type.name]" />
+            <span class="plain-text"> type Pokemon</span>
           </h4>
-          <div class="text">
+          <div class="info-section-text">
             <p v-if="type.defendingNotVeryEffective.length > 0">
-              Strong against attacks from
+              <span class="plain-text">Strong against attacks from </span>
               <Type
                 v-for="(item, index) in type.defendingNotVeryEffective"
                 :key="index"
@@ -29,7 +30,7 @@
               />
             </p>
             <p v-if="type.defendingSuperEffective.length > 0">
-              Weak against attacks from
+              <span class="plain-text">Weak against attacks from </span>
               <Type
                 v-for="(item, index) in type.defendingSuperEffective"
                 :key="index"
@@ -39,7 +40,7 @@
               />
             </p>
             <p v-if="type.defendingNotEffective.length > 0">
-              Invulnerable to attacks from
+              <span class="plain-text">Invulnerable to attacks from </span>
               <Type
                 v-for="(item, index) in type.defendingNotEffective"
                 :key="index"
@@ -52,11 +53,12 @@
         </div>
         <div class="info-section">
           <h4 class="info-section-header">
-            <Type :typeName="type.name" :typeColors="colors[type.name]" /> type Moves
+            <Type :typeName="type.name" :typeColors="colors[type.name]" />
+            <span class="plain-text"> type Moves </span>
           </h4>
-          <div class="text">
+          <div class="info-section-text">
             <p v-if="type.attackingNotVeryEffective.length > 0">
-              Not very effective against
+              <span class="plain-text">Not very effective against </span>
               <Type
                 v-for="(item, index) in type.attackingNotVeryEffective"
                 :key="index"
@@ -66,7 +68,7 @@
               />
             </p>
             <p v-if="type.attackingSuperEffective.length > 0">
-              Super effective against
+              <span class="plain-text">Super effective against </span>
               <Type
                 v-for="(item, index) in type.attackingSuperEffective"
                 :key="index"
@@ -76,7 +78,7 @@
               />
             </p>
             <p v-if="type.attackingNotEffective.length > 0">
-              Completely ineffective against
+              <span class="plain-text">Completely ineffective against </span>
               <Type
                 v-for="(item, index) in type.attackingNotEffective"
                 :key="index"
@@ -169,20 +171,20 @@ export default {
     },
     passiveGridItemColor() {
       return {
-        backgroundColor: `${this.colors[this.type.name][0]}`,
         background: `linear-gradient(
-          ${this.colors[this.type.name][1]}EE,
           ${this.colors[this.type.name][0]}EE,
-          ${this.colors[this.type.name][2]}EE)`,
+          ${this.colors[this.type.name][2]}EE,
+          ${this.colors[this.type.name][0]}EE)`,
+        color: this.colors[this.type.name][1],
       }
     },
     activeGridItemColor() {
       return {
-        backgroundColor: `${this.colors[this.type.name][0]}`,
         background: `linear-gradient(
-          ${this.colors[this.type.name][1]}FF,
           ${this.colors[this.type.name][0]}FF,
-          ${this.colors[this.type.name][2]}FF)`,
+          ${this.colors[this.type.name][2]}FF,
+          ${this.colors[this.type.name][0]}FF)`,
+        color: this.colors[this.type.name][1],
       }
     },
   },
@@ -253,8 +255,6 @@ export default {
   max-height: 28vh;
 }
 .grid-item {
-  /* background-color: red; */
-  /* border: 2px solid blue; */
   /* Ensure that the grid items remain square and never overflow the page */
   width: 14vw;
   height: 14vw;
@@ -273,6 +273,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  mix-blend-mode: multiply;
 }
 
 .info {
@@ -300,9 +301,12 @@ export default {
   /* text-align: center; */
 }
 
-.info-section .text p {
+.info-section-text p {
   margin-top: 2vh;
-  /* color:  */
+}
+/* All the text on an active or inactive grid item except for Type components */
+.plain-text {
+  mix-blend-mode: multiply;
 }
 
 @media (orientation: portrait) {
