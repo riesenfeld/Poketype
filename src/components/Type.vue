@@ -1,6 +1,6 @@
 <template>
   <span>
-    <span class="typeName" :style="colorMap">{{ typeName }}</span>
+    <span class="typeName" :style="colorMap" @click="viewColor">{{ typeName }}</span>
     <span class="delimiter">{{ delimiters[Math.min(delimiter, 2)] }}</span>
   </span>
 </template>
@@ -34,10 +34,17 @@ export default {
     colorMap() {
       return {
         backgroundColor: this.typeColors[0],
+        color: this.typeColors[3],
+        padding: "1px",
+        borderRadius: "2px",
       }
     },
   },
 }
 </script>
 
-<style></style>
+<style>
+/* .testing-only {
+  color: #a52626
+} */
+</style>

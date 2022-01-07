@@ -10,7 +10,9 @@
       </h3>
       <div v-if="isActive" :class="['info', { 'show-text': isActive }]">
         <div class="info-section">
-          <h4><Type :typeName="type.name" :typeColors="colors[type.name]" /> type Pokemon</h4>
+          <h4 class="info-section-header">
+            <Type :typeName="type.name" :typeColors="colors[type.name]" /> type Pokemon
+          </h4>
           <div class="text">
             <p v-if="type.defendingNotVeryEffective.length > 0">
               Strong against attacks from
@@ -45,7 +47,9 @@
           </div>
         </div>
         <div class="info-section">
-          <h4><Type :typeName="type.name" :typeColors="colors[type.name]" /> type Moves</h4>
+          <h4 class="info-section-header">
+            <Type :typeName="type.name" :typeColors="colors[type.name]" /> type Moves
+          </h4>
           <div class="text">
             <p v-if="type.attackingNotVeryEffective.length > 0">
               Not very effective against
@@ -257,10 +261,23 @@ export default {
 .info-section {
   /* Keeps both info-sections the same length along the main track */
   flex-basis: 100%;
+  height: 94%;
 }
 
 .show-text .info-section {
   animation: scale-text 0.4s;
+}
+
+.info-section-header {
+  font-weight: normal;
+  font-size: 1.2rem;
+  /* margin: 3vh 0vw 1vh 0vw; */
+  /* text-align: center; */
+}
+
+.info-section .text p {
+  margin-top: 2vh;
+  /* color:  */
 }
 
 @media (orientation: portrait) {
