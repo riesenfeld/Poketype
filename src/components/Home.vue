@@ -1,6 +1,10 @@
 <template>
   <div class="home">
-    <div id="modal-backdrop" :class="{ active: modalActivated }"></div>
+    <div
+      id="modal-backdrop"
+      :class="{ active: currentlyActiveGridItem > -1 }"
+      @click="toggleModalBackground(-1)"
+    ></div>
     <NavBar />
     <div id="vertical-centering-flexbox">
       <div id="horizontal-centering-flexbox">
@@ -11,7 +15,8 @@
             :type="type"
             :orientation="orientation"
             :colors="typesAndColors"
-            @modalToggled="toggleModalBackground"
+            :isActive="currentlyActiveGridItem == type.id"
+            @modalOn="toggleModalBackground(type.id)"
           />
         </main>
       </div>
@@ -298,7 +303,8 @@ export default {
         Steel: ["#B8B8D0", "#D8D8C0", "#807870", "#44447C"],
         Fairy: ["#F0B6BC", "#F5CAD1", "#905F63", "#30F6FC"],
       },
-      modalActivated: false,
+      /* The ID of the active grid item, -1 when no grid item is active */
+      currentlyActiveGridItem: -1,
       orientation: null,
     }
   },
@@ -310,11 +316,18 @@ export default {
         this.orientation = "landscape"
       }
     },
-    toggleModalBackground() {
-      if (this.modalActivated) {
-        this.modalActivated = false
-      } else this.modalActivated = true
-      return this.modalActivated
+    toggleModalBackground(id) {
+      if (id >= 0) {
+        // this.modalActivated = true
+        this.currentlyActiveGridItem = id
+      } else {
+        // this.modalActivated = false
+        this.currentlyActiveGridItem = -1
+      }
+      // if (this.modalActivated) {
+      //   this.modalActivated = false
+      // } else this.modalActivated = true
+      return this.currentlyActiveGridItem
     },
   },
   mounted() {

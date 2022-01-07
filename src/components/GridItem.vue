@@ -105,10 +105,15 @@ export default {
     orientation: String,
     /* The colors mapped to each type */
     colors: Object,
+    /* Whether a modal is currently active */
+    // modalActivated: Boolean,
+    // modalIsOn: Boolean,
+    // currentlyActiveGridItem: Number,
+    isActive: Boolean,
   },
   data: function () {
     return {
-      isActive: false,
+      // isActive: false,
     }
   },
   methods: {
@@ -116,11 +121,27 @@ export default {
       return this.orientation == "portrait"
     },
     toggleModal() {
-      if (this.isActive) {
-        this.isActive = false
-      } else this.isActive = true
-      /* Let the Home component know to toggle the modal backdrop */
-      this.$emit("modalToggled")
+      /* If there is no modal currently up, just in case a click somehow gets past the backdrop */
+      // if (this.modalIsActive) {
+      //   this.isActive = false
+      // } else {
+      //   this.isActive = true
+      //   this.$emit("modalOn")
+      // }
+      /**
+       * If this grid item is not active (kept track of by the parent Home Component),
+       * then let Home know to activate it.
+       */
+      if (!this.isActive) {
+        /**
+         * Send a signal to the parent to flip isActive to true for this gridItem
+         * thereby activating this item and the backdrop
+         */
+        this.$emit("modalOn")
+      }
+      //   this.isActive = false
+      // } else
+
       return this.isActive
     },
     /* Convert pixel units to viewport units */
@@ -176,6 +197,9 @@ export default {
           ${this.colors[this.type.name][2]}FF)`,
       }
     },
+  },
+  mounted() {
+    // this.modalIsOn.addEventListener
   },
 }
 </script>
