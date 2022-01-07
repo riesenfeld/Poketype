@@ -162,9 +162,9 @@ export default {
       return {
         backgroundColor: `${this.colors[this.type.name][0]}`,
         background: `linear-gradient(
-          ${this.colors[this.type.name][1]}DD,
-          ${this.colors[this.type.name][0]}DD,
-          ${this.colors[this.type.name][2]}DD)`,
+          ${this.colors[this.type.name][1]}EE,
+          ${this.colors[this.type.name][0]}EE,
+          ${this.colors[this.type.name][2]}EE)`,
       }
     },
     activeGridItemColor() {
