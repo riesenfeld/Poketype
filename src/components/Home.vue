@@ -5,7 +5,7 @@
       :class="{ active: currentlyActiveGridItem > -1 }"
       @click="toggleModalBackground(-1)"
     ></div>
-    <NavBar />
+    <NavBar :modalIsActive="currentlyActiveGridItem > -1" />
     <div id="vertical-centering-flexbox">
       <div id="horizontal-centering-flexbox">
         <main id="container">
