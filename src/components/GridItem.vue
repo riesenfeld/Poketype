@@ -15,8 +15,8 @@
       >
         {{ type.name }}
       </h3>
-      <div v-if="isActive" :class="['info', { 'show-text': isActive }]">
-        <div class="info-section">
+      <div v-if="isActive" :class="['info', { 'animate-text': isActive }]">
+        <div class="info-section left-top-section">
           <h4 class="info-section-header">
             <Type :typeName="type.name" :typeColors="colors[type.name]" />
             <span class="plain-text"> type Pokemon</span>
@@ -54,7 +54,8 @@
             </p>
           </div>
         </div>
-        <div class="info-section">
+        <hr class="section-separator" />
+        <div class="info-section right-bottom-section">
           <h4 class="info-section-header">
             <Type :typeName="type.name" :typeColors="colors[type.name]" />
             <span class="plain-text"> type Moves </span>
@@ -155,16 +156,21 @@ export default {
   computed: {
     /* The dimensions of the modal are different for landscape and portrait orientations */
     modalWidth() {
+      let aspectRatio = document.documentElement.clientWidth / document.documentElement.clientHeight
+      console.log(`aspect ratio: ${aspectRatio}`)
       if (this.orientation == "portrait") {
         return 80
-      } else return 60
+      } else if (aspectRatio < 1.5) {
+        return 80
+      }
+      return 60
     },
     /**
      *  Computed and dynamically-bound styles
      * */
     activeAnimation() {
       let preTranslationRect = this.$el.getBoundingClientRect()
-      let modalHeight = 60
+      let modalHeight = this.modalWidth == 80 ? 70 : 60
       let centerX = this.convertPxToVu(preTranslationRect.x, "width") + this.modalWidth / 2
       let centerY = this.convertPxToVu(preTranslationRect.y, "height") + modalHeight / 2
       return {
@@ -222,7 +228,7 @@ export default {
 <style scoped>
 /**
  * @keyframes pop-in
- * Used when text appears on a modal to prevent it from showing until 
+ * Used when text appears on a modal to prevent it from showing until
  * the moment the modal is at full size. This keeps the text from rearranging
  * as the modal size increases during its transition.
  */
@@ -268,8 +274,6 @@ export default {
     opacity: 1;
   }
 }
-/* .hide-text {
-} */
 .grid-item-dummy {
   width: 14vw;
   height: 14vw;
@@ -306,23 +310,41 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 
 .info-section {
   /* Keeps both info-sections the same length along the main track */
-  flex-basis: 100%;
+  /* flex-basis: 100%; */
+  width: 46%;
   height: 94%;
+  line-height: 140%;
+  /* border-right: 2px solid black; */
 }
 
-.show-text .info-section {
-  animation: scale-text 0.4s;
+hr.section-separator {
+  height: 100%;
+  width: 1px;
+  border-left: 1px solid black;
+  /* margin-right: 2vw; */
+}
+.left-top-section {
+  /* border-right: 1px solid black; */
+}
+.right-bottom-section {
+  /* border-left: 1px solid green; */
+}
+
+.animate-text .info-section {
+  animation: scale-text 0.5s;
 }
 
 .info-section-header {
   font-weight: normal;
-  font-size: 1.2rem;
+  font-size: 2vw;
+  text-align: center;
+  margin-bottom: 3vw;
   /* margin: 3vh 0vw 1vh 0vw; */
   /* text-align: center; */
 }
@@ -350,6 +372,22 @@ export default {
   }
   .info {
     flex-direction: column;
+  }
+
+  .info-section {
+    width: 94%;
+    height: 50%;
+    line-height: 140%;
+    font-size: 2vh;
+  }
+  hr.section-separator {
+    height: 1px;
+    width: 100%;
+    border-top: 1px solid black;
+  }
+  .info-section-header {
+    font-size: 2.5vh;
+    margin-top: 3vh;
   }
 }
 </style>
