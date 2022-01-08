@@ -15,6 +15,7 @@
             :type="type"
             :orientation="orientation"
             :isActive="currentlyActiveGridItem == type.id"
+            :activeGridItemID="currentlyActiveGridItem"
             @modalOn="toggleModalBackground(type.id)"
           />
         </main>
@@ -32,9 +33,7 @@ export default {
     NavBar,
     GridItem,
   },
-  props: {
-    //  msg: String
-  },
+  props: {},
   data: function () {
     return {
       pokemonTypes: [

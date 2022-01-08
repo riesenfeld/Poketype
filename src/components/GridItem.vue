@@ -8,7 +8,11 @@
       ]"
       @click="toggleModal"
     >
-      <h3 v-if="!isActive" class="passive-header">
+      <h3
+        v-if="!isActive"
+        :class="{ 'passive-header': true, blurred: isBehindBackdrop }"
+        :style="{ activeGridItemID: !isActive }"
+      >
         {{ type.name }}
       </h3>
       <div v-if="isActive" :class="['info', { 'show-text': isActive }]">
@@ -111,6 +115,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    activeGridItemID: {
+      type: Number,
+      default: -1,
+    },
   },
   data: function () {
     return {
@@ -185,11 +193,27 @@ export default {
         color: this.colors[this.type.name][1],
       }
     },
+    isBehindBackdrop() {
+      if (this.activeGridItemID > -1 && this.activeGridItemID != this.type.id) {
+        return true
+      }
+      return false
+    },
   },
   watch: {
     /* For Testing */
     // isActive(val) {
     //   console.log("isActive: " + val)
+    // },
+    // activeGridItemID(value) {
+    //   /* If a GridItem other than this one is active */
+    //   if (value > -1 && value != this.type.id) {
+    //     // console.log(`It's not me! ${this.type.id}`)
+    //     return {
+    //       filter: "blur(3px)",
+    //     }
+    //   }
+    //   return {}
     // },
   },
 }
@@ -272,6 +296,10 @@ export default {
   justify-content: center;
   align-items: center;
   mix-blend-mode: multiply;
+}
+
+.blurred {
+  filter: blur(1.5px);
 }
 
 .info {

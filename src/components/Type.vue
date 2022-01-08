@@ -33,7 +33,6 @@ export default {
   },
   computed: {
     colorMap() {
-      console.log(`Type text color ${this.typeColors[1]}`)
       return {
         backgroundColor: this.typeColors[2],
         color: this.typeColors[1],
