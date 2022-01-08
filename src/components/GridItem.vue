@@ -32,6 +32,7 @@
                 :delimiter="type.defendingNotVeryEffective.length - 1 - index"
               />
             </p>
+            <hr v-if="type.defendingSuperEffective.length > 0" class="section-text-separator" />
             <p v-if="type.defendingSuperEffective.length > 0">
               <span class="plain-text">Weak against attacks from </span>
               <Type
@@ -42,6 +43,7 @@
                 :delimiter="type.defendingSuperEffective.length - 1 - index"
               />
             </p>
+            <hr v-if="type.defendingNotEffective.length > 0" class="section-text-separator" />
             <p v-if="type.defendingNotEffective.length > 0">
               <span class="plain-text">Invulnerable to attacks from </span>
               <Type
@@ -71,6 +73,7 @@
                 :delimiter="type.attackingNotVeryEffective.length - 1 - index"
               />
             </p>
+            <hr v-if="type.attackingSuperEffective.length > 0" class="section-text-separator" />
             <p v-if="type.attackingSuperEffective.length > 0">
               <span class="plain-text">Super effective against </span>
               <Type
@@ -81,6 +84,7 @@
                 :delimiter="type.attackingSuperEffective.length - 1 - index"
               />
             </p>
+            <hr v-if="type.attackingNotEffective.length > 0" class="section-text-separator" />
             <p v-if="type.attackingNotEffective.length > 0">
               <span class="plain-text">Completely ineffective against </span>
               <Type
@@ -326,7 +330,7 @@ export default {
 hr.section-separator {
   height: 100%;
   width: 1px;
-  border-left: 1px solid black;
+  border-left: 1px dotted black;
   /* margin-right: 2vw; */
 }
 .left-top-section {
@@ -350,11 +354,19 @@ hr.section-separator {
 }
 
 .info-section-text p {
-  margin-top: 2vh;
+  margin: 2vh 0vw 2vh 0vw;
+}
+hr.section-text-separator {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dotted black;
 }
 /* All the text on an active or inactive grid item except for Type components */
 .plain-text {
   mix-blend-mode: multiply;
+}
+.info-section-text .plain-text {
+  font-weight: bold;
 }
 
 @media (orientation: portrait) {
@@ -383,7 +395,7 @@ hr.section-separator {
   hr.section-separator {
     height: 1px;
     width: 100%;
-    border-top: 1px solid black;
+    border-top: 1px dotted black;
   }
   .info-section-header {
     font-size: 2.5vh;
