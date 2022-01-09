@@ -1,5 +1,3 @@
-//SYMBOL 	TYPE NAME 	ATTACK
-
 /**
  * The type color data from Pokemon Sword and Shield.
  * This data was extracted from Sword/Shield game files
