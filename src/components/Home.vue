@@ -17,6 +17,7 @@
             :isActive="currentlyActiveGridItem == type.id"
             :activeGridItemID="currentlyActiveGridItem"
             @modalOn="toggleModalBackground(type.id)"
+            @modalOff="toggleModalBackground(-1)"
           />
         </main>
       </div>

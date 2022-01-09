@@ -6,7 +6,7 @@
         isActive ? activeAnimation : '',
         isActive ? activeGridItemColor : passiveGridItemColor,
       ]"
-      @click="toggleModal"
+      v-on="!isActive ? { click: openModal } : {}"
     >
       <h3
         v-if="!isActive"
@@ -15,7 +15,13 @@
       >
         {{ type.name }}
       </h3>
-      <button v-if="isActive" class="close-button" :style="modalCloseButtonColor">
+      <button
+        id="modal-close-button"
+        v-if="isActive"
+        class="close-button"
+        :style="modalCloseButtonColor"
+        @click="closeModal"
+      >
         <span class="close-button-symbol">&#x00D7;</span>
       </button>
       <div v-if="isActive" :class="['info', { 'animate-text': isActive }]">
@@ -138,13 +144,19 @@ export default {
     orientationIsPortrait() {
       return this.orientation == "portrait"
     },
-    toggleModal() {
+    openModal() {
       if (!this.isActive) {
         /**
          * Send a signal to the parent to flip isActive to true for this gridItem,
          * thereby activating this item and the backdrop.
          */
         this.$emit("modalOn")
+      }
+      return this.isActive
+    },
+    closeModal() {
+      if (this.isActive) {
+        this.$emit("modalOff")
       }
       return this.isActive
     },
@@ -314,6 +326,7 @@ export default {
   position: relative;
   left: calc(100% - 1vw);
   top: -1vw;
+  z-index: 4;
   /* font-size: 100%; */
 }
 .close-button-symbol {
