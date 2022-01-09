@@ -15,6 +15,9 @@
       >
         {{ type.name }}
       </h3>
+      <button v-if="isActive" class="close-button" :style="modalCloseButtonColor">
+        <span class="close-button-symbol">&#x00D7;</span>
+      </button>
       <div v-if="isActive" :class="['info', { 'animate-text': isActive }]">
         <div class="info-section left-top-section">
           <h4 class="info-section-header">
@@ -203,6 +206,14 @@ export default {
         color: this.colors[this.type.name][1],
       }
     },
+    modalCloseButtonColor() {
+      return {
+        background: `${this.colors[this.type.name][1]}FF`,
+        color: `${this.colors[this.type.name][2]}FF`,
+        // fontSize: "4vw",
+        // mixBlendMode: `darken`,
+      }
+    },
     isBehindBackdrop() {
       if (this.activeGridItemID > -1 && this.activeGridItemID != this.type.id) {
         return true
@@ -296,7 +307,19 @@ export default {
   position: absolute;
   z-index: 3;
 }
-
+.close-button {
+  width: 2vw;
+  height: 2vw;
+  border-radius: 100%;
+  position: relative;
+  left: calc(100% - 1vw);
+  top: -1vw;
+  /* font-size: 100%; */
+}
+.close-button-symbol {
+  /* width: 2vh; */
+  /* height: 2vh; */
+}
 .passive-header {
   width: 100%;
   height: 100%;
@@ -382,6 +405,14 @@ hr.section-text-separator {
     max-width: 14vh;
     max-height: 14vh;
   }
+
+  .close-button {
+    width: 3vh;
+    height: 3vh;
+    left: calc(100% - 1.5vh);
+    top: -1.5vh;
+  }
+
   .info {
     flex-direction: column;
   }
