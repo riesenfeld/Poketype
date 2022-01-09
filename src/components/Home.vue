@@ -5,7 +5,7 @@
       :class="{ active: currentlyActiveGridItem > -1 }"
       @click="toggleModalBackground(-1)"
     ></div>
-    <NavBar :modalIsActive="currentlyActiveGridItem > -1" />
+    <NavBar :modalIsActive="currentlyActiveGridItem > -1" @selectionChanged="switchGeneration" />
     <div id="vertical-centering-flexbox">
       <div id="horizontal-centering-flexbox">
         <main id="container">
@@ -68,6 +68,9 @@ export default {
         this.currentlyActiveGridItem = -1
       }
       return this.currentlyActiveGridItem
+    },
+    switchGeneration(selected) {
+      this.pokemonTypes = this.typesByGeneration[selected]
     },
   },
   mounted() {
