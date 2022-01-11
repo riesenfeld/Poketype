@@ -1,6 +1,6 @@
 <template>
   <nav :class="{ 'nav-bar': true, 'behind-backdrop': modalIsActive }">
-    <h5>THIS IS A NAVBAR</h5>
+    <h5>PokéType</h5>
     <select v-model="selected" id="generation-select" name="generation-select">
       <option value="gen6">Generation VI+</option>
       <option value="gen2">Generation II - V</option>
