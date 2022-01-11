@@ -1,4 +1,4 @@
-var pokemonTypes = [
+var pokemonTypesGen6 = [
   {
     id: 0,
     name: "Normal",
@@ -228,4 +228,4 @@ var pokemonTypes = [
   },
 ]
 
-export default pokemonTypes
+export default pokemonTypesGen6
