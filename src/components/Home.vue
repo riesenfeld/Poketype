@@ -28,9 +28,6 @@
 <script>
 import NavBar from "./NavBar.vue"
 import GridItem from "./GridItem.vue"
-import pokemonTypesGen6 from "../data/PokemonTypesGen6.js"
-import pokemonTypesGen2 from "../data/PokemonTypesGen2.js"
-import pokemonTypesGen1 from "../data/PokemonTypesGen1.js"
 
 export default {
   name: "Home",
@@ -38,15 +35,12 @@ export default {
     NavBar,
     GridItem,
   },
-  props: {},
+  props: {
+    typesByGeneration: Object,
+  },
   data: function () {
     return {
-      typesByGeneration: {
-        gen1: pokemonTypesGen1,
-        gen2: pokemonTypesGen2,
-        gen6: pokemonTypesGen6,
-      },
-      pokemonTypes: pokemonTypesGen6,
+      pokemonTypes: this.typesByGeneration["gen6"],
       /* The ID of the active grid item, -1 when no grid item is active */
       currentlyActiveGridItem: -1,
       /* The current orientation of the window or device */
