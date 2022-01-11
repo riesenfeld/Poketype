@@ -6,10 +6,6 @@
       @click="toggleModalBackdrop(-1)"
     ></div>
     <NavBar :modalIsActive="currentlyActiveGridItem > -1" @selectionChanged="switchGeneration" />
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
     <router-view
       :selectedGeneration="selectedGeneration"
       :currentlyActiveGridItem="currentlyActiveGridItem"
@@ -26,15 +22,6 @@ export default {
   components: {
     NavBar,
   },
-  // data() {
-  //   return {
-  //     typesByGeneration: {
-  //       gen1: pokemonTypesGen1,
-  //       gen2: pokemonTypesGen2,
-  //       gen6: pokemonTypesGen6,
-  //     },
-  //   }
-  // },
   props: {},
   data() {
     return {

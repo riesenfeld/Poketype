@@ -26,7 +26,13 @@ export default {
 *   LANDSCAPE ORIENTATION AND DEFAULT STYLES
 */
 .about {
-  height: 100vh;
+  height: 90vh;
   background-color: #222222;
+}
+
+@media (orientation: portrait) {
+  .about {
+    height: 92vh;
+  }
 }
 </style>
