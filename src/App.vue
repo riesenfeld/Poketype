@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    <div
+      id="modal-backdrop"
+      :class="{ active: currentlyActiveGridItem > -1 }"
+      @click="toggleModalBackdrop(-1)"
+    ></div>
     <NavBar :modalIsActive="currentlyActiveGridItem > -1" @selectionChanged="switchGeneration" />
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
@@ -7,6 +12,7 @@
     </div> -->
     <router-view
       :selectedGeneration="selectedGeneration"
+      :currentlyActiveGridItem="currentlyActiveGridItem"
       @activeGridItemChanged="updateCurrentlyActiveGridItem"
     />
   </div>
@@ -44,6 +50,19 @@ export default {
     updateCurrentlyActiveGridItem(value) {
       this.currentlyActiveGridItem = value
     },
+    toggleModalBackdrop(id) {
+      if (id >= 0) {
+        this.currentlyActiveGridItem = id
+      } else {
+        this.currentlyActiveGridItem = -1
+      }
+      return this.currentlyActiveGridItem
+    },
+  },
+  watch: {
+    currentlyActiveGridItem(val) {
+      this.toggleModalBackdrop(val)
+    },
   },
 }
 </script>
@@ -63,6 +82,24 @@ export default {
   /* color: #2c3e50; */
   /* margin-top: 60px; */
   overflow: hidden;
+}
+#modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  visibility: hidden;
+  transition-duration: 0.5s;
+}
+#modal-backdrop.active {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0.5, 0.5, 0.5, 0.8);
+  z-index: 2;
+  visibility: visible;
 }
 </style>
 

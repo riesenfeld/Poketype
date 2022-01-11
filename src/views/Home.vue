@@ -1,10 +1,5 @@
 <template>
   <div class="home">
-    <div
-      id="modal-backdrop"
-      :class="{ active: currentlyActiveGridItem > -1 }"
-      @click="toggleModalBackground(-1)"
-    ></div>
     <!-- <NavBar :modalIsActive="currentlyActiveGridItem > -1" @selectionChanged="switchGeneration" /> -->
     <div id="vertical-centering-flexbox">
       <div id="horizontal-centering-flexbox">
@@ -16,8 +11,8 @@
             :orientation="orientation"
             :isActive="currentlyActiveGridItem == type.id"
             :activeGridItemID="currentlyActiveGridItem"
-            @modalOn="toggleModalBackground(type.id)"
-            @modalOff="toggleModalBackground(-1)"
+            @modalOn="handleModalActivation(type.id)"
+            @modalOff="handleModalActivation(-1)"
           />
         </main>
       </div>
@@ -41,13 +36,17 @@ export default {
       type: String,
       default: "gen6",
     },
+    currentlyActiveGridItem: {
+      type: Number,
+      default: -1,
+    },
   },
   data: function () {
     return {
       // pokemonTypes: this.typesByGeneration[this.selectedGeneration],
       pokemonTypes: this.typesByGeneration[this.selectedGeneration],
       /* The ID of the active grid item, -1 when no grid item is active */
-      currentlyActiveGridItem: -1,
+      // currentlyActiveGridItem: -1,
       /* The current orientation of the window or device */
       orientation: null,
     }
@@ -60,22 +59,23 @@ export default {
         this.orientation = "landscape"
       }
     },
-    toggleModalBackground(id) {
-      if (id >= 0) {
-        this.currentlyActiveGridItem = id
-      } else {
-        this.currentlyActiveGridItem = -1
-      }
-      return this.currentlyActiveGridItem
-    },
     switchGeneration(selected) {
       this.pokemonTypes = this.typesByGeneration[selected]
     },
+    handleModalActivation(id) {
+      // if (id >= 0) {
+      //   this.currentlyActiveGridItem = id
+      // } else {
+      //   this.currentlyActiveGridItem = -1
+      // }
+      this.$emit("activeGridItemChanged", id)
+      return this.currentlyActiveGridItem
+    },
   },
   watch: {
-    currentlyActiveGridItem(val) {
-      this.$emit("activeGridItemChanged", val)
-    },
+    // currentlyActiveGridItem(val) {
+    //   this.$emit("activeGridItemChanged", val) //
+    // },
     selectedGeneration(selected) {
       this.pokemonTypes = this.typesByGeneration[selected]
     },
@@ -99,24 +99,8 @@ export default {
 *   LANDSCAPE ORIENTATION AND DEFAULT STYLES
 */
 .home {
-  height: 100vh;
+  height: 90vh;
   background-color: #222222;
-}
-#modal-backdrop {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  visibility: hidden;
-  transition-duration: 0.5s;
-}
-#modal-backdrop.active {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0.5, 0.5, 0.5, 0.8);
-  z-index: 2;
-  visibility: visible;
 }
 #vertical-centering-flexbox {
   display: flex;
