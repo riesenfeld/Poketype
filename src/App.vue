@@ -6,9 +6,9 @@
 
 <script>
 import Home from "./components/Home.vue"
-import pokemonTypesGen6 from "./data/PokemonTypesGen6.js"
-import pokemonTypesGen2 from "./data/PokemonTypesGen2.js"
-import pokemonTypesGen1 from "./data/PokemonTypesGen1.js"
+import pokemonTypesGen6 from "./PokemonTypesGen6.js"
+import pokemonTypesGen2 from "./PokemonTypesGen2.js"
+import pokemonTypesGen1 from "./PokemonTypesGen1.js"
 
 export default {
   name: "App",
