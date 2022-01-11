@@ -5,7 +5,7 @@
       :class="{ active: currentlyActiveGridItem > -1 }"
       @click="toggleModalBackground(-1)"
     ></div>
-    <NavBar :modalIsActive="currentlyActiveGridItem > -1" @selectionChanged="switchGeneration" />
+    <!-- <NavBar :modalIsActive="currentlyActiveGridItem > -1" @selectionChanged="switchGeneration" /> -->
     <div id="vertical-centering-flexbox">
       <div id="horizontal-centering-flexbox">
         <main id="container">
@@ -26,21 +26,26 @@
 </template>
 
 <script>
-import NavBar from "@/components/NavBar.vue"
+// import NavBar from "@/components/NavBar.vue"
 import GridItem from "@/components/GridItem.vue"
 
 export default {
   name: "Home",
   components: {
-    NavBar,
+    // NavBar,
     GridItem,
   },
   props: {
     typesByGeneration: Object,
+    selectedGeneration: {
+      type: String,
+      default: "gen6",
+    },
   },
   data: function () {
     return {
-      pokemonTypes: this.typesByGeneration["gen6"],
+      // pokemonTypes: this.typesByGeneration[this.selectedGeneration],
+      pokemonTypes: this.typesByGeneration[this.selectedGeneration],
       /* The ID of the active grid item, -1 when no grid item is active */
       currentlyActiveGridItem: -1,
       /* The current orientation of the window or device */
@@ -64,6 +69,14 @@ export default {
       return this.currentlyActiveGridItem
     },
     switchGeneration(selected) {
+      this.pokemonTypes = this.typesByGeneration[selected]
+    },
+  },
+  watch: {
+    currentlyActiveGridItem(val) {
+      this.$emit("activeGridItemChanged", val)
+    },
+    selectedGeneration(selected) {
       this.pokemonTypes = this.typesByGeneration[selected]
     },
   },

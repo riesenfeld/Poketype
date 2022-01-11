@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import NavBar from "./NavBar.vue"
-import GridItem from "./GridItem.vue"
+import NavBar from "@/components/NavBar.vue"
+import GridItem from "@/components/GridItem.vue"
 
 export default {
   name: "Home",

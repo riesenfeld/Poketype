@@ -18,6 +18,7 @@ const routes = [
         gen2: pokemonTypesGen2,
         gen6: pokemonTypesGen6,
       },
+      // selectedGeneration: selectedGeneration,
     },
   },
   {

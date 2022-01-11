@@ -1,17 +1,17 @@
 <template>
   <div class="about">
-    <NavBar :modalIsActive="currentlyActiveGridItem > -1" @selectionChanged="switchGeneration" />
+    <!-- <NavBar :modalIsActive="currentlyActiveGridItem > -1" @selectionChanged="switchGeneration" /> -->
     <h1>This is the about page.</h1>
   </div>
 </template>
 
 <script>
-import NavBar from "@/components/NavBar.vue"
+// import NavBar from "@/components/NavBar.vue"
 
 export default {
   name: "About",
   components: {
-    NavBar,
+    // NavBar,
   },
   props: {},
   data: function () {
