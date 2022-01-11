@@ -28,9 +28,9 @@
 <script>
 import NavBar from "./NavBar.vue"
 import GridItem from "./GridItem.vue"
-import pokemonTypesGen6 from "@/data/PokemonTypesGen6.js"
-import pokemonTypesGen2 from "@/data/PokemonTypesGen2.js"
-import pokemonTypesGen1 from "@/data/PokemonTypesGen1.js"
+import pokemonTypesGen6 from "../data/PokemonTypesGen6.js"
+import pokemonTypesGen2 from "../data/PokemonTypesGen2.js"
+import pokemonTypesGen1 from "../data/PokemonTypesGen1.js"
 
 export default {
   name: "Home",
