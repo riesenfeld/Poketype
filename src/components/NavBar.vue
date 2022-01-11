@@ -1,7 +1,7 @@
 <template>
   <nav :class="{ 'nav-bar': true, 'behind-backdrop': modalIsActive }">
-    <router-link to="/"><h5>PokéType</h5></router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/"><h5>PokéType</h5></router-link>
+    <router-link to="/about">About</router-link> |
     <select v-model="selected" id="generation-select" name="generation-select">
       <option value="gen6">Generation VI+</option>
       <option value="gen2">Generation II - V</option>
@@ -35,7 +35,10 @@ export default {
 <style scoped>
 .nav-bar {
   width: 100%;
-  height: 10%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   background-color: #333333;
   color: #cccccc;
 }
@@ -47,7 +50,7 @@ export default {
 @media (orientation: portrait) {
   .nav-bar {
     width: 100%;
-    height: 8%;
+    height: 8vh;
   }
 }
 </style>

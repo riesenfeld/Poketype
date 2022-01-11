@@ -99,14 +99,14 @@ export default {
 *   LANDSCAPE ORIENTATION AND DEFAULT STYLES
 */
 .home {
-  height: 90vh;
+  height: 90vh; /* viewport height - navbar height */
   background-color: #222222;
 }
 #vertical-centering-flexbox {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 90%; /* viewport height - navbar height */
+  height: 100%;
 }
 #horizontal-centering-flexbox {
   display: flex;
@@ -121,8 +121,8 @@ export default {
 }
 
 @media (orientation: portrait) {
-  #vertical-centering-flexbox {
-    height: 92%; /* viewport height - navbar height */
+  .home {
+    height: 92vh; /* viewport height - navbar height */
   }
   #container {
     /* Making sure height is always twice with width without flowing over the page */
