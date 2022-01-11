@@ -1,6 +1,9 @@
 <template>
   <nav :class="{ 'nav-bar': true, 'behind-backdrop': modalIsActive }">
-    <router-link to="/" class="nav-item nav-link"><h5>PokéType</h5></router-link>
+    <!-- <router-link to="/" class="nav-item nav-link"><h5>PokéType</h5></router-link> -->
+    <router-link to="/" class="nav-item nav-link"
+      ><img src="@/assets/logo.png" class="logo"
+    /></router-link>
     <router-link to="/about" class="nav-item nav-link">About</router-link>
     <select
       v-if="this.$route.name == 'Home'"
@@ -48,6 +51,11 @@ export default {
   justify-content: space-evenly;
   background-color: #333333;
   color: #cccccc;
+}
+
+.logo {
+  /* width: 30vw; */
+  /* height: 20vh; */
 }
 
 #generation-select {
