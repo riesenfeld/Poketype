@@ -75,6 +75,7 @@ export default {
 }
 .logo {
   height: 50%;
+  max-width: 35vw;
   filter: brightness(0);
 }
 
@@ -84,11 +85,6 @@ export default {
   width: 7.8rem;
   /* display: inline-block; */
 }
-/* Replace the <select> in the nav when not on the home page
-    to keep the other items from shifting on navigation between pages */
-/* #dummy-nav-item {
-  width: 7.8rem;
-} */
 .behind-backdrop {
   filter: blur(1.5px);
 }
@@ -98,5 +94,18 @@ export default {
     width: 100%;
     height: 8vh;
   }
+  #generation-select {
+    width: 6.9rem;
+    font-size: 0.7rem;
+  }
+  /* .nav-link-wrapper {
+    width: 40%;
+  }
+  .nav-select-wrapper {
+    width: 40%;
+  }
+  .nav-logo-wrapper {
+    width: 20%;
+  } */
 }
 </style>
