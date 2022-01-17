@@ -323,7 +323,7 @@ export default {
   width: 2vw;
   height: 2vw;
   border-radius: 100%;
-  position: relative;
+  position: absolute;
   left: calc(100% - 1vw);
   top: -1vw;
   z-index: 4;
@@ -348,7 +348,8 @@ export default {
 
 .info {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 2vh);
+  margin-top: 2vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -427,6 +428,8 @@ hr.section-text-separator {
   }
 
   .info {
+    height: 100%;
+    margin: 0;
     flex-direction: column;
   }
 
