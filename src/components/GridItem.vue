@@ -22,7 +22,7 @@
         :style="modalCloseButtonColor"
         @click="closeModal"
       >
-        <span class="close-button-symbol">&#x00D7;</span>
+        <div class="close-button-symbol">&#x00D7;</div>
       </button>
       <div v-if="isActive" :class="['info', { 'animate-text': isActive }]">
         <div class="info-section left-top-section">
@@ -220,8 +220,8 @@ export default {
     },
     modalCloseButtonColor() {
       return {
-        background: `${this.colors[this.type.name][1]}FF`,
-        color: `${this.colors[this.type.name][2]}FF`,
+        // background: `${this.colors[this.type.name][1]}FF`,
+        color: `${this.colors[this.type.name][1]}FF`,
         // fontSize: "4vw",
         // mixBlendMode: `darken`,
       }
@@ -320,18 +320,21 @@ export default {
   z-index: 3;
 }
 .close-button {
-  width: 2vw;
-  height: 2vw;
-  border-radius: 100%;
+  width: 3vw;
+  height: 3vw;
+  /* border-radius: 100%; */
   position: absolute;
-  left: calc(100% - 1vw);
-  top: -1vw;
+  left: calc(100% - 3vw);
+  /* left: calc(100% - 1vw); */
+  /* top: -1vw; */
   z-index: 4;
+  background-color: #00000000;
   /* font-size: 100%; */
+  font-size: 2vw;
 }
 .close-button-symbol {
-  /* width: 2vh; */
-  /* height: 2vh; */
+  /* width: 100%; */
+  height: 100%;
 }
 .passive-header {
   width: 100%;
@@ -423,8 +426,10 @@ hr.section-text-separator {
   .close-button {
     width: 3vh;
     height: 3vh;
-    left: calc(100% - 1.5vh);
-    top: -1.5vh;
+    left: calc(100% - 3vh);
+    font-size: 2vh;
+    /* left: calc(100% - 1.5vh); */
+    /* top: -1.5vh; */
   }
 
   .info {
