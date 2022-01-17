@@ -220,10 +220,7 @@ export default {
     },
     modalCloseButtonColor() {
       return {
-        // background: `${this.colors[this.type.name][1]}FF`,
         color: `${this.colors[this.type.name][1]}FF`,
-        // fontSize: "4vw",
-        // mixBlendMode: `darken`,
       }
     },
     isBehindBackdrop() {
@@ -233,60 +230,10 @@ export default {
       return false
     },
   },
-  watch: {
-    /* For Testing */
-    // isActive(val) {
-    //   console.log("isActive: " + val)
-    // },
-    // activeGridItemID(value) {
-    //   /* If a GridItem other than this one is active */
-    //   if (value > -1 && value != this.type.id) {
-    //     // console.log(`It's not me! ${this.type.id}`)
-    //     return {
-    //       filter: "blur(3px)",
-    //     }
-    //   }
-    //   return {}
-    // },
-  },
 }
 </script>
 
 <style scoped>
-/**
- * @keyframes pop-in
- * Used when text appears on a modal to prevent it from showing until
- * the moment the modal is at full size. This keeps the text from rearranging
- * as the modal size increases during its transition.
- */
-/* @keyframes pop-in {
-  0% {
-    visibility: hidden;
-  }
-  90% {
-    visibility: hidden;
-  }
-  100% {
-    visibility: visible;
-  }
-} */
-/**
- * @keyframes pop-in
- * Ensures that the modal text disappears immediately during a transition,
- * preventing showing text rearranging as the modal shrinks back down into the grid.
- */
-/* @keyframes pop-out {
-  0% {
-    visibility: visible;
-  }
-  1% {
-    visibility: visible;
-  }
-  100% {
-    visibility: hidden;
-  }
-} */
-
 @keyframes scale-text {
   0% {
     transform: scale(0);
@@ -322,18 +269,13 @@ export default {
 .close-button {
   width: 3vw;
   height: 3vw;
-  /* border-radius: 100%; */
   position: absolute;
   left: calc(100% - 3vw);
-  /* left: calc(100% - 1vw); */
-  /* top: -1vw; */
   z-index: 4;
   background-color: #00000000;
-  /* font-size: 100%; */
   font-size: 2vw;
 }
 .close-button-symbol {
-  /* width: 100%; */
   height: 100%;
 }
 .passive-header {
@@ -359,25 +301,15 @@ export default {
 }
 
 .info-section {
-  /* Keeps both info-sections the same length along the main track */
-  /* flex-basis: 100%; */
   width: 46%;
   height: 94%;
   line-height: 140%;
-  /* border-right: 2px solid black; */
 }
 
 hr.section-separator {
   height: 100%;
   width: 1px;
   border-left: 1px dotted black;
-  /* margin-right: 2vw; */
-}
-.left-top-section {
-  /* border-right: 1px solid black; */
-}
-.right-bottom-section {
-  /* border-left: 1px solid green; */
 }
 
 .animate-text .info-section {
@@ -389,8 +321,6 @@ hr.section-separator {
   font-size: 2vw;
   text-align: center;
   margin-bottom: 3vw;
-  /* margin: 3vh 0vw 1vh 0vw; */
-  /* text-align: center; */
 }
 
 .info-section-text p {
@@ -428,8 +358,6 @@ hr.section-text-separator {
     height: 3vh;
     left: calc(100% - 3vh);
     font-size: 2vh;
-    /* left: calc(100% - 1.5vh); */
-    /* top: -1.5vh; */
   }
 
   .info {
