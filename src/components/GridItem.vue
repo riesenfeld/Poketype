@@ -6,15 +6,22 @@
         isActive ? activeAnimation : '',
         isActive ? activeGridItemColor : passiveGridItemColor,
       ]"
-      v-on="!isActive ? { click: openModal } : {}"
+      v-on="!isActive && type.existsInThisGen ? { click: openModal } : {}"
     >
-      <h3
+      <div
         v-if="!isActive"
-        :class="{ 'passive-header': true, blurred: isBehindBackdrop }"
-        :style="{ activeGridItemID: !isActive }"
+        :class="[
+          type.existsInThisGen ? 'passive-content' : 'passive-content-not-in-generation',
+          { blurred: isBehindBackdrop },
+        ]"
       >
-        {{ type.name }}
-      </h3>
+        <h3 :class="{ 'not-in-generation-header': !type.existsInThisGen }">
+          {{ type.name }}
+        </h3>
+        <p v-if="!isActive && !type.existsInThisGen" class="not-in-generation-message">
+          Does not exist in this generation
+        </p>
+      </div>
       <button
         id="modal-close-button"
         v-if="isActive"
@@ -114,6 +121,8 @@
 <script>
 import Type from "./Type.vue"
 import colors from "../data/SwordAndShieldColors.js"
+const unavailableGridItem = require("@/assets/unavailableGridItem.svg")
+
 export default {
   name: "GridItem",
   components: {
@@ -201,12 +210,25 @@ export default {
       }
     },
     passiveGridItemColor() {
-      return {
-        background: `linear-gradient(
+      console.log("this.type.existsInThisGen: " + this.type.existsInThisGen)
+      if (this.type.existsInThisGen) {
+        return {
+          background: `linear-gradient(
           ${this.colors[this.type.name][0]}EE,
           ${this.colors[this.type.name][2]}EE,
           ${this.colors[this.type.name][0]}EE)`,
-        color: this.colors[this.type.name][1],
+          color: this.colors[this.type.name][1],
+        }
+      } else {
+        return {
+          backgroundImage: `url(${unavailableGridItem}), 
+          linear-gradient(
+          ${this.colors[this.type.name][0]}EE,
+          ${this.colors[this.type.name][2]}EE,
+          ${this.colors[this.type.name][0]}EE)`,
+          color: `${this.colors[this.type.name][1]}AA`,
+          // textDecoration: "line-through double 1px",
+        }
       }
     },
     activeGridItemColor() {
@@ -278,13 +300,35 @@ export default {
 .close-button-symbol {
   height: 100%;
 }
-.passive-header {
+.passive-content {
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   mix-blend-mode: multiply;
+}
+
+.passive-content-not-in-generation {
+  width: 100%;
+  height: 100%;
+  /* 1/3 of grid item (can get away with a percentage padding-top because the parent is a square) */
+  padding-top: 33.3%;
+  mix-blend-mode: multiply;
+}
+.not-in-generation-header {
+  /* 50% of the remaining 2/3 under the padding */
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.not-in-generation-message {
+  /* 50% of the remaining 2/3 under the padding */
+  height: 50%;
+  font-size: 65%;
+  text-align: center;
 }
 
 .blurred {
