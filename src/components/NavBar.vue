@@ -9,7 +9,7 @@
     <span class="nav-item nav-logo-wrapper">
       <img src="@/assets/logo.svg" class="logo" />
     </span>
-    <span class="nav-item nav-select-wrapper">
+    <!-- <span class="nav-item nav-select-wrapper">
       <select
         v-if="this.$route.name == 'Home'"
         v-model="selected"
@@ -20,6 +20,10 @@
         <option value="gen2">Generation II - V</option>
         <option value="gen1">Generation I</option>
       </select>
+    </span> -->
+    <span class="nav-item nav-switch-wrapper">
+      <div class="switch-generation-modal"></div>
+      <button class="switch-generation-button" @click="openModal">Switch generation</button>
     </span>
   </nav>
 </template>
@@ -37,6 +41,14 @@ export default {
     return {
       selected: "gen6",
     }
+  },
+  methods: {
+    openModal() {
+      this.$emit("selectionModalActivated")
+      //emit an event to App like this.$emit("modalOn") in GridItem
+      // and this.$emit("activeGridItemChanged", id) in Home.
+      // Can you get away with emiting an event like this with id of 1000?
+    },
   },
   watch: {
     selected(val) {
@@ -67,24 +79,28 @@ export default {
 .nav-link-wrapper {
   width: 25%;
 }
-.nav-select-wrapper {
-  width: 25%;
-}
 .nav-logo-wrapper {
   width: 50%;
 }
+.nav-switch-wrapper {
+  width: 25%;
+}
+/* .nav-select-wrapper {
+  width: 25%;
+  justify-content: flex-end;
+} */
 .logo {
   height: 50%;
   max-width: 35vw;
   filter: brightness(0);
 }
 
-#generation-select {
-  /* Slightly larger than the default width of a <select> element
+/* #generation-select { */
+/* Slightly larger than the default width of a <select> element
       containing the text "Generation II - V" */
-  width: 7.8rem;
-  /* display: inline-block; */
-}
+/* width: 7.8rem;
+  margin-bottom: 0.5vh; */
+/* } */
 .behind-backdrop {
   filter: blur(1.5px);
 }
@@ -94,11 +110,12 @@ export default {
     width: 100%;
     height: 8vh;
   }
-  #generation-select {
-    width: 5.5rem;
-    /* width: fit-content; */
-    font-size: 0.5rem;
-  }
+  /* #generation-select {
+    width: 7.5rem;
+    font-size: 0.8rem;
+    position: relative;
+    right: 4vw;
+  } */
   /* .nav-link-wrapper {
     width: 40%;
   }

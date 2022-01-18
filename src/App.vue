@@ -2,10 +2,14 @@
   <div id="app">
     <div
       id="modal-backdrop"
-      :class="{ active: currentlyActiveGridItem > -1 }"
-      @click="toggleModalBackdrop(-1)"
+      :class="{ active: currentlyActiveGridItem > -1 || selectionModalIsActive }"
+      @click=";[toggleModalBackdrop(-1), toggleBackdropForGenerationSelect(false)]"
     ></div>
-    <NavBar :modalIsActive="currentlyActiveGridItem > -1" @selectionChanged="switchGeneration" />
+    <NavBar
+      :modalIsActive="currentlyActiveGridItem > -1"
+      @selectionModalActivated="toggleBackdropForGenerationSelect(true)"
+      @selectionChanged="switchGeneration"
+    />
     <router-view
       :selectedGeneration="selectedGeneration"
       :currentlyActiveGridItem="currentlyActiveGridItem"
@@ -27,6 +31,7 @@ export default {
     return {
       selectedGeneration: "gen6",
       currentlyActiveGridItem: -1,
+      selectionModalIsActive: false,
     }
   },
   methods: {
@@ -38,12 +43,18 @@ export default {
       this.currentlyActiveGridItem = value
     },
     toggleModalBackdrop(id) {
-      if (id >= 0) {
+      console.log(`toggleModalBackdrop called with id of ${id}`)
+      if (id >= 0 && id < 18) {
         this.currentlyActiveGridItem = id
       } else {
         this.currentlyActiveGridItem = -1
       }
       return this.currentlyActiveGridItem
+    },
+    toggleBackdropForGenerationSelect(bool) {
+      if (this.selectionModalIsActive != bool) {
+        this.selectionModalIsActive = bool
+      }
     },
   },
   watch: {
