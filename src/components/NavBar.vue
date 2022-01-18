@@ -95,8 +95,9 @@ export default {
     height: 8vh;
   }
   #generation-select {
-    width: 6.9rem;
-    font-size: 0.7rem;
+    width: 5.5rem;
+    /* width: fit-content; */
+    font-size: 0.5rem;
   }
   /* .nav-link-wrapper {
     width: 40%;
