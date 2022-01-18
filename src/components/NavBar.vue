@@ -22,7 +22,9 @@
       </select>
     </span> -->
     <span class="nav-item nav-switch-wrapper">
-      <div class="switch-generation-modal"></div>
+      <div
+        :class="[selectionModalIsActive ? 'selection-modal-active' : 'selection-modal-inactive']"
+      ></div>
       <button class="switch-generation-button" @click="openModal">Switch generation</button>
     </span>
   </nav>
@@ -36,15 +38,21 @@ export default {
       type: Boolean,
       default: false,
     },
+    selectionModalIsActive: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       selected: "gen6",
+      // selectionModalIsActive: false,
     }
   },
   methods: {
     openModal() {
       this.$emit("selectionModalActivated")
+      // this.selectionModalIsActive = true
       //emit an event to App like this.$emit("modalOn") in GridItem
       // and this.$emit("activeGridItemChanged", id) in Home.
       // Can you get away with emiting an event like this with id of 1000?
@@ -105,10 +113,45 @@ export default {
   filter: blur(1.5px);
 }
 
+.selection-modal-inactive {
+  width: 0;
+  height: 0;
+  display: none;
+  opacity: 0;
+  z-index: -1;
+}
+.selection-modal-active {
+  position: absolute;
+  top: 25vh;
+  left: 25vw;
+  width: 50vw;
+  height: 50vh;
+  display: block;
+  opacity: 1;
+  z-index: 3;
+  background-color: burlywood;
+}
+
+.close-button {
+  width: 3vw;
+  height: 3vw;
+  position: absolute;
+  left: calc(100% - 3vw);
+  z-index: 4;
+  background-color: #00000000;
+  font-size: 2vw;
+}
+
 @media (orientation: portrait) {
   .nav-bar {
     width: 100%;
     height: 8vh;
+  }
+  .selection-modal-active {
+    top: 25vh;
+    left: 10vw;
+    width: 80vw;
+    height: 50vh;
   }
   /* #generation-select {
     width: 7.5rem;

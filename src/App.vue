@@ -7,6 +7,7 @@
     ></div>
     <NavBar
       :modalIsActive="currentlyActiveGridItem > -1"
+      :selectionModalIsActive="selectionModalIsActive"
       @selectionModalActivated="toggleBackdropForGenerationSelect(true)"
       @selectionChanged="switchGeneration"
     />
