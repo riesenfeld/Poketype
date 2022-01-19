@@ -56,14 +56,17 @@ export default {
         {
           value: "gen1",
           text: "Generation I",
+          shortText: "Gen I",
         },
         {
           value: "gen2",
           text: "Generation II - V",
+          shortText: "Gen II - V",
         },
         {
           value: "gen6",
           text: "Generation VI+",
+          shortText: "Gen VI+",
         },
       ],
     }
@@ -73,6 +76,9 @@ export default {
       this.selected = selected
       this.$emit("selectionChanged", selected)
       console.log("Selection Changed to: " + selected)
+    },
+    orientationIsLandscape() {
+      return true
     },
     // Cookies may be implemented in Phase 2
     // writeCookie() {},
@@ -151,7 +157,9 @@ export default {
   /* width: 100%; */
   /* margin-bottom: 4vh; */
   /* text-align: center; */
-  display: none;
+  visibility: hidden;
+  height: 0%;
+  width: 0%;
 }
 .selection-button {
   /* width: 15vw; */
