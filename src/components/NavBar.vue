@@ -24,7 +24,62 @@
     <span class="nav-item nav-switch-wrapper">
       <div
         :class="[selectionModalIsActive ? 'selection-modal-active' : 'selection-modal-inactive']"
-      ></div>
+      >
+        <div class="generation-selection-explanation">
+          <p>
+            In the mainline Pokémon games, there have been two alterations to Pokémon types, both of
+            which involved the addition of previously-absent types and interactions.
+          </p>
+          <br />
+          <p>
+            Most notably, Generation II (Gold and Silver) saw the addition of the Dark and Steel
+            types, while Generation VI (X and Y) saw the introduction of the Fairy type. A few
+            other, minor changes to type interactions were added with these generations as well.
+          </p>
+          <br />
+          <p>
+            Thus, you have three type interaction categories to choose from: Generation I,
+            Generations II through V, and Generation VI and onward.
+          </p>
+        </div>
+        <fieldset class="generation-selection-fieldset">
+          <legend class="generation-selection-legend">Select a game generation</legend>
+          <button :class="['selection-button', { 'selection-button-active': selected == 'gen6' }]">
+            <input
+              type="radio"
+              id="gen6"
+              class="hidden-radio-button"
+              name="radio-button"
+              value="gen6"
+              checked
+              v-model="selected"
+            />
+            <label for="gen6">Generation VI+</label>
+          </button>
+          <button :class="['selection-button', { 'selection-button-active': selected == 'gen2' }]">
+            <input
+              type="radio"
+              id="gen2"
+              class="hidden-radio-button"
+              name="radio-button"
+              value="gen2"
+              v-model="selected"
+            />
+            <label for="gen2">Generation II - V</label>
+          </button>
+          <button :class="['selection-button', { 'selection-button-active': selected == 'gen1' }]">
+            <input
+              type="radio"
+              id="gen1"
+              class="hidden-radio-button"
+              name="radio-button"
+              value="gen1"
+              v-model="selected"
+            />
+            <label for="gen1">Generation I</label>
+          </button>
+        </fieldset>
+      </div>
       <button class="switch-generation-button" @click="openModal">Switch generation</button>
     </span>
   </nav>
@@ -73,7 +128,7 @@ export default {
   width: 100%;
   height: 10vh;
   background-color: #333333;
-  color: #cccccc;
+  color: #bbbbb5;
 }
 
 .nav-item {
@@ -114,22 +169,34 @@ export default {
 }
 
 .selection-modal-inactive {
+  position: absolute;
+  top: 1vh;
+  left: 99vw;
   width: 0;
   height: 0;
-  display: none;
-  opacity: 0;
+  /* display: none; */
+  opacity: 0.5;
+  font-size: 0;
   z-index: -1;
+  transition-duration: 0.3s;
 }
 .selection-modal-active {
   position: absolute;
-  top: 25vh;
-  left: 25vw;
-  width: 50vw;
-  height: 50vh;
-  display: block;
+  top: 20vh;
+  left: 20vw;
+  width: 60vw;
+  height: 60vh;
+  /* display: block; */
   opacity: 1;
+  /* font-size: 100%; */
   z-index: 3;
-  background-color: burlywood;
+  background-color: #222222;
+  transition-duration: 0.3s;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .close-button {
@@ -140,6 +207,34 @@ export default {
   z-index: 4;
   background-color: #00000000;
   font-size: 2vw;
+}
+
+.generation-selection-explanation {
+  width: 90%;
+  font-size: 0.9rem;
+}
+
+.generation-selection-fieldset {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  width: 100%;
+}
+.selection-button {
+  width: 15vw;
+  height: 7vh;
+  font-size: 0.9rem;
+}
+.selection-button-active {
+  background-color: #44aa44;
+  width: 14.9vw;
+  height: 6.9vh;
+}
+
+.hidden-radio-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 @media (orientation: portrait) {
