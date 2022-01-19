@@ -36,53 +36,6 @@
         />
         <label :for="gen.value">{{ gen.text }}</label>
       </button>
-
-      <!-- <button
-        id="button-gen6"
-        :class="['selection-button', { 'selection-button-active': selected == 'gen6' }]"
-        @click="switchGeneration('gen6')"
-      >
-        <input
-          type="radio"
-          id="radio-gen6"
-          class="hidden-radio-button"
-          name="radio-button"
-          value="gen6"
-          checked
-          v-model="selected"
-        />
-        <label for="gen6">Generation VI+</label>
-      </button>
-      <button
-        id="button-gen2"
-        :class="['selection-button', { 'selection-button-active': selected == 'gen2' }]"
-        @click="switchGeneration('gen2')"
-      >
-        <input
-          type="radio"
-          id="radio-gen2"
-          class="hidden-radio-button"
-          name="radio-button"
-          value="gen2"
-          v-model="selected"
-        />
-        <label for="gen2">Generation II - V</label>
-      </button>
-      <button
-        id="button-gen1"
-        :class="['selection-button', { 'selection-button-active': selected == 'gen1' }]"
-        @click="switchGeneration('gen1')"
-      >
-        <input
-          type="radio"
-          id="radio-gen1"
-          class="hidden-radio-button"
-          name="radio-button"
-          value="gen1"
-          v-model="selected"
-        />
-        <label for="gen1">Generation I</label>
-      </button> -->
     </fieldset>
   </div>
 </template>
@@ -171,11 +124,7 @@ export default {
   align-items: center;
 }
 
-button {
-  border-radius: 2px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-}
-
+/* Not yet implemented */
 .close-button {
   width: 3vw;
   height: 3vw;
@@ -196,20 +145,28 @@ button {
   justify-content: space-evenly;
   align-items: flex-end;
   width: 100%;
+  height: 12%;
 }
 .generation-selection-legend {
-  width: 100%;
-  margin-bottom: 4vh;
-  text-align: center;
+  /* width: 100%; */
+  /* margin-bottom: 4vh; */
+  /* text-align: center; */
+  display: none;
 }
 .selection-button {
-  width: 15vw;
-  height: 7vh;
+  /* width: 15vw; */
+  width: 27%;
+  /* height: 7vh; */
+  height: 100%;
   /* font-size: 0.9rem; */
+  border-radius: 2px;
+  background-color: #bbbbbb;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 .selection-button-active {
-  width: 14.9vw;
-  height: 6.9vh;
+  /* width: 14.9vw; */
+  width: 26.5%;
+  height: 98%;
   background-color: #44aa44;
   box-shadow: none;
 }
@@ -222,10 +179,11 @@ button {
 
 @media (orientation: portrait) {
   .selection-modal-active {
-    top: 25vh;
-    left: 10vw;
-    width: 80vw;
-    height: 50vh;
+    top: 20vh;
+    left: 5vw;
+    width: 90vw;
+    height: 60vh;
+    font-size: 0.8rem;
   }
 }
 </style>
