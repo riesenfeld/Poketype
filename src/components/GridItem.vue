@@ -185,7 +185,6 @@ export default {
     /* The dimensions of the modal are different for landscape and portrait orientations */
     modalWidth() {
       let aspectRatio = document.documentElement.clientWidth / document.documentElement.clientHeight
-      console.log(`aspect ratio: ${aspectRatio}`)
       if (this.orientation == "portrait") {
         return 80
       } else if (aspectRatio < 1.5) {
@@ -210,7 +209,6 @@ export default {
       }
     },
     passiveGridItemColor() {
-      console.log("this.type.existsInThisGen: " + this.type.existsInThisGen)
       if (this.type.existsInThisGen) {
         return {
           background: `linear-gradient(

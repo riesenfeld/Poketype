@@ -42,7 +42,7 @@ export default {
   },
   data: function () {
     return {
-      // pokemonTypes: this.typesByGeneration[this.selectedGeneration],
+      /* Can be one of three objects containing type data for the selected generation */
       pokemonTypes: this.typesByGeneration[this.selectedGeneration],
       /* The current orientation of the window or device */
       orientation: null,

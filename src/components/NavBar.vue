@@ -9,18 +9,6 @@
     <span class="nav-item nav-logo-wrapper">
       <img src="@/assets/logo.svg" class="logo" />
     </span>
-    <!-- <span class="nav-item nav-select-wrapper">
-      <select
-        v-if="this.$route.name == 'Home'"
-        v-model="selected"
-        id="generation-select"
-        name="generation-select"
-      >
-        <option value="gen6">Generation VI+</option>
-        <option value="gen2">Generation II - V</option>
-        <option value="gen1">Generation I</option>
-      </select>
-    </span> -->
     <span class="nav-item nav-switch-wrapper">
       <div
         :class="[selectionModalIsActive ? 'selection-modal-active' : 'selection-modal-inactive']"
@@ -101,16 +89,11 @@ export default {
   data() {
     return {
       selected: "gen6",
-      // selectionModalIsActive: false,
     }
   },
   methods: {
     openModal() {
       this.$emit("selectionModalActivated")
-      // this.selectionModalIsActive = true
-      //emit an event to App like this.$emit("modalOn") in GridItem
-      // and this.$emit("activeGridItemChanged", id) in Home.
-      // Can you get away with emiting an event like this with id of 1000?
     },
   },
   watch: {
@@ -148,22 +131,12 @@ export default {
 .nav-switch-wrapper {
   width: 25%;
 }
-/* .nav-select-wrapper {
-  width: 25%;
-  justify-content: flex-end;
-} */
 .logo {
   height: 50%;
   max-width: 35vw;
   filter: brightness(0);
 }
 
-/* #generation-select { */
-/* Slightly larger than the default width of a <select> element
-      containing the text "Generation II - V" */
-/* width: 7.8rem;
-  margin-bottom: 0.5vh; */
-/* } */
 .behind-backdrop {
   filter: blur(1.5px);
 }
@@ -186,9 +159,7 @@ export default {
   left: 20vw;
   width: 60vw;
   height: 60vh;
-  /* display: block; */
   opacity: 1;
-  /* font-size: 100%; */
   z-index: 3;
   background-color: #222222;
   transition-duration: 0.3s;
@@ -248,20 +219,5 @@ export default {
     width: 80vw;
     height: 50vh;
   }
-  /* #generation-select {
-    width: 7.5rem;
-    font-size: 0.8rem;
-    position: relative;
-    right: 4vw;
-  } */
-  /* .nav-link-wrapper {
-    width: 40%;
-  }
-  .nav-select-wrapper {
-    width: 40%;
-  }
-  .nav-logo-wrapper {
-    width: 20%;
-  } */
 }
 </style>
