@@ -3,7 +3,7 @@
     <div
       :class="{ 'grid-item': true, 'grid-item-active': isActive }"
       :style="[
-        isActive ? activeAnimation : '',
+        isActive ? activeAnimation() : '',
         isActive ? activeGridItemColor : passiveGridItemColor,
       ]"
       v-on="!isActive && type.existsInThisGen ? { click: openModal } : {}"
@@ -132,7 +132,9 @@ export default {
     /* The type data */
     type: Object,
     /* Window orientation */
-    orientation: String,
+    // orientation: String,
+    /* visualViewport aspect ratio */
+    aspectRatio: Number,
     /* Whether this GridItem is active, kept track of in the parent Home component */
     isActive: {
       type: Boolean,
@@ -147,12 +149,13 @@ export default {
     return {
       /* The colors mapped to each type */
       colors,
+      modalWidth: this.calculateModalWidth(),
     }
   },
   methods: {
-    orientationIsPortrait() {
-      return this.orientation == "portrait"
-    },
+    // orientationIsPortrait() {
+    //   return this.orientation == "portrait"
+    // },
     openModal() {
       if (!this.isActive) {
         /**
@@ -180,21 +183,19 @@ export default {
         return (pixelValue / viewportHeight) * 100
       }
     },
-  },
-  computed: {
     /* The dimensions of the modal are different for landscape and portrait orientations */
-    modalWidth() {
-      let aspectRatio = document.documentElement.clientWidth / document.documentElement.clientHeight
-      if (this.orientation == "portrait") {
+    calculateModalWidth(aspectRatio) {
+      // let aspectRatio = document.documentElement.clientWidth / document.documentElement.clientHeight
+      // if (orientation == "portrait") {
+      //   return 80
+      // } else if (aspectRatio < 1.5) {
+      //   return 80
+      // }
+      // return 60
+      if (aspectRatio < 1.5) {
         return 80
-      } else if (aspectRatio < 1.5) {
-        return 80
-      }
-      return 60
+      } else return 60
     },
-    /**
-     *  Computed and dynamically-bound styles
-     * */
     activeAnimation() {
       let preTranslationRect = this.$el.getBoundingClientRect()
       let modalHeight = this.modalWidth == 80 ? 70 : 60
@@ -208,6 +209,11 @@ export default {
         transform: `translate(${50 - centerX}vw, ${50 - centerY}vh)`,
       }
     },
+  },
+  computed: {
+    /**
+     *  Computed and dynamically-bound styles
+     * */
     passiveGridItemColor() {
       if (this.type.existsInThisGen) {
         return {
@@ -248,6 +254,27 @@ export default {
         return true
       }
       return false
+    },
+  },
+  watch: {
+    aspectRatio(val) {
+      this.modalWidth = this.calculateModalWidth(val)
+      /**
+       *  TO-DO:
+       *  1. Calculate aspectRatio in App the same way you do with orientation
+       *      (set event handler in mounted())
+       *  2. Pass aspectRatio down through Home to GridItem
+       *  3. Modify this.calculateModalWidth() so that it takes two args: orientation and aspectRatio
+       *  4. Get rid of the orientation watcher -- if aspect ratio changes, then kal vechomer orientation changes
+       *  5. You have one watcher: aspectRatio(val). use the commented-out function that I've already written
+       *  6. Any time aspectRatio changes (including orientation changes!), modalWidth will be recalculated.
+       *
+       *  7. Next: In GenerationSelectModal. Pass down the orientation prop from app and use it
+       *      to shorten text inside buttons when orientation is portait.
+       *
+       *  Question: Can we even get aspectRatio through MediaQueryList? Hope so.
+       *
+       *  */
     },
   },
 }

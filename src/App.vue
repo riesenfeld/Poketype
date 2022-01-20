@@ -14,6 +14,8 @@
     <router-view
       :selectedGeneration="selectedGeneration"
       :currentlyActiveGridItem="currentlyActiveGridItem"
+      :orientation="orientation"
+      :aspectRatio="aspectRatio"
       @activeGridItemChanged="updateCurrentlyActiveGridItem"
     />
   </div>
@@ -33,6 +35,12 @@ export default {
       selectedGeneration: "gen6",
       currentlyActiveGridItem: -1,
       selectionModalIsActive: false,
+      /* The current orientation of the window or device */
+      orientation: null,
+      /* The current visualViewport aspect ratio -- used for modals */
+      aspectRatio: null,
+      /* Used for debouncing the vieport resize handler attached in mounted() */
+      resizeTimeoutIdentifier: null,
     }
   },
   methods: {
@@ -57,11 +65,41 @@ export default {
         this.selectionModalIsActive = bool
       }
     },
+    updateOrientation(bool) {
+      if (bool) {
+        this.orientation = "portrait"
+      } else {
+        this.orientation = "landscape"
+      }
+    },
+    setAspectRatio(ratio) {
+      console.log(`setAspectRatio called!`)
+      this.aspectRatio = ratio
+    },
+    handleResize(e) {
+      clearTimeout(this.resizeTimeoutIdentifier)
+      let ratio = e.target.width / e.target.height
+      this.resizeTimeoutIdentifier = setTimeout(this.setAspectRatio, 200, ratio)
+    },
   },
   watch: {
     currentlyActiveGridItem(val) {
       this.toggleModalBackdrop(val)
     },
+  },
+  mounted() {
+    /* Get and update the window's orientation */
+    var mediaQueryList = window.matchMedia("(orientation: portrait)")
+    console.log(mediaQueryList)
+    this.updateOrientation(mediaQueryList.matches)
+    /* Bring the event handler into scope for addEventListener */
+    let updateOrientation = this.updateOrientation
+    /* Listen for changes to orientation */
+    mediaQueryList.addEventListener("change", function (mql) {
+      console.log("orientation change: " + mql.matches)
+      updateOrientation(mql.matches)
+    })
+    visualViewport.addEventListener("resize", this.handleResize)
   },
 }
 </script>
@@ -77,9 +115,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  /* color: #2c3e50; */
-  /* margin-top: 60px; */
   overflow: hidden;
 }
 #modal-backdrop {
@@ -101,31 +136,3 @@ export default {
   visibility: visible;
 }
 </style>
-
-<!--
-
-DEFAULT STYLES FROM VUE-ROUTER
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
--->
