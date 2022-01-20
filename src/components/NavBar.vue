@@ -120,22 +120,19 @@ export default {
     width: 95%;
     height: 40%;
     font-size: 2.7vw;
-    /* font-size: 0.6rem; */
+  }
+  .switch-generation-button:focus {
+    width: 92.6%;
+    height: 39%;
+    margin-bottom: -3px;
+    box-shadow: none;
+    /* font-size: 0.76rem; */
+    font-size: 2.5vw;
   }
 }
 @media (orientation: portrait) and (min-aspect-ratio: 37/59) {
-  .nav-bar {
-    width: 100%;
-    height: 8vh;
-  }
-  .nav-switch-wrapper {
-    align-items: flex-start;
-  }
   .switch-generation-button {
-    width: 95%;
-    height: 40%;
     font-size: 1.8vw;
-    /* font-size: 0.6rem; */
   }
 }
 </style>
