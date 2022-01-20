@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       /* Removes router-link to the about page when true. Passed in as a prop to <NavBar> */
-      singlePage: true,
+      singlePage: false,
       selectedGeneration: "gen6",
       currentlyActiveGridItem: -1,
       selectionModalIsActive: false,
