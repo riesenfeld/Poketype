@@ -111,7 +111,9 @@ export default {
 #modal-backdrop.active {
   position: absolute;
   width: 100%;
-  height: 100%;
+  /* Height 100% doesn't take the URL bar into account while 100vh does.
+     (https://stackoverflow.com/questions/37112218/css3-100vh-not-constant-in-mobile-browser) */
+  height: 100vh;
   background-color: rgba(0.5, 0.5, 0.5, 0.8);
   z-index: 2;
   visibility: visible;
