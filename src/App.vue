@@ -73,15 +73,6 @@ export default {
       this.resizeTimeoutIdentifier = setTimeout(this.setAspectRatio, 200, ratio)
     },
   },
-  computed: {
-    // https://stackoverflow.com/questions/37112218/css3-100vh-not-constant-in-mobile-browser
-    // setActiveModalHeight() {
-    //   return {
-    //     height: `${window.innerHeight}px`,
-    //     height: `${window.}`
-    //   }
-    // },
-  },
   watch: {
     currentlyActiveGridItem(val) {
       this.toggleModalBackdrop(val)
