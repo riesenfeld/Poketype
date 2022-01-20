@@ -90,6 +90,7 @@ export default {
   border-radius: 2px;
   font-size: 0.9rem;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  background-color: #bbbbbb;
 }
 .switch-generation-button:focus {
   width: 78%;
