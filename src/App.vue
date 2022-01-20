@@ -8,6 +8,7 @@
     <NavBar
       :modalIsActive="currentlyActiveGridItem > -1"
       :selectionModalIsActive="selectionModalIsActive"
+      :aspectRatio="aspectRatio"
       @selectionModalActivated="toggleBackdropForGenerationSelect(true)"
       @selectionChanged="switchGeneration"
     />

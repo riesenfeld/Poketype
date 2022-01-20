@@ -12,6 +12,7 @@
     <span class="nav-item nav-switch-wrapper">
       <GenerationSelectModal
         :selectionModalIsActive="selectionModalIsActive"
+        :aspectRatio="aspectRatio"
         @selectionChanged="handleSelectionChange"
       />
       <button class="switch-generation-button" @click="openModal">Switch generation</button>
@@ -33,6 +34,7 @@ export default {
       type: Boolean,
       default: false,
     },
+    aspectRatio: Number,
   },
   data() {
     return {

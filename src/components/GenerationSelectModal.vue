@@ -34,7 +34,7 @@
           :checked="selected == gen.value"
           v-model="selected"
         />
-        <label :for="gen.value">{{ gen.text }}</label>
+        <label :for="gen.value">{{ aspectRatio > 1.5 ? gen.longText : gen.shortText }}</label>
       </button>
     </fieldset>
   </div>
@@ -48,6 +48,7 @@ export default {
       type: Boolean,
       default: false,
     },
+    aspectRatio: Number,
   },
   data() {
     return {
@@ -55,17 +56,17 @@ export default {
       generations: [
         {
           value: "gen1",
-          text: "Generation I",
+          longText: "Generation I",
           shortText: "Gen I",
         },
         {
           value: "gen2",
-          text: "Generation II - V",
+          longText: "Generation II - V",
           shortText: "Gen II - V",
         },
         {
           value: "gen6",
-          text: "Generation VI+",
+          longText: "Generation VI+",
           shortText: "Gen VI+",
         },
       ],
@@ -83,6 +84,11 @@ export default {
     // Cookies may be implemented in Phase 2
     // writeCookie() {},
     // readCookie() {},
+  },
+  watch: {
+    aspectRatio(val) {
+      console.log(`aspect ratio: ${val}`)
+    },
   },
 }
 </script>
