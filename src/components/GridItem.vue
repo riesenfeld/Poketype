@@ -255,6 +255,9 @@ export default {
       this.boundingClientRect = this.$el.getBoundingClientRect()
     },
   },
+  mounted() {
+    this.boundingClientRect = this.$el.getBoundingClientRect()
+  },
 }
 </script>
 

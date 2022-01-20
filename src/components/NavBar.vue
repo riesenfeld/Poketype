@@ -58,6 +58,7 @@ export default {
   height: 10vh;
   background-color: #333333;
   color: #bbbbb5;
+  border: none;
 }
 
 .nav-item {
@@ -91,13 +92,14 @@ export default {
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 .switch-generation-button:focus {
-  box-shadow: none;
   width: 78%;
   max-width: 156px;
   height: 48.5%;
   margin-bottom: -3px;
+  box-shadow: none;
+  font-size: 0.875rem;
 }
-.behind-backdrop {
+.behind-backdrop span {
   filter: blur(1.5px);
 }
 

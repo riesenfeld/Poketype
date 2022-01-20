@@ -104,7 +104,7 @@ export default {
 }
 
 .selection-modal-inactive {
-  /* position: absolute; */
+  position: absolute;
   top: 1vh;
   left: 99vw;
   width: 0;
@@ -136,6 +136,7 @@ export default {
   justify-content: space-evenly;
   align-items: center;
 
+  /* Only animate pop-in. The modal disappears immediately on pop-out. */
   transition-duration: 0.3s;
   animation: display-modal 0.1s;
 }
