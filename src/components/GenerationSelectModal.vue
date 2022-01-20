@@ -88,29 +88,37 @@ export default {
 </script>
 
 <style scoped>
-* {
-  /* display: none;
-  visibility: hidden; */
-}
-
-.displayed {
-  display: unset;
-  visibility: visible;
+@keyframes display-modal {
+  0% {
+    display: none;
+    visibility: hidden;
+  }
+  90% {
+    display: none;
+    visibility: hidden;
+  }
+  100% {
+    display: block;
+    visibility: visible;
+  }
 }
 
 .selection-modal-inactive {
-  position: absolute;
+  /* position: absolute; */
   top: 1vh;
   left: 99vw;
   width: 0;
   height: 0;
-  /* display: none; */
   opacity: 0.5;
-  /* visibility: hidden; */
   font-size: 0;
   z-index: -1;
-  transition-duration: 0.3s;
+  overflow: hidden;
 }
+
+.selection-modal-inactive button {
+  font-size: 0;
+}
+
 .selection-modal-active {
   position: absolute;
   top: 20vh;
@@ -118,16 +126,18 @@ export default {
   width: 60vw;
   height: 60vh;
   opacity: 1;
-  /* visibility: visible; */
   font-size: 0.9rem;
   z-index: 3;
   background-color: #222222;
-  transition-duration: 0.3s;
+  overflow: hidden;
 
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+
+  transition-duration: 0.3s;
+  animation: display-modal 0.1s;
 }
 
 /* Not yet implemented */
@@ -143,7 +153,6 @@ export default {
 
 .generation-selection-explanation {
   width: 90%;
-  /* font-size: 0.9rem; */
 }
 
 .generation-selection-fieldset {
@@ -154,25 +163,18 @@ export default {
   height: 12%;
 }
 .generation-selection-legend {
-  /* width: 100%; */
-  /* margin-bottom: 4vh; */
-  /* text-align: center; */
   visibility: hidden;
   height: 0%;
   width: 0%;
 }
 .selection-button {
-  /* width: 15vw; */
   width: 27%;
-  /* height: 7vh; */
   height: 100%;
-  /* font-size: 0.9rem; */
   border-radius: 2px;
   background-color: #bbbbbb;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 .selection-button-active {
-  /* width: 14.9vw; */
   width: 26.5%;
   height: 98%;
   background-color: #44aa44;
@@ -192,6 +194,9 @@ export default {
     width: 90vw;
     height: 60vh;
     font-size: 0.8rem;
+  }
+  .selection-button {
+    height: 70%;
   }
 }
 </style>

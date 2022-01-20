@@ -82,8 +82,20 @@ export default {
   max-width: 35vw;
   filter: brightness(0);
 }
+.switch-generation-button {
+  width: 80%;
+  max-width: 160px;
+  height: 50%;
+  border-radius: 2px;
+  font-size: 0.9rem;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
 .switch-generation-button:focus {
   box-shadow: none;
+  width: 78%;
+  max-width: 156px;
+  height: 48.5%;
+  margin-bottom: -3px;
 }
 .behind-backdrop {
   filter: blur(1.5px);
@@ -93,6 +105,30 @@ export default {
   .nav-bar {
     width: 100%;
     height: 8vh;
+  }
+  .nav-switch-wrapper {
+    align-items: flex-start;
+  }
+  .switch-generation-button {
+    width: 95%;
+    height: 40%;
+    font-size: 2.7vw;
+    /* font-size: 0.6rem; */
+  }
+}
+@media (orientation: portrait) and (min-aspect-ratio: 37/59) {
+  .nav-bar {
+    width: 100%;
+    height: 8vh;
+  }
+  .nav-switch-wrapper {
+    align-items: flex-start;
+  }
+  .switch-generation-button {
+    width: 95%;
+    height: 40%;
+    font-size: 1.8vw;
+    /* font-size: 0.6rem; */
   }
 }
 </style>
