@@ -76,7 +76,6 @@ export default {
     switchGeneration(selected) {
       this.selected = selected
       this.$emit("selectionChanged", selected)
-      console.log("Selection Changed to: " + selected)
     },
     orientationIsLandscape() {
       return true
@@ -84,11 +83,6 @@ export default {
     // Cookies may be implemented in Phase 2
     // writeCookie() {},
     // readCookie() {},
-  },
-  watch: {
-    aspectRatio(val) {
-      console.log(`aspect ratio: ${val}`)
-    },
   },
 }
 </script>

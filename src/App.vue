@@ -44,13 +44,11 @@ export default {
   methods: {
     switchGeneration(selected) {
       this.selectedGeneration = selected
-      console.log("switchGeneration Fired. selectedGeneration: " + this.selectedGeneration)
     },
     updateCurrentlyActiveGridItem(value) {
       this.currentlyActiveGridItem = value
     },
     toggleModalBackdrop(id) {
-      console.log(`toggleModalBackdrop called with id of ${id}`)
       if (id >= 0 && id < 18) {
         this.currentlyActiveGridItem = id
       } else {
@@ -64,7 +62,6 @@ export default {
       }
     },
     setAspectRatio(ratio) {
-      console.log(`setAspectRatio called!`)
       this.aspectRatio = ratio
     },
     handleResize(e) {

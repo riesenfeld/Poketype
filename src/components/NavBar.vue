@@ -37,38 +37,16 @@ export default {
     aspectRatio: Number,
   },
   data() {
-    return {
-      // selected: "gen6",
-    }
+    return {}
   },
   methods: {
     openModal() {
       this.$emit("selectionModalActivated")
     },
-    // handleSelectionModalActivation() {
-    //   this.$emit("selectionModalActivated")
-    // },
     handleSelectionChange(selected) {
       this.$emit("selectionChanged", selected)
     },
-    // openModal() {
-    //   this.$emit("selectionModalActivated")
-    // },
-    // switchGeneration(selected) {
-    //   this.selected = selected
-    //   this.$emit("selectionChanged", selected)
-    //   console.log("Selection Changed to: " + selected)
-    // },
-    // Cookies may be implemented in Phase 2
-    // writeCookie() {},
-    // readCookie() {},
   },
-  // watch: {
-  //   selected(val) {
-  //     this.$emit("selectionChanged", val)
-  //     console.log("Selection Changed to: " + val)
-  //   },
-  // },
 }
 </script>
 
