@@ -7,7 +7,6 @@
             v-for="type in pokemonTypes"
             :key="type.id"
             :type="type"
-            :orientation="orientation"
             :aspectRatio="aspectRatio"
             :isActive="currentlyActiveGridItem == type.id"
             :activeGridItemID="currentlyActiveGridItem"
@@ -40,25 +39,15 @@ export default {
       type: Number,
       default: -1,
     },
-    orientation: String,
     aspectRatio: Number,
   },
   data: function () {
     return {
       /* Can be one of three objects containing type data for the selected generation */
       pokemonTypes: this.typesByGeneration[this.selectedGeneration],
-      /* The current orientation of the window or device */
-      // orientation: null,
     }
   },
   methods: {
-    // updateOrientation(bool) {
-    //   if (bool) {
-    //     this.orientation = "portrait"
-    //   } else {
-    //     this.orientation = "landscape"
-    //   }
-    // },
     switchGeneration(selected) {
       this.pokemonTypes = this.typesByGeneration[selected]
     },
@@ -72,17 +61,6 @@ export default {
       this.pokemonTypes = this.typesByGeneration[selected]
     },
   },
-  // mounted() {
-  //   /* Get and update the window's orientation */
-  //   var mediaQueryList = window.matchMedia("(orientation: portrait)")
-  //   this.updateOrientation(mediaQueryList.matches)
-  //   /* Bring the event handler into scope for addEventListener */
-  //   let updateOrientation = this.updateOrientation
-  //   /* Listen for changes to orientation */
-  //   mediaQueryList.addEventListener("change", function (mql) {
-  //     updateOrientation(mql.matches)
-  //   })
-  // },
 }
 </script>
 

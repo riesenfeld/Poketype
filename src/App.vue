@@ -14,7 +14,6 @@
     <router-view
       :selectedGeneration="selectedGeneration"
       :currentlyActiveGridItem="currentlyActiveGridItem"
-      :orientation="orientation"
       :aspectRatio="aspectRatio"
       @activeGridItemChanged="updateCurrentlyActiveGridItem"
     />
@@ -35,8 +34,6 @@ export default {
       selectedGeneration: "gen6",
       currentlyActiveGridItem: -1,
       selectionModalIsActive: false,
-      /* The current orientation of the window or device */
-      orientation: null,
       /* The current visualViewport aspect ratio -- used for modals */
       aspectRatio: null,
       /* Used for debouncing the vieport resize handler attached in mounted() */
@@ -65,13 +62,6 @@ export default {
         this.selectionModalIsActive = bool
       }
     },
-    updateOrientation(bool) {
-      if (bool) {
-        this.orientation = "portrait"
-      } else {
-        this.orientation = "landscape"
-      }
-    },
     setAspectRatio(ratio) {
       console.log(`setAspectRatio called!`)
       this.aspectRatio = ratio
@@ -88,17 +78,7 @@ export default {
     },
   },
   mounted() {
-    /* Get and update the window's orientation */
-    var mediaQueryList = window.matchMedia("(orientation: portrait)")
-    console.log(mediaQueryList)
-    this.updateOrientation(mediaQueryList.matches)
-    /* Bring the event handler into scope for addEventListener */
-    let updateOrientation = this.updateOrientation
-    /* Listen for changes to orientation */
-    mediaQueryList.addEventListener("change", function (mql) {
-      console.log("orientation change: " + mql.matches)
-      updateOrientation(mql.matches)
-    })
+    /* Get and update the vieports's current aspect ratio */
     visualViewport.addEventListener("resize", this.handleResize)
   },
 }
