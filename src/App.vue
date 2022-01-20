@@ -106,12 +106,13 @@ export default {
   height: 100%;
   z-index: -1;
   visibility: hidden;
+  overflow: hidden;
   transition-duration: 0.5s;
 }
 #modal-backdrop.active {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 120vh;
   background-color: rgba(0.5, 0.5, 0.5, 0.8);
   z-index: 2;
   visibility: visible;
