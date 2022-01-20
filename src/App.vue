@@ -3,6 +3,7 @@
     <div
       id="modal-backdrop"
       :class="{ active: currentlyActiveGridItem > -1 || selectionModalIsActive }"
+      :style="{ active: setActiveModalHeight }"
       @click=";[toggleModalBackdrop(-1), toggleBackdropForGenerationSelect(false)]"
     ></div>
     <NavBar
@@ -73,6 +74,14 @@ export default {
       this.resizeTimeoutIdentifier = setTimeout(this.setAspectRatio, 200, ratio)
     },
   },
+  computed: {
+    // https://stackoverflow.com/questions/37112218/css3-100vh-not-constant-in-mobile-browser
+    setActiveModalHeight() {
+      return {
+        height: `${window.innerHeight}px`,
+      }
+    },
+  },
   watch: {
     currentlyActiveGridItem(val) {
       this.toggleModalBackdrop(val)
@@ -111,7 +120,10 @@ export default {
 #modal-backdrop.active {
   position: absolute;
   width: 100%;
-  height: 100%;
+  /* Height 100% doesn't work on mobile browsers, and it is intentional behavior.
+      Need to set height with a dynamically-bound style object instead.
+     (https://stackoverflow.com/questions/37112218/css3-100vh-not-constant-in-mobile-browser) */
+  /* height: 100%; */
   background-color: rgba(0.5, 0.5, 0.5, 0.8);
   z-index: 2;
   visibility: visible;
