@@ -148,6 +148,7 @@ export default {
       /* The colors mapped to each type */
       colors,
       modalWidth: this.calculateModalWidth(),
+      boundingClientRect: null,
     }
   },
   methods: {
@@ -186,7 +187,7 @@ export default {
       } else return 60
     },
     activeAnimation() {
-      let preTranslationRect = this.$el.getBoundingClientRect()
+      let preTranslationRect = this.boundingClientRect
       let modalHeight = this.modalWidth == 80 ? 70 : 60
       let centerX = this.convertPxToVu(preTranslationRect.x, "width") + this.modalWidth / 2
       let centerY = this.convertPxToVu(preTranslationRect.y, "height") + modalHeight / 2
@@ -247,7 +248,11 @@ export default {
   },
   watch: {
     aspectRatio(val) {
+      /* Update modalWidth property any time vieport dimensions change */
       this.modalWidth = this.calculateModalWidth(val)
+      /* Update boundingClientRect property (of dummy -- which holds its passive shape!) 
+        any time viewport dimensions change */
+      this.boundingClientRect = this.$el.getBoundingClientRect()
     },
   },
 }
