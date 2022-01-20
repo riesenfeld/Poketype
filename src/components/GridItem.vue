@@ -288,7 +288,7 @@ export default {
   height: 14vw;
   max-width: 28vh;
   max-height: 28vh;
-  transition-duration: 0.5s;
+  transition-duration: 0.3s;
 }
 .grid-item-active {
   position: absolute;
@@ -363,7 +363,7 @@ hr.section-separator {
 }
 
 .animate-text .info-section {
-  animation: scale-text 0.5s;
+  animation: scale-text 0.3s;
 }
 
 .info-section-header {
