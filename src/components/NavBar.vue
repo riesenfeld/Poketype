@@ -1,7 +1,9 @@
 <template>
   <nav :class="{ 'nav-bar': true, 'behind-backdrop': modalIsActive }">
     <span v-if="this.$route.name == 'Home'" class="nav-item nav-link-wrapper">
-      <router-link to="/about" id="nav-link-about" class="nav-link">About</router-link>
+      <router-link v-if="!singlePage" to="/about" id="nav-link-about" class="nav-link"
+        >About</router-link
+      >
     </span>
     <span v-if="this.$route.name == 'About'" class="nav-item nav-link-wrapper">
       <router-link to="/" id="nav-link-home" class="nav-link">Home</router-link>
@@ -26,6 +28,8 @@ export default {
   components: { GenerationSelectModal },
   name: "NavBar",
   props: {
+    /* Removes router-link to the about page when true */
+    singlePage: Boolean,
     modalIsActive: {
       type: Boolean,
       default: false,
