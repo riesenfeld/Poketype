@@ -102,7 +102,7 @@ export default {
   height: 48.5%;
   margin-bottom: -3px;
   box-shadow: none;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
 }
 .behind-backdrop span {
   filter: blur(1.5px);
@@ -120,6 +120,7 @@ export default {
     width: 95%;
     height: 40%;
     font-size: 2.7vw;
+    /* font-size: 0.6rem; */
   }
 }
 @media (orientation: portrait) and (min-aspect-ratio: 37/59) {
@@ -133,7 +134,8 @@ export default {
   .switch-generation-button {
     width: 95%;
     height: 40%;
-    font-size: 1.7vw;
+    font-size: 1.8vw;
+    /* font-size: 0.6rem; */
   }
 }
 </style>
