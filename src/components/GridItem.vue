@@ -221,7 +221,6 @@ export default {
           ${this.colors[this.type.name][2]}EE,
           ${this.colors[this.type.name][0]}EE)`,
           color: `${this.colors[this.type.name][1]}AA`,
-          // textDecoration: "line-through double 1px",
         }
       }
     },
@@ -402,7 +401,10 @@ hr.section-text-separator {
     max-width: 14vh;
     max-height: 14vh;
   }
-
+  .passive-content-not-in-generation {
+    color: #aaaaaaaa;
+    mix-blend-mode: color-dodge;
+  }
   .close-button {
     width: 3vh;
     height: 3vh;
