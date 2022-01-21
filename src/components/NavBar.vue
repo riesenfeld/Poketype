@@ -116,6 +116,9 @@ export default {
   .nav-switch-wrapper {
     align-items: flex-start;
   }
+  .logo {
+    filter: brightness(1);
+  }
   .switch-generation-button {
     width: 95%;
     height: 40%;
@@ -126,7 +129,6 @@ export default {
     height: 39%;
     margin-bottom: -3px;
     box-shadow: none;
-    /* font-size: 0.76rem; */
     font-size: 2.5vw;
   }
 }
