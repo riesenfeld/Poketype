@@ -414,6 +414,12 @@ hr.section-text-separator {
   font-weight: bold;
 }
 
+@media (min-aspect-ratio: 2/1) {
+  .info-section {
+    font-size: 0.8rem;
+  }
+}
+
 @media (orientation: portrait) {
   .grid-item-dummy {
     width: 28vw;
