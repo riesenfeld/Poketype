@@ -68,6 +68,7 @@ export default {
       this.aspectRatio = ratio
     },
     handleResize(e) {
+      console.log("handleResize called")
       clearTimeout(this.resizeTimeoutIdentifier)
       let ratio = e.target.width / e.target.height
       this.resizeTimeoutIdentifier = setTimeout(this.setAspectRatio, 200, ratio)
@@ -80,6 +81,8 @@ export default {
   },
   mounted() {
     /* Get and update the vieports's current aspect ratio */
+    this.aspectRatio = visualViewport.width / visualViewport.height
+    /* Do this on every time the viewport is resized */
     visualViewport.addEventListener("resize", this.handleResize)
   },
 }
