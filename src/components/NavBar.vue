@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     openModal() {
-      console.log(`aspect ratio: ${this.aspectRatio}`)
       this.$emit("selectionModalActivated")
     },
     handleSelectionChange(selected) {
@@ -107,6 +106,30 @@ export default {
 }
 .behind-backdrop span {
   filter: blur(1.5px);
+}
+
+@media (min-aspect-ratio: 2/1) {
+  .switch-generation-button {
+    height: 60%;
+    border-radius: 2px;
+    font-size: 0.9rem;
+  }
+  .switch-generation-button:focus {
+    height: 58.5%;
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-aspect-ratio: 5/2) {
+  .switch-generation-button {
+    height: 70%;
+    border-radius: 2px;
+    font-size: 0.9rem;
+  }
+  .switch-generation-button:focus {
+    height: 68.5%;
+    font-size: 0.875rem;
+  }
 }
 
 @media (orientation: portrait) {
