@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     openModal() {
+      console.log(`aspect ratio: ${this.aspectRatio}`)
       this.$emit("selectionModalActivated")
     },
     handleSelectionChange(selected) {

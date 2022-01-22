@@ -214,7 +214,6 @@ export default {
       let preTranslationRect = this.boundingClientRect
       let modalWidth = this.modalDimensions.width
       let modalHeight = this.modalDimensions.height
-      console.log(`aspect ratio: ${this.aspectRatio}`)
       let centerX = this.convertPxToVu(preTranslationRect.x, "width") + modalWidth / 2
       let centerY = this.convertPxToVu(preTranslationRect.y, "height") + modalHeight / 2
       return {

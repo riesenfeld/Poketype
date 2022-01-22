@@ -68,7 +68,6 @@ export default {
       this.aspectRatio = ratio
     },
     handleResize(e) {
-      console.log("handleResize called")
       clearTimeout(this.resizeTimeoutIdentifier)
       let ratio = e.target.width / e.target.height
       this.resizeTimeoutIdentifier = setTimeout(this.setAspectRatio, 200, ratio)

@@ -77,9 +77,6 @@ export default {
       this.selected = selected
       this.$emit("selectionChanged", selected)
     },
-    orientationIsLandscape() {
-      return true
-    },
     // Cookies may be implemented in Phase 2
     // writeCookie() {},
     // readCookie() {},
@@ -186,6 +183,27 @@ export default {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+/* min-aspect-ratio 1.6 */
+@media (min-aspect-ratio: 8/5) {
+  .selection-modal-active {
+    top: 15vh;
+    height: 70vh;
+    font-size: 0.8rem;
+  }
+}
+/* min-aspect-ratio 2 */
+@media (min-aspect-ratio: 2/1) {
+  .selection-modal-active {
+    top: 10vh;
+    height: 80vh;
+  }
+}
+/* min-aspect-ratio 2.2 */
+@media (min-aspect-ratio: 11/5) {
+  .selection-modal-active {
+    font-size: 0.7rem;
+  }
 }
 
 @media (orientation: portrait) {
