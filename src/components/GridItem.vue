@@ -159,37 +159,44 @@ export default {
     }
   },
   methods: {
+    convertVuToPx(viewportUnit, axis) {
+      /* Height and width of the viewport (minus scrollbar) in px */
+      let viewportWidth = document.documentElement.clientWidth
+      let viewportHeight = document.documentElement.clientHeight
+      if (axis == "width") {
+        return (viewportUnit / 100) * viewportWidth
+      } else {
+        return (viewportUnit / 100) * viewportHeight
+      }
+    },
     produceTestingInformation() {
       // let returnString = `
       //         <div style="font-size: 0.4rem; background-color: white; height: 10vh">
       //         <p>This site is currently being tested.</p>`
       let returnString = "This site is currently being tested. \n"
 
-      let placeholderCenterX = this.convertPxToVu(
-        this.boundingClientRect.x + this.boundingClientRect.width / 2,
-        "width"
-      ).toFixed(2)
-      let placeholderCenterY = this.convertPxToVu(
-        this.boundingClientRect.y + this.boundingClientRect.height / 2,
-        "height"
-      ).toFixed(2)
-      let preTranslationModalCenterX =
-        this.convertPxToVu(this.boundingClientRect.x, "width") + this.modalDimensions.width / 2
-      let preTranslationModalCenterY =
-        this.convertPxToVu(this.boundingClientRect.y, "height") + this.modalDimensions.height / 2
+      let modalWidth = this.convertVuToPx(this.modalDimensions.width)
+      let modalHeight = this.convertVuToPx(this.modalDimensions.height)
+      let placeholderCenterX = this.boundingClientRect.x + this.boundingClientRect.width / 2
+      let placeholderCenterY = this.boundingClientRect.y + this.boundingClientRect.height / 2
+      let preTranslationModalCenterX = this.boundingClientRect.x + modalWidth / 2
+      let preTranslationModalCenterY = this.boundingClientRect.y + modalHeight / 2
 
-      let translationVector = [50 - preTranslationModalCenterX, 50 - preTranslationModalCenterY]
+      let translationVector = [
+        this.convertVuToPx(50, "width") - preTranslationModalCenterX,
+        this.convertVuToPx(50, "height") - preTranslationModalCenterY,
+      ]
 
       let modalCenterX = (preTranslationModalCenterX + translationVector[0]).toFixed(2)
       let modalCenterY = (preTranslationModalCenterY + translationVector[1]).toFixed(2)
 
       let obj = {
-        placeholderCenterX: placeholderCenterX,
-        placeholderCenterY: placeholderCenterY,
+        placeholderCenterX: Math.round(placeholderCenterX),
+        placeholderCenterY: Math.round(placeholderCenterY),
         modalCenterX: modalCenterX,
         modalCenterY: modalCenterY,
-        modalWidth: this.modalDimensions.width,
-        modalHeight: this.modalDimensions.height,
+        modalWidth: modalWidth,
+        modalHeight: modalHeight,
         translationVector: `[${translationVector[0].toFixed(2)}, ${translationVector[1].toFixed(
           2
         )}]`,
