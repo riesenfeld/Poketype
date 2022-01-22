@@ -147,7 +147,7 @@ export default {
     return {
       /* The colors mapped to each type */
       colors,
-      modalWidth: this.calculateModalWidth(),
+      modalDimensions: this.calculateModalDimensions(this.aspectRatio),
       boundingClientRect: null,
     }
   },
@@ -186,15 +186,41 @@ export default {
         return 80
       } else return 60
     },
+    /* The dimensions of the modal are different for landscape and portrait orientations */
+    calculateModalDimensions(aspectRatio) {
+      /* If viewport is portait OR just a little bit wider than a square */
+      if (aspectRatio < 1.5) {
+        return {
+          width: 80,
+          height: 70,
+        }
+      } else if (aspectRatio > 1.95) {
+        return {
+          width: 60,
+          height: 80,
+        }
+      } else if (aspectRatio > 1.7) {
+        return {
+          width: 60,
+          height: 70,
+        }
+      } else
+        return {
+          width: 60,
+          height: 60,
+        }
+    },
     activeAnimation() {
       let preTranslationRect = this.boundingClientRect
-      let modalHeight = this.modalWidth == 80 ? 70 : 60
-      let centerX = this.convertPxToVu(preTranslationRect.x, "width") + this.modalWidth / 2
+      let modalWidth = this.modalDimensions.width
+      let modalHeight = this.modalDimensions.height
+      console.log(`aspect ratio: ${this.aspectRatio}`)
+      let centerX = this.convertPxToVu(preTranslationRect.x, "width") + modalWidth / 2
       let centerY = this.convertPxToVu(preTranslationRect.y, "height") + modalHeight / 2
       return {
-        maxWidth: `${this.modalWidth}vw`,
+        maxWidth: `${modalWidth}vw`,
         maxHeight: `${modalHeight}vh`,
-        width: `${this.modalWidth}vw`,
+        width: `${modalWidth}vw`,
         height: `${modalHeight}vh`,
         transform: `translate(${50 - centerX}vw, ${50 - centerY}vh)`,
       }
@@ -247,8 +273,8 @@ export default {
   },
   watch: {
     aspectRatio(val) {
-      /* Update modalWidth property any time vieport dimensions change */
-      this.modalWidth = this.calculateModalWidth(val)
+      /* Update modalDimensions property any time vieport dimensions change */
+      this.modalDimensions = this.calculateModalDimensions(val)
       /* Update boundingClientRect property (of dummy -- which holds its passive shape!) 
         any time viewport dimensions change */
       this.boundingClientRect = this.$el.getBoundingClientRect()
