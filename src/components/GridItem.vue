@@ -111,6 +111,13 @@
                 :delimiter="type.attackingNotEffective.length - 1 - index"
               />
             </p>
+            <div
+              id="diagnostic"
+              ref="diagnostic"
+              style="font-size: 0.4rem; background-color: white; height: 10vh"
+            >
+              {{ produceTestingInformation() }}
+            </div>
           </div>
         </div>
       </div>
@@ -152,6 +159,54 @@ export default {
     }
   },
   methods: {
+    produceTestingInformation() {
+      // let returnString = `
+      //         <div style="font-size: 0.4rem; background-color: white; height: 10vh">
+      //         <p>This site is currently being tested.</p>`
+      let returnString = "This site is currently being tested. \n"
+
+      let placeholderCenterX = this.convertPxToVu(
+        this.boundingClientRect.x + this.boundingClientRect.width / 2,
+        "width"
+      ).toFixed(2)
+      let placeholderCenterY = this.convertPxToVu(
+        this.boundingClientRect.y + this.boundingClientRect.height / 2,
+        "height"
+      ).toFixed(2)
+      let preTranslationModalCenterX =
+        this.convertPxToVu(this.boundingClientRect.x, "width") + this.modalDimensions.width / 2
+      let preTranslationModalCenterY =
+        this.convertPxToVu(this.boundingClientRect.y, "height") + this.modalDimensions.height / 2
+
+      let translationVector = [50 - preTranslationModalCenterX, 50 - preTranslationModalCenterY]
+
+      let modalCenterX = (preTranslationModalCenterX + translationVector[0]).toFixed(2)
+      let modalCenterY = (preTranslationModalCenterY + translationVector[1]).toFixed(2)
+
+      let obj = {
+        placeholderCenterX: placeholderCenterX,
+        placeholderCenterY: placeholderCenterY,
+        modalCenterX: modalCenterX,
+        modalCenterY: modalCenterY,
+        modalWidth: this.modalDimensions.width,
+        modalHeight: this.modalDimensions.height,
+        translationVector: `[${translationVector[0].toFixed(2)}, ${translationVector[1].toFixed(
+          2
+        )}]`,
+      }
+      // for (let prop in obj) {
+      //   returnString += "<p>" + prop + ": " + obj[prop] + "</p>"
+      // }
+      for (let prop in obj) {
+        returnString += prop + ": " + obj[prop] + ", "
+      }
+      // returnString += "</div>"
+
+      // this.$refs.diagnostic.innerHTML = returnString
+      // document.getElementById("diagnostic").innerHTML = returnString
+      return returnString
+      // return obj
+    },
     openModal() {
       if (!this.isActive) {
         /**
@@ -240,7 +295,7 @@ export default {
         }
       } else {
         return {
-          backgroundImage: `url(${unavailableGridItem}), 
+          backgroundImage: `url(${unavailableGridItem}),
           linear-gradient(
           ${this.colors[this.type.name][0]}EE,
           ${this.colors[this.type.name][2]}EE,
@@ -274,7 +329,7 @@ export default {
     aspectRatio(val) {
       /* Update modalDimensions property any time vieport dimensions change */
       this.modalDimensions = this.calculateModalDimensions(val)
-      /* Update boundingClientRect property (of dummy -- which holds its passive shape!) 
+      /* Update boundingClientRect property (of dummy -- which holds its passive shape!)
         any time viewport dimensions change */
       this.boundingClientRect = this.$el.getBoundingClientRect()
     },
