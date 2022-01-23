@@ -430,7 +430,9 @@ export default {
 .info-section {
   width: 46%;
   height: 94%;
-  line-height: 140%;
+  line-height: 150%;
+  /* font-size: 3.5vh; */
+  font-size: min(1.9vw, 3.5vh);
 }
 
 hr.section-separator {
@@ -445,7 +447,7 @@ hr.section-separator {
 
 .info-section-header {
   font-weight: normal;
-  font-size: 2vw;
+  font-size: 4vh;
   text-align: center;
   margin-bottom: 3vw;
 }
@@ -466,9 +468,15 @@ hr.section-text-separator {
   font-weight: bold;
 }
 
+/* @media (min-aspect-ratio: 3/2) {
+  .info-section {
+    font-size: min(1.9vw, 3.5vh);
+  }
+} */
+
 @media (min-aspect-ratio: 2/1) {
   .info-section {
-    font-size: 0.8rem;
+    font-size: 4vh;
   }
 }
 
