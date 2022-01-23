@@ -409,6 +409,12 @@ hr.section-text-separator {
   font-weight: bold;
 }
 
+@media (min-aspect-ratio: 5/8) {
+  .info-section {
+    font-size: min(1.9vw, 3.5vh);
+  }
+}
+
 @media (min-aspect-ratio: 2/1) {
   .info-section {
     font-size: 4vh;
