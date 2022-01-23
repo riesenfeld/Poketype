@@ -204,7 +204,6 @@ export default {
         }
     },
     activeAnimation() {
-      console.log("aspectRatio: " + this.aspectRatio)
       let preTranslationRect = this.boundingClientRect
       let modalWidth = this.convertVuToPx(this.modalDimensions.width, "horizontal")
       let modalHeight = this.convertVuToPx(this.modalDimensions.height, "vertical")
