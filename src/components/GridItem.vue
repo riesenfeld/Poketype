@@ -168,23 +168,16 @@ export default {
       }
       return this.isActive
     },
-    /* Convert pixel units to viewport units */
-    convertPxToVu(pixelValue, axis) {
-      /* Height and width of the viewport (minus scrollbar) in px */
-      let viewportWidth = document.documentElement.clientWidth
-      let viewportHeight = document.documentElement.clientHeight
-      if (axis == "width") {
-        return (pixelValue / viewportWidth) * 100
+    /* Convert viewport units to pixel units */
+    convertVuToPx(viewportUnit, axis) {
+      /* Height and width of the page in px */
+      let pageWidth = document.documentElement.clientWidth
+      let pageHeight = document.documentElement.clientHeight
+      if (axis == "horizontal") {
+        return (viewportUnit / 100) * pageWidth
       } else {
-        return (pixelValue / viewportHeight) * 100
+        return (viewportUnit / 100) * pageHeight
       }
-    },
-    /* The dimensions of the modal are different for landscape and portrait orientations */
-    calculateModalWidth(aspectRatio) {
-      /* If viewport is portait OR just a little bit wider than a square */
-      if (aspectRatio < 1.5) {
-        return 80
-      } else return 60
     },
     /* The dimensions of the modal are different for landscape and portrait orientations */
     calculateModalDimensions(aspectRatio) {
@@ -212,16 +205,18 @@ export default {
     },
     activeAnimation() {
       let preTranslationRect = this.boundingClientRect
-      let modalWidth = this.modalDimensions.width
-      let modalHeight = this.modalDimensions.height
-      let centerX = this.convertPxToVu(preTranslationRect.x, "width") + modalWidth / 2
-      let centerY = this.convertPxToVu(preTranslationRect.y, "height") + modalHeight / 2
+      let modalWidth = this.convertVuToPx(this.modalDimensions.width, "horizontal")
+      let modalHeight = this.convertVuToPx(this.modalDimensions.height, "vertical")
+      let centerX = preTranslationRect.x + modalWidth / 2
+      let centerY = preTranslationRect.y + modalHeight / 2
+      let pageCenterX = document.documentElement.clientWidth / 2
+      let pageCenterY = document.documentElement.clientHeight / 2
       return {
-        maxWidth: `${modalWidth}vw`,
-        maxHeight: `${modalHeight}vh`,
-        width: `${modalWidth}vw`,
-        height: `${modalHeight}vh`,
-        transform: `translate(${50 - centerX}vw, ${50 - centerY}vh)`,
+        maxWidth: `${modalWidth}px`,
+        maxHeight: `${modalHeight}px`,
+        width: `${modalWidth}px`,
+        height: `${modalHeight}px`,
+        transform: `translate(${pageCenterX - centerX}px, ${pageCenterY - centerY}px)`,
       }
     },
   },
