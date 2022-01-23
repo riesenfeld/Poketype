@@ -373,7 +373,8 @@ export default {
   width: 46%;
   height: 94%;
   line-height: 150%;
-  font-size: 3.5vh;
+  /* font-size: 3.5vh; */
+  font-size: min(1.9vw, 3.5vh);
 }
 
 hr.section-separator {
@@ -409,11 +410,11 @@ hr.section-text-separator {
   font-weight: bold;
 }
 
-@media (min-aspect-ratio: 5/8) {
+/* @media (min-aspect-ratio: 3/2) {
   .info-section {
     font-size: min(1.9vw, 3.5vh);
   }
-}
+} */
 
 @media (min-aspect-ratio: 2/1) {
   .info-section {
