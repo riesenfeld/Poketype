@@ -161,5 +161,8 @@ export default {
   .switch-generation-button {
     font-size: 1.8vw;
   }
+  .switch-generation-button:focus {
+    font-size: 1.75vw;
+  }
 }
 </style>

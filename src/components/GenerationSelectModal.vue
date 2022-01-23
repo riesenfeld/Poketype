@@ -219,6 +219,20 @@ export default {
   }
   .selection-button {
     height: 70%;
+    font-size: min(1rem, 4vw);
+  }
+}
+@media (orientation: portrait) and (min-aspect-ratio: 1/2) {
+  .selection-modal-active {
+    font-size: min(0.8rem, 4vw);
+  }
+}
+@media (orientation: portrait) and (min-aspect-ratio: 3/5) {
+  .selection-modal-active {
+    font-size: min(3vh, 3vw);
+  }
+  .selection-button {
+    font-size: min(4vh, 4vw);
   }
 }
 </style>
