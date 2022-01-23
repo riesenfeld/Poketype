@@ -380,7 +380,6 @@ export default {
   height: 94%;
   line-height: 150%;
   font-size: 3.5vh;
-  /* font-size: min(1.9vw, 3.5vh); */
 }
 
 hr.section-separator {
