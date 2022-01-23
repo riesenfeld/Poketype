@@ -114,7 +114,7 @@
             <div
               id="diagnostic"
               ref="diagnostic"
-              style="font-size: 0.4rem; background-color: white; height: 10vh"
+              style="font-size: 0.4rem; background-color: white; height: fit-content"
             >
               {{ produceTestingInformation() }}
             </div>
