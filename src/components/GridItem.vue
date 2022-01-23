@@ -279,21 +279,21 @@ export default {
         }
     },
     activeAnimation() {
-      console.log(`visualViewport dimensions: [${visualViewport.width}, ${visualViewport.height}]`)
-      console.log(
-        `documentElement dimensions: [${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}]`
-      )
       let preTranslationRect = this.boundingClientRect
-      let modalWidth = this.modalDimensions.width
-      let modalHeight = this.modalDimensions.height
-      let centerX = this.convertPxToVu(preTranslationRect.x, "width") + modalWidth / 2
-      let centerY = this.convertPxToVu(preTranslationRect.y, "height") + modalHeight / 2
+      let modalWidth = this.convertVuToPx(this.modalDimensions.width, "width")
+      let modalHeight = this.convertVuToPx(this.modalDimensions.height, "height")
+      let centerX = preTranslationRect.x + modalWidth / 2
+      let centerY = preTranslationRect.y + modalHeight / 2
+      let pageCenterX = document.documentElement.clientWidth / 2
+      let pageCenterY = document.documentElement.clientHeight / 2
+      console.log(`pageCenter: [${pageCenterX}, ${pageCenterY}]`)
+      console.log(`modalCenter (pre-translation): [${centerX}, ${centerY}]`)
       return {
-        maxWidth: `${modalWidth}vw`,
-        maxHeight: `${modalHeight}vh`,
-        width: `${modalWidth}vw`,
-        height: `${modalHeight}vh`,
-        transform: `translate(${50 - centerX}vw, ${50 - centerY}vh)`,
+        maxWidth: `${modalWidth}px`,
+        maxHeight: `${modalHeight}px`,
+        width: `${modalWidth}px`,
+        height: `${modalHeight}px`,
+        transform: `translate(${pageCenterX - centerX}px, ${pageCenterY - centerY}px)`,
       }
     },
   },
