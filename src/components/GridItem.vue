@@ -165,6 +165,7 @@ export default {
       //         <p>This site is currently being tested.</p>`
       let returnString = "This site is currently being tested. \n"
 
+      let viewport = [visualViewport.width, visualViewport.height]
       let modalWidth = this.convertVuToPx(this.modalDimensions.width, "width")
       let modalHeight = this.convertVuToPx(this.modalDimensions.height, "height")
       let placeholderCenterX = this.boundingClientRect.x + this.boundingClientRect.width / 2
@@ -185,6 +186,7 @@ export default {
       let documentElementDimensions = `[${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}]`
 
       let obj = {
+        viewport: viewport,
         placeholderCenterX: Math.round(placeholderCenterX),
         placeholderCenterY: Math.round(placeholderCenterY),
         modalCenterX: modalCenterX,
