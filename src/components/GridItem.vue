@@ -187,6 +187,12 @@ export default {
           width: 80,
           height: 70,
         }
+      } else if (aspectRatio > 2 && document.documentElement.clientHeight < 400) {
+        /* For mobile devices in landscape mode */
+        return {
+          width: 70,
+          height: 80,
+        }
       } else if (aspectRatio > 1.95) {
         return {
           width: 60,
@@ -373,8 +379,8 @@ export default {
   width: 46%;
   height: 94%;
   line-height: 150%;
-  /* font-size: 3.5vh; */
-  font-size: min(1.9vw, 3.5vh);
+  font-size: 3.5vh;
+  /* font-size: min(1.9vw, 3.5vh); */
 }
 
 hr.section-separator {
