@@ -159,16 +159,6 @@ export default {
     }
   },
   methods: {
-    convertVuToPx(viewportUnit, axis) {
-      /* Height and width of the viewport (minus scrollbar) in px */
-      let viewportWidth = document.documentElement.clientWidth
-      let viewportHeight = document.documentElement.clientHeight
-      if (axis == "width") {
-        return (viewportUnit / 100) * viewportWidth
-      } else {
-        return (viewportUnit / 100) * viewportHeight
-      }
-    },
     produceTestingInformation() {
       // let returnString = `
       //         <div style="font-size: 0.4rem; background-color: white; height: 10vh">
@@ -273,22 +263,12 @@ export default {
     },
     activeAnimation() {
       let preTranslationRect = this.boundingClientRect
-<<<<<<< HEAD
-      let modalWidth = this.convertVuToPx(this.modalDimensions.width, "width")
-      let modalHeight = this.convertVuToPx(this.modalDimensions.height, "height")
-=======
       let modalWidth = this.convertVuToPx(this.modalDimensions.width, "horizontal")
       let modalHeight = this.convertVuToPx(this.modalDimensions.height, "vertical")
->>>>>>> single-page
       let centerX = preTranslationRect.x + modalWidth / 2
       let centerY = preTranslationRect.y + modalHeight / 2
       let pageCenterX = document.documentElement.clientWidth / 2
       let pageCenterY = document.documentElement.clientHeight / 2
-<<<<<<< HEAD
-      console.log(`pageCenter: [${pageCenterX}, ${pageCenterY}]`)
-      console.log(`modalCenter (pre-translation): [${centerX}, ${centerY}]`)
-=======
->>>>>>> single-page
       return {
         maxWidth: `${modalWidth}px`,
         maxHeight: `${modalHeight}px`,
