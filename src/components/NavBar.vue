@@ -92,7 +92,7 @@ export default {
   max-width: 160px;
   height: 50%;
   border-radius: 2px;
-  font-size: 0.9rem;
+  font-size: min(0.9rem, 2.5vh);
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
   background-color: #bbbbbb;
 }
@@ -103,6 +103,7 @@ export default {
   margin-bottom: -3px;
   box-shadow: none;
   font-size: 0.875rem;
+  font-size: min(0.875rem, 1.94vh);
 }
 .behind-backdrop span {
   filter: blur(1.5px);
@@ -112,11 +113,11 @@ export default {
   .switch-generation-button {
     height: 60%;
     border-radius: 2px;
-    font-size: 0.9rem;
+    font-size: min(0.9rem, 4vh);
   }
   .switch-generation-button:focus {
     height: 58.5%;
-    font-size: 0.875rem;
+    font-size: min(0.9rem, 3.85vh);
   }
 }
 
@@ -124,11 +125,11 @@ export default {
   .switch-generation-button {
     height: 70%;
     border-radius: 2px;
-    font-size: 0.9rem;
+    font-size: min(0.9rem, 5vh);
   }
   .switch-generation-button:focus {
     height: 68.5%;
-    font-size: 0.875rem;
+    font-size: min(0.9rem, 4.85vh);
   }
 }
 

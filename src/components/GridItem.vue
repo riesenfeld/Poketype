@@ -204,6 +204,7 @@ export default {
         }
     },
     activeAnimation() {
+      console.log("aspectRatio: " + this.aspectRatio)
       let preTranslationRect = this.boundingClientRect
       let modalWidth = this.convertVuToPx(this.modalDimensions.width, "horizontal")
       let modalHeight = this.convertVuToPx(this.modalDimensions.height, "vertical")
@@ -372,7 +373,8 @@ export default {
 .info-section {
   width: 46%;
   height: 94%;
-  line-height: 140%;
+  line-height: 150%;
+  font-size: 3.5vh;
 }
 
 hr.section-separator {
@@ -387,7 +389,7 @@ hr.section-separator {
 
 .info-section-header {
   font-weight: normal;
-  font-size: 2vw;
+  font-size: 4vh;
   text-align: center;
   margin-bottom: 3vw;
 }
@@ -410,7 +412,7 @@ hr.section-text-separator {
 
 @media (min-aspect-ratio: 2/1) {
   .info-section {
-    font-size: 0.8rem;
+    font-size: 4vh;
   }
 }
 
