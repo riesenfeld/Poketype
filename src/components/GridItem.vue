@@ -175,20 +175,24 @@ export default {
       //         <p>This site is currently being tested.</p>`
       let returnString = "This site is currently being tested. \n"
 
-      let modalWidth = this.convertVuToPx(this.modalDimensions.width)
-      let modalHeight = this.convertVuToPx(this.modalDimensions.height)
+      let modalWidth = this.convertVuToPx(this.modalDimensions.width, "width")
+      let modalHeight = this.convertVuToPx(this.modalDimensions.height, "height")
       let placeholderCenterX = this.boundingClientRect.x + this.boundingClientRect.width / 2
       let placeholderCenterY = this.boundingClientRect.y + this.boundingClientRect.height / 2
       let preTranslationModalCenterX = this.boundingClientRect.x + modalWidth / 2
       let preTranslationModalCenterY = this.boundingClientRect.y + modalHeight / 2
-
+      let midwayX = visualViewport.width / 2
+      let midwayY = visualViewport.height / 2
       let translationVector = [
-        this.convertVuToPx(50, "width") - preTranslationModalCenterX,
-        this.convertVuToPx(50, "height") - preTranslationModalCenterY,
+        midwayX - preTranslationModalCenterX,
+        midwayY - preTranslationModalCenterY,
       ]
 
       let modalCenterX = (preTranslationModalCenterX + translationVector[0]).toFixed(2)
       let modalCenterY = (preTranslationModalCenterY + translationVector[1]).toFixed(2)
+
+      let visualViewportDimensions = `[${visualViewport.width}, ${visualViewport.height}]`
+      let documentElementDimensions = `[${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}]`
 
       let obj = {
         placeholderCenterX: Math.round(placeholderCenterX),
@@ -200,6 +204,8 @@ export default {
         translationVector: `[${translationVector[0].toFixed(2)}, ${translationVector[1].toFixed(
           2
         )}]`,
+        visualViewportDimensions: visualViewportDimensions,
+        documentElementDimensions: documentElementDimensions,
       }
       // for (let prop in obj) {
       //   returnString += "<p>" + prop + ": " + obj[prop] + "</p>"
@@ -273,6 +279,10 @@ export default {
         }
     },
     activeAnimation() {
+      console.log(`visualViewport dimensions: [${visualViewport.width}, ${visualViewport.height}]`)
+      console.log(
+        `documentElement dimensions: [${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}]`
+      )
       let preTranslationRect = this.boundingClientRect
       let modalWidth = this.modalDimensions.width
       let modalHeight = this.modalDimensions.height
