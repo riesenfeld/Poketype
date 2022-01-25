@@ -1,5 +1,7 @@
 <template>
-  <button class="type-button" :style="colorMap" @click="handleClickEvent">{{ typeName }}</button>
+  <button class="type-button" :style="[colorMap, buttonSize]" @click="handleClickEvent">
+    {{ typeName }}
+  </button>
 </template>
 
 <script>
@@ -8,6 +10,15 @@ export default {
   props: {
     typeName: String,
     typeColors: Array,
+    dimensions: {
+      type: Object,
+      default: () => {
+        return {
+          width: "auto",
+          height: "auto",
+        }
+      },
+    },
   },
   data() {
     return {}
@@ -27,8 +38,18 @@ export default {
         borderRadius: "2px",
       }
     },
+    buttonSize() {
+      return {
+        width: this.dimensions.width,
+        height: this.dimensions.height,
+      }
+    },
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.type-button {
+  font-size: 1rem;
+}
+</style>
