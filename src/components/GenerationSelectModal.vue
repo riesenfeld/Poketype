@@ -77,9 +77,6 @@ export default {
       this.selected = selected
       this.$emit("selectionChanged", selected)
     },
-    orientationIsLandscape() {
-      return true
-    },
     // Cookies may be implemented in Phase 2
     // writeCookie() {},
     // readCookie() {},
@@ -126,7 +123,7 @@ export default {
   width: 60vw;
   height: 60vh;
   opacity: 1;
-  font-size: 0.9rem;
+  font-size: min(0.9rem, 2.6vh);
   z-index: 3;
   background-color: #222222;
   overflow: hidden;
@@ -174,6 +171,7 @@ export default {
   border-radius: 2px;
   background-color: #bbbbbb;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  font-size: min(1rem, 3vh);
 }
 .selection-button-active {
   width: 26.5%;
@@ -187,6 +185,29 @@ export default {
   -moz-appearance: none;
   appearance: none;
 }
+/* min-aspect-ratio 1.6 */
+@media (min-aspect-ratio: 8/5) {
+  .selection-modal-active {
+    top: 15vh;
+    height: 70vh;
+    font-size: min(0.9rem, 3vh);
+  }
+  .selection-button {
+    font-size: min(1rem, 3.5vh);
+  }
+}
+/* min-aspect-ratio 2 */
+@media (min-aspect-ratio: 2/1) {
+  .selection-modal-active {
+    top: 10vh;
+    height: 80vh;
+  }
+}
+/* min-aspect-ratio 2.3 */
+/* @media (min-aspect-ratio: 23/10) {
+  .selection-modal-active {
+  }
+} */
 
 @media (orientation: portrait) {
   .selection-modal-active {
@@ -198,6 +219,20 @@ export default {
   }
   .selection-button {
     height: 70%;
+    font-size: min(1rem, 4vw);
+  }
+}
+@media (orientation: portrait) and (min-aspect-ratio: 1/2) {
+  .selection-modal-active {
+    font-size: min(0.8rem, 4vw);
+  }
+}
+@media (orientation: portrait) and (min-aspect-ratio: 3/5) {
+  .selection-modal-active {
+    font-size: min(3vh, 3vw);
+  }
+  .selection-button {
+    font-size: min(4vh, 4vw);
   }
 }
 </style>

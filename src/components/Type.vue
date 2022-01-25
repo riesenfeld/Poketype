@@ -45,7 +45,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .delimiter {
   /* Same as .plain-text class in GridItem component */
   mix-blend-mode: multiply;

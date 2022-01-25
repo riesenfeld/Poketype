@@ -147,7 +147,7 @@ export default {
     return {
       /* The colors mapped to each type */
       colors,
-      modalWidth: this.calculateModalWidth(),
+      modalDimensions: this.calculateModalDimensions(this.aspectRatio),
       boundingClientRect: null,
     }
   },
@@ -168,35 +168,66 @@ export default {
       }
       return this.isActive
     },
-    /* Convert pixel units to viewport units */
-    convertPxToVu(pixelValue, axis) {
-      /* Height and width of the viewport (minus scrollbar) in px */
-      let viewportWidth = document.documentElement.clientWidth
-      let viewportHeight = document.documentElement.clientHeight
-      if (axis == "width") {
-        return (pixelValue / viewportWidth) * 100
+    /* Convert viewport units to pixel units */
+    convertVuToPx(viewportUnit, axis) {
+      /* Height and width of the page in px */
+      let pageWidth = document.documentElement.clientWidth
+      let pageHeight = document.documentElement.clientHeight
+      if (axis == "horizontal") {
+        return (viewportUnit / 100) * pageWidth
       } else {
-        return (pixelValue / viewportHeight) * 100
+        return (viewportUnit / 100) * pageHeight
       }
     },
     /* The dimensions of the modal are different for landscape and portrait orientations */
-    calculateModalWidth(aspectRatio) {
+    calculateModalDimensions(aspectRatio) {
       /* If viewport is portait OR just a little bit wider than a square */
       if (aspectRatio < 1.5) {
-        return 80
-      } else return 60
+        return {
+          width: 80,
+          height: 70,
+        }
+      } else if (aspectRatio > 2 && document.documentElement.clientHeight < 400) {
+        /* For mobile devices in landscape mode */
+        return {
+          width: 80,
+          height: 80,
+        }
+      } else if (aspectRatio > 1.95) {
+        return {
+          width: 60,
+          height: 80,
+        }
+      } else if (aspectRatio > 1.7) {
+        return {
+          width: 60,
+          height: 70,
+        }
+      } else if (aspectRatio > 1 && document.documentElement.clientHeight < 600) {
+        return {
+          width: 80,
+          height: 70,
+        }
+      } else
+        return {
+          width: 60,
+          height: 60,
+        }
     },
     activeAnimation() {
       let preTranslationRect = this.boundingClientRect
-      let modalHeight = this.modalWidth == 80 ? 70 : 60
-      let centerX = this.convertPxToVu(preTranslationRect.x, "width") + this.modalWidth / 2
-      let centerY = this.convertPxToVu(preTranslationRect.y, "height") + modalHeight / 2
+      let modalWidth = this.convertVuToPx(this.modalDimensions.width, "horizontal")
+      let modalHeight = this.convertVuToPx(this.modalDimensions.height, "vertical")
+      let centerX = preTranslationRect.x + modalWidth / 2
+      let centerY = preTranslationRect.y + modalHeight / 2
+      let pageCenterX = document.documentElement.clientWidth / 2
+      let pageCenterY = document.documentElement.clientHeight / 2
       return {
-        maxWidth: `${this.modalWidth}vw`,
-        maxHeight: `${modalHeight}vh`,
-        width: `${this.modalWidth}vw`,
-        height: `${modalHeight}vh`,
-        transform: `translate(${50 - centerX}vw, ${50 - centerY}vh)`,
+        maxWidth: `${modalWidth}px`,
+        maxHeight: `${modalHeight}px`,
+        width: `${modalWidth}px`,
+        height: `${modalHeight}px`,
+        transform: `translate(${pageCenterX - centerX}px, ${pageCenterY - centerY}px)`,
       }
     },
   },
@@ -221,7 +252,6 @@ export default {
           ${this.colors[this.type.name][2]}EE,
           ${this.colors[this.type.name][0]}EE)`,
           color: `${this.colors[this.type.name][1]}AA`,
-          // textDecoration: "line-through double 1px",
         }
       }
     },
@@ -248,8 +278,8 @@ export default {
   },
   watch: {
     aspectRatio(val) {
-      /* Update modalWidth property any time vieport dimensions change */
-      this.modalWidth = this.calculateModalWidth(val)
+      /* Update modalDimensions property any time vieport dimensions change */
+      this.modalDimensions = this.calculateModalDimensions(val)
       /* Update boundingClientRect property (of dummy -- which holds its passive shape!) 
         any time viewport dimensions change */
       this.boundingClientRect = this.$el.getBoundingClientRect()
@@ -353,7 +383,8 @@ export default {
 .info-section {
   width: 46%;
   height: 94%;
-  line-height: 140%;
+  line-height: 150%;
+  font-size: 3.5vh;
 }
 
 hr.section-separator {
@@ -368,7 +399,7 @@ hr.section-separator {
 
 .info-section-header {
   font-weight: normal;
-  font-size: 2vw;
+  font-size: 4vh;
   text-align: center;
   margin-bottom: 3vw;
 }
@@ -389,6 +420,18 @@ hr.section-text-separator {
   font-weight: bold;
 }
 
+/* @media (min-aspect-ratio: 3/2) {
+  .info-section {
+    font-size: min(1.9vw, 3.5vh);
+  }
+} */
+
+@media (min-aspect-ratio: 2/1) {
+  .info-section {
+    font-size: 4vh;
+  }
+}
+
 @media (orientation: portrait) {
   .grid-item-dummy {
     width: 28vw;
@@ -402,7 +445,10 @@ hr.section-text-separator {
     max-width: 14vh;
     max-height: 14vh;
   }
-
+  .passive-content-not-in-generation {
+    color: #aaaaaaaa;
+    mix-blend-mode: color-dodge;
+  }
   .close-button {
     width: 3vh;
     height: 3vh;

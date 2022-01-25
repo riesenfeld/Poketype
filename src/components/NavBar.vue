@@ -92,7 +92,7 @@ export default {
   max-width: 160px;
   height: 50%;
   border-radius: 2px;
-  font-size: 0.9rem;
+  font-size: min(0.9rem, 2.5vh);
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
   background-color: #bbbbbb;
 }
@@ -103,9 +103,34 @@ export default {
   margin-bottom: -3px;
   box-shadow: none;
   font-size: 0.875rem;
+  font-size: min(0.875rem, 1.94vh);
 }
 .behind-backdrop span {
   filter: blur(1.5px);
+}
+
+@media (min-aspect-ratio: 2/1) {
+  .switch-generation-button {
+    height: 60%;
+    border-radius: 2px;
+    font-size: min(0.9rem, 4vh);
+  }
+  .switch-generation-button:focus {
+    height: 58.5%;
+    font-size: min(0.9rem, 3.85vh);
+  }
+}
+
+@media (min-aspect-ratio: 5/2) {
+  .switch-generation-button {
+    height: 70%;
+    border-radius: 2px;
+    font-size: min(0.9rem, 5vh);
+  }
+  .switch-generation-button:focus {
+    height: 68.5%;
+    font-size: min(0.9rem, 4.85vh);
+  }
 }
 
 @media (orientation: portrait) {
@@ -115,6 +140,9 @@ export default {
   }
   .nav-switch-wrapper {
     align-items: flex-start;
+  }
+  .logo {
+    filter: brightness(1);
   }
   .switch-generation-button {
     width: 95%;
@@ -126,13 +154,15 @@ export default {
     height: 39%;
     margin-bottom: -3px;
     box-shadow: none;
-    /* font-size: 0.76rem; */
     font-size: 2.5vw;
   }
 }
 @media (orientation: portrait) and (min-aspect-ratio: 37/59) {
   .switch-generation-button {
     font-size: 1.8vw;
+  }
+  .switch-generation-button:focus {
+    font-size: 1.75vw;
   }
 }
 </style>

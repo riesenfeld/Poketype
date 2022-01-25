@@ -80,6 +80,8 @@ export default {
   },
   mounted() {
     /* Get and update the vieports's current aspect ratio */
+    this.aspectRatio = visualViewport.width / visualViewport.height
+    /* Do this on every time the viewport is resized */
     visualViewport.addEventListener("resize", this.handleResize)
   },
 }
@@ -103,7 +105,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   z-index: -1;
   visibility: hidden;
   transition-duration: 0.5s;
