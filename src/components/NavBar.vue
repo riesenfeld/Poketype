@@ -4,6 +4,9 @@
       <router-link v-if="!singlePage" to="/about" id="nav-link-about" class="nav-link"
         >About</router-link
       >
+      <router-link v-if="!singlePage" to="/dual-types" id="nav-link-dual-types" class="nav-link"
+        >Dual Types</router-link
+      >
     </span>
     <span v-if="this.$route.name == 'About'" class="nav-item nav-link-wrapper">
       <router-link to="/" id="nav-link-home" class="nav-link">Home</router-link>

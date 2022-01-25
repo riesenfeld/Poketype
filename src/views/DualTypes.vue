@@ -6,10 +6,12 @@
         <TypeButton
           v-for="type in pokemonTypes"
           :key="type.id"
+          class="type-list-item"
           @buttonClicked="isSelected(type) ? deselectByType(type) : selectType(type)"
           :typeName="type.name"
           :typeColors="colors[type.name]"
           :status="getButtonStatus(type)"
+          :dimensions="typeListButtonDimensions"
         />
       </div>
       <div class="information-container">
@@ -76,9 +78,9 @@ export default {
         typeOne: null,
         typeTwo: null,
       },
-      selectedButtonDimensions: {
-        width: "40%",
-        height: "50%",
+      baseButtonDimensions: {
+        width: 90 / 10,
+        height: 75 / 18 - 0.5,
       },
     }
   },
@@ -127,6 +129,20 @@ export default {
     },
     selectedTypesIsFull() {
       return this.selectedTypes.typeOne != null && this.selectedTypes.typeTwo != null
+    },
+    typeListButtonDimensions() {
+      return {
+        width: `${this.baseButtonDimensions.width}vw`,
+        height: `${this.baseButtonDimensions.height}vh`,
+      }
+    },
+    selectedButtonDimensions() {
+      // let w = document.getElementsByClassName("type-list")[0].width
+      // console.log(`width: ${w}`)
+      return {
+        width: `${this.baseButtonDimensions.width * 3}vw`,
+        height: `${this.baseButtonDimensions.height * 3}vh`,
+      }
     },
   },
 }

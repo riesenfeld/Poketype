@@ -54,19 +54,19 @@ export default {
     //    }
     //  },
     buttonSize() {
-      if (this.status == "selected") {
-        return {
-          //  width: `calc(${this.dimensions.width} - 10px)`,
-          //  height: `calc(${this.dimensions.height} - 10px)`,
-          width: this.dimensions.width,
-          height: this.dimensions.height,
-          margin: "1px 0px -1px 1px",
-        }
-      } else
-        return {
-          width: this.dimensions.width,
-          height: this.dimensions.height,
-        }
+      // if (this.status == "selected") {
+      //   return {
+      //     //  width: `calc(${this.dimensions.width} - 10px)`,
+      //     //  height: `calc(${this.dimensions.height} - 10px)`,
+      //     //  width: this.dimensions.width,
+      //     //  height: this.dimensions.height,
+      //     //  margin: "1px 0px -1px 1px",
+      //   }
+      // } else
+      return {
+        width: this.dimensions.width,
+        height: this.dimensions.height,
+      }
     },
     statusStyle() {
       //Replace colorMap()
@@ -96,7 +96,7 @@ export default {
           //  color: "white",
           //  opacity: 0.5,
           //  filter: "brightness(80%) saturate(130%) contrast(140%)",
-          boxShadow: "2px 2px 2px black",
+          //  boxShadow: "2px 2px 2px black",
           //  filter: "brightness(1.1)",
           //  filter: "saturate(180%)",
         }
