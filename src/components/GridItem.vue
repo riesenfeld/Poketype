@@ -190,7 +190,7 @@ export default {
       } else if (aspectRatio > 2 && document.documentElement.clientHeight < 400) {
         /* For mobile devices in landscape mode */
         return {
-          width: 70,
+          width: 80,
           height: 80,
         }
       } else if (aspectRatio > 1.95) {
@@ -201,6 +201,11 @@ export default {
       } else if (aspectRatio > 1.7) {
         return {
           width: 60,
+          height: 70,
+        }
+      } else if (aspectRatio > 1 && document.documentElement.clientHeight < 600) {
+        return {
+          width: 80,
           height: 70,
         }
       } else
