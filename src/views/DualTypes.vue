@@ -6,11 +6,10 @@
         <TypeButton
           v-for="type in pokemonTypes"
           :key="type.id"
-          :class="{ 'is-selected': isSelected(type) }"
-          :aria-disabled="isSelected(type)"
-          @buttonClicked="selectType(type)"
+          @buttonClicked="isSelected(type) ? deselectByType(type) : selectType(type)"
           :typeName="type.name"
           :typeColors="colors[type.name]"
+          :status="getButtonStatus(type)"
         />
       </div>
       <div class="information-container">
@@ -23,7 +22,7 @@
             ></div>
             <TypeButton
               v-else
-              @buttonClicked="deselectType('typeOne')"
+              @buttonClicked="deselectByKey('typeOne')"
               class="selected-type"
               :typeName="selectedTypes.typeOne.name"
               :typeColors="colors[selectedTypes.typeOne.name]"
@@ -38,7 +37,7 @@
             ></div>
             <TypeButton
               v-else
-              @buttonClicked="deselectType('typeTwo')"
+              @buttonClicked="deselectByKey('typeTwo')"
               class="selected-type"
               :typeName="selectedTypes.typeTwo.name"
               :typeColors="colors[selectedTypes.typeTwo.name]"
@@ -88,27 +87,48 @@ export default {
       return this.selectedTypes.typeOne == type || this.selectedTypes.typeTwo == type
     },
     selectType(type) {
-      // if (this.selectedTypes.length < 2 && !this.isSelected(type)) {
-      //   this.selectedTypes.push(type)
-      // }
       if (this.selectedTypes.typeOne == null && !this.isSelected(type)) {
         this.selectedTypes.typeOne = type
       } else if (this.selectedTypes.typeTwo == null && !this.isSelected(type)) {
         this.selectedTypes.typeTwo = type
       }
     },
-    deselectType(key) {
-      // if (this.selectedTypes.length > 0) {
-      //   this.selectedTypes = this.selectedTypes.filter(function (t) {
-      //     return t != type
-      //   })
-      // }
+    deselectByKey(key) {
       this.selectedTypes[key] = null
     },
+    deselectByType(type) {
+      if (this.selectedTypes.typeOne == type) {
+        this.selectedTypes.typeOne = null
+      } else if (this.selectedTypes.typeTwo == type) {
+        this.selectedTypes.typeTwo = null
+      }
+    },
+    /* Returns one of three status strings to be passed into TypeButton.
+     * These status strings determine each TypeButtons styles and semantics (aria-disabled)
+     */
+    getButtonStatus(type) {
+      if (this.isSelected(type)) {
+        return "selected"
+      } else if (this.selectedTypesIsFull) {
+        return "unselectable"
+      } else return "free"
+    },
   },
-  //   computed() {
-  //      buttonDi
-  //   }
+  computed: {
+    getSelectedTypes() {
+      let arrayOfSelectedTypes = []
+      if (this.selectedTypes.typeOne != null) {
+        arrayOfSelectedTypes.push(this.selectedTypes.typeOne)
+      }
+      if (this.selectedTypes.typeTwo != null) {
+        arrayOfSelectedTypes.push(this.selectedTypes.typeTwo)
+      }
+      return arrayOfSelectedTypes
+    },
+    selectedTypesIsFull() {
+      return this.selectedTypes.typeOne != null && this.selectedTypes.typeTwo != null
+    },
+  },
 }
 </script>
 
@@ -126,7 +146,7 @@ export default {
   height: 75vh;
   margin-top: 5vh;
   margin-left: 5vw;
-  background-color: maroon;
+  /* background-color: maroon; */
 }
 
 .type-list {
@@ -143,7 +163,7 @@ export default {
 .selected-types {
   display: flex;
   justify-content: space-around;
-  background-color: darkblue;
+  /* background-color: darkblue; */
 }
 
 .type-present-or-empty {
@@ -161,11 +181,14 @@ export default {
 }
 
 .information {
-  background-color: darkgoldenrod;
+  /* background-color: darkgoldenrod; */
 }
 
 .is-selected {
   opacity: 0.5;
+}
+
+.unselectable {
 }
 
 @media (orientation: portrait) {
