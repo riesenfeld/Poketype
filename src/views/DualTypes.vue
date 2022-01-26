@@ -212,4 +212,32 @@ export default {
     height: 92vh; /* viewport height - navbar height */
   }
 }
+
+@media (max-height: 500px), (max-width: 500px) {
+  .container {
+    display: grid;
+    grid-template-rows: 1fr 6fr;
+    grid-template-columns: unset;
+
+    width: 90vw;
+    height: 75vh;
+    margin-top: 5vh;
+    margin-left: 5vw;
+  }
+
+  .type-list {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    justify-items: center;
+    order: 1;
+    /* gap: 0; */
+    /* height: 20vh; */
+  }
+  .information-container {
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    /* height: 40vh; */
+  }
+}
 </style>
