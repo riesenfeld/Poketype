@@ -64,8 +64,10 @@ export default {
       //   }
       // } else
       return {
-        width: this.dimensions.width,
-        height: this.dimensions.height,
+        //   width: this.dimensions.width,
+        //   height: this.dimensions.height,
+        //   width: "max-content",
+        width: "12vw",
       }
     },
     statusStyle() {

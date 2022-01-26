@@ -1,5 +1,5 @@
 <template>
-  <div class="dual-types">
+  <div class="dual-types" :style="customProps">
     <h3 class="instructions">Select two types from the list on the right</h3>
     <div class="container">
       <div class="type-list">
@@ -68,6 +68,9 @@ export default {
       type: String,
       default: "gen6",
     },
+    aspectRatio: Number,
+    /* Contains a width and a height */
+    pageDimensions: Object,
   },
   data() {
     return {
@@ -131,9 +134,13 @@ export default {
       return this.selectedTypes.typeOne != null && this.selectedTypes.typeTwo != null
     },
     typeListButtonDimensions() {
+      // return {
+      //   width: `${this.baseButtonDimensions.width}vw`,
+      //   height: `${this.baseButtonDimensions.height}vh`,
+      // }
       return {
-        width: `${this.baseButtonDimensions.width}vw`,
-        height: `${this.baseButtonDimensions.height}vh`,
+        width: "auto",
+        height: "auto",
       }
     },
     selectedButtonDimensions() {
@@ -142,6 +149,11 @@ export default {
       return {
         width: `${this.baseButtonDimensions.width * 3}vw`,
         height: `${this.baseButtonDimensions.height * 3}vh`,
+      }
+    },
+    customProps() {
+      return {
+        "--height": "40vh",
       }
     },
   },
@@ -169,6 +181,7 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  /* height: var(--height); */
 }
 
 .information-container {

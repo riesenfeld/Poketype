@@ -17,6 +17,7 @@
       :selectedGeneration="selectedGeneration"
       :currentlyActiveGridItem="currentlyActiveGridItem"
       :aspectRatio="aspectRatio"
+      :pageDimensions="pageDimensions"
       @activeGridItemChanged="updateCurrentlyActiveGridItem"
     />
   </div>
@@ -38,8 +39,12 @@ export default {
       selectedGeneration: "gen6",
       currentlyActiveGridItem: -1,
       selectionModalIsActive: false,
-      /* The current visualViewport aspect ratio -- used for modals */
-      aspectRatio: null,
+      /* The current aspect ratio -- used for modals */
+      aspectRatio: visualViewport.width / visualViewport.height,
+      pageDimensions: {
+        width: Math.min(document.documentElement.clientWidth, visualViewport.width),
+        height: Math.min(document.documentElement.clientHeight, visualViewport.height),
+      },
       /* Used for debouncing the vieport resize handler attached in mounted() */
       resizeTimeoutIdentifier: null,
     }
@@ -64,13 +69,26 @@ export default {
         this.selectionModalIsActive = bool
       }
     },
-    setAspectRatio(ratio) {
-      this.aspectRatio = ratio
+    setAspectRatio(dimensions) {
+      /**
+       *  Update information about the page's dimensions
+       *  Sometimes visualViewport > documentElement and sometimes the other way around
+       *  We always want to take whichever is smaller to ensure a good fit
+       * */
+      this.pageDimensions.width = dimensions.width
+      this.pageDimensions.height = dimensions.height
+      this.aspectRatio = dimensions.width / dimensions.height
+      console.log(`width: ${this.pageDimensions.width}`)
+      console.log(`height: ${this.pageDimensions.height}`)
+      console.log(`ratio: ${this.aspectRatio}`)
     },
     handleResize(e) {
       clearTimeout(this.resizeTimeoutIdentifier)
-      let ratio = e.target.width / e.target.height
-      this.resizeTimeoutIdentifier = setTimeout(this.setAspectRatio, 200, ratio)
+      let dimensions = {
+        width: Math.min(document.documentElement.clientWidth, e.target.width),
+        height: Math.min(document.documentElement.clientHeight, e.target.height),
+      }
+      this.resizeTimeoutIdentifier = setTimeout(this.setAspectRatio, 50, dimensions)
     },
   },
   watch: {
@@ -79,8 +97,13 @@ export default {
     },
   },
   mounted() {
+    this.pageDimensions.width = Math.min(document.documentElement.clientWidth, visualViewport.width)
+    this.pageDimensions.height = Math.min(
+      document.documentElement.clientHeight,
+      visualViewport.height
+    )
     /* Get and update the vieports's current aspect ratio */
-    this.aspectRatio = visualViewport.width / visualViewport.height
+    this.aspectRatio = this.pageDimensions.width / this.pageDimensions.height
     /* Do this on every time the viewport is resized */
     visualViewport.addEventListener("resize", this.handleResize)
   },
