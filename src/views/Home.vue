@@ -29,6 +29,7 @@ export default {
     GridItem,
   },
   props: {
+    /* Passed in by router */
     typesByGeneration: Object,
     selectedGeneration: {
       type: String,
