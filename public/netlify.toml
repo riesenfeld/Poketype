@@ -1,0 +1,5 @@
+# Configures Netlify to be able to properly navigate to vue routes
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
