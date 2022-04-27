@@ -1,10 +1,6 @@
 <template>
   <div id="app">
-    <div
-      id="modal-backdrop"
-      :class="{ active: currentlyActiveGridItem > -1 || selectionModalIsActive }"
-      @click=";[toggleModalBackdrop(-1), toggleBackdropForGenerationSelect(false)]"
-    ></div>
+    <div id="modal-backdrop" :class="{ active: currentlyActiveGridItem > -1 || selectionModalIsActive }" @click=";[toggleModalBackdrop(-1), toggleBackdropForGenerationSelect(false)]"></div>
     <NavBar
       :modalIsActive="currentlyActiveGridItem > -1"
       :selectionModalIsActive="selectionModalIsActive"
@@ -13,12 +9,7 @@
       @selectionModalActivated="toggleBackdropForGenerationSelect(true)"
       @selectionChanged="switchGeneration"
     />
-    <router-view
-      :selectedGeneration="selectedGeneration"
-      :currentlyActiveGridItem="currentlyActiveGridItem"
-      :aspectRatio="aspectRatio"
-      @activeGridItemChanged="updateCurrentlyActiveGridItem"
-    />
+    <router-view :selectedGeneration="selectedGeneration" :currentlyActiveGridItem="currentlyActiveGridItem" :aspectRatio="aspectRatio" @activeGridItemChanged="updateCurrentlyActiveGridItem" />
   </div>
 </template>
 
@@ -86,14 +77,7 @@ export default {
   },
 }
 </script>
-<style>
-* {
-  /* Simple reset */
-  margin: 0;
-  padding: 0;
-  border: 0;
-  box-sizing: border-box;
-}
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
