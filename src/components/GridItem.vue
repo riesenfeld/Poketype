@@ -2,33 +2,16 @@
   <div class="grid-item-dummy">
     <div
       :class="{ 'grid-item': true, 'grid-item-active': isActive }"
-      :style="[
-        isActive ? activeAnimation() : '',
-        isActive ? activeGridItemColor : passiveGridItemColor,
-      ]"
+      :style="[isActive ? activeAnimation() : '', isActive ? activeGridItemColor : passiveGridItemColor]"
       v-on="!isActive && type.existsInThisGen ? { click: openModal } : {}"
     >
-      <div
-        v-if="!isActive"
-        :class="[
-          type.existsInThisGen ? 'passive-content' : 'passive-content-not-in-generation',
-          { blurred: isBehindBackdrop },
-        ]"
-      >
-        <h3 :class="{ 'not-in-generation-header': !type.existsInThisGen }">
+      <div v-if="!isActive" :class="[type.existsInThisGen ? 'passive-content' : 'passive-content-not-in-generation', { blurred: isBehindBackdrop }]">
+        <h3 :class="{ 'passive-header': true, 'not-in-generation-header': !type.existsInThisGen }">
           {{ type.name }}
         </h3>
-        <p v-if="!isActive && !type.existsInThisGen" class="not-in-generation-message">
-          Does not exist in this generation
-        </p>
+        <p v-if="!isActive && !type.existsInThisGen" class="not-in-generation-message">Does not exist in this generation</p>
       </div>
-      <button
-        id="modal-close-button"
-        v-if="isActive"
-        class="close-button"
-        :style="modalCloseButtonColor"
-        @click="closeModal"
-      >
+      <button id="modal-close-button" v-if="isActive" class="close-button" :style="modalCloseButtonColor" @click="closeModal">
         <div class="close-button-symbol">&#x00D7;</div>
       </button>
       <div v-if="isActive" :class="['info', { 'animate-text': isActive }]">
@@ -40,35 +23,17 @@
           <div class="info-section-text">
             <p v-if="type.defendingNotVeryEffective.length > 0">
               <span class="plain-text">Strong against attacks from </span>
-              <Type
-                v-for="(item, index) in type.defendingNotVeryEffective"
-                :key="index"
-                :typeName="item"
-                :typeColors="colors[item]"
-                :delimiter="type.defendingNotVeryEffective.length - 1 - index"
-              />
+              <Type v-for="(item, index) in type.defendingNotVeryEffective" :key="index" :typeName="item" :typeColors="colors[item]" :delimiter="type.defendingNotVeryEffective.length - 1 - index" />
             </p>
             <hr v-if="type.defendingSuperEffective.length > 0" class="section-text-separator" />
             <p v-if="type.defendingSuperEffective.length > 0">
               <span class="plain-text">Weak against attacks from </span>
-              <Type
-                v-for="(item, index) in type.defendingSuperEffective"
-                :key="index"
-                :typeName="item"
-                :typeColors="colors[item]"
-                :delimiter="type.defendingSuperEffective.length - 1 - index"
-              />
+              <Type v-for="(item, index) in type.defendingSuperEffective" :key="index" :typeName="item" :typeColors="colors[item]" :delimiter="type.defendingSuperEffective.length - 1 - index" />
             </p>
             <hr v-if="type.defendingNotEffective.length > 0" class="section-text-separator" />
             <p v-if="type.defendingNotEffective.length > 0">
               <span class="plain-text">Invulnerable to attacks from </span>
-              <Type
-                v-for="(item, index) in type.defendingNotEffective"
-                :key="index"
-                :typeName="item"
-                :typeColors="colors[item]"
-                :delimiter="type.defendingNotEffective.length - 1 - index"
-              />
+              <Type v-for="(item, index) in type.defendingNotEffective" :key="index" :typeName="item" :typeColors="colors[item]" :delimiter="type.defendingNotEffective.length - 1 - index" />
             </p>
           </div>
         </div>
@@ -81,35 +46,17 @@
           <div class="info-section-text">
             <p v-if="type.attackingNotVeryEffective.length > 0">
               <span class="plain-text">Not very effective against </span>
-              <Type
-                v-for="(item, index) in type.attackingNotVeryEffective"
-                :key="index"
-                :typeName="item"
-                :typeColors="colors[item]"
-                :delimiter="type.attackingNotVeryEffective.length - 1 - index"
-              />
+              <Type v-for="(item, index) in type.attackingNotVeryEffective" :key="index" :typeName="item" :typeColors="colors[item]" :delimiter="type.attackingNotVeryEffective.length - 1 - index" />
             </p>
             <hr v-if="type.attackingSuperEffective.length > 0" class="section-text-separator" />
             <p v-if="type.attackingSuperEffective.length > 0">
               <span class="plain-text">Super effective against </span>
-              <Type
-                v-for="(item, index) in type.attackingSuperEffective"
-                :key="index"
-                :typeName="item"
-                :typeColors="colors[item]"
-                :delimiter="type.attackingSuperEffective.length - 1 - index"
-              />
+              <Type v-for="(item, index) in type.attackingSuperEffective" :key="index" :typeName="item" :typeColors="colors[item]" :delimiter="type.attackingSuperEffective.length - 1 - index" />
             </p>
             <hr v-if="type.attackingNotEffective.length > 0" class="section-text-separator" />
             <p v-if="type.attackingNotEffective.length > 0">
               <span class="plain-text">Completely ineffective against </span>
-              <Type
-                v-for="(item, index) in type.attackingNotEffective"
-                :key="index"
-                :typeName="item"
-                :typeColors="colors[item]"
-                :delimiter="type.attackingNotEffective.length - 1 - index"
-              />
+              <Type v-for="(item, index) in type.attackingNotEffective" :key="index" :typeName="item" :typeColors="colors[item]" :delimiter="type.attackingNotEffective.length - 1 - index" />
             </p>
           </div>
         </div>
@@ -476,6 +423,48 @@ hr.section-text-separator {
   .info-section-header {
     font-size: 2.5vh;
     margin-top: 3vh;
+  }
+}
+
+/* Aspect Ratio of 420:1000 */
+@media (orientation: portrait) and (max-aspect-ratio: 21/50) {
+  .info-section {
+    font-size: 1.8vh;
+  }
+  .info-section-header {
+    font-size: 2.3vh;
+  }
+}
+
+/* Aspect Ratio of 365:1000 */
+@media (orientation: portrait) and (max-aspect-ratio: 73/200) {
+  .info-section {
+    font-size: 1.6vh;
+  }
+  .info-section-header {
+    font-size: 2.1vh;
+  }
+}
+
+@media (orientation: portrait) and (max-aspect-ratio: 3/10) {
+  .passive-header {
+    font-size: 1.1rem;
+  }
+}
+
+@media (orientation: portrait) and (max-aspect-ratio: 26/100) {
+  .passive-header {
+    font-size: 0.9rem;
+  }
+}
+
+/* Aspect Ratio of 254:1000 */
+@media (orientation: portrait) and (max-aspect-ratio: 127/500) {
+  .info-section {
+    font-size: 1.4vh;
+  }
+  .info-section-header {
+    font-size: 1.9vh;
   }
 }
 </style>
